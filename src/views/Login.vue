@@ -41,15 +41,17 @@ export default {
           `http://localhost:8080/admin/login?password=X%2376saNR!tA`
         );
         if (response.data) {
+          state.username = "";
+          state.password = "";
           // VueCookies.set("keyName", response.data, "1d");
           console.log(response.data);
-
-          // this.$router.replace(`/Home/`);
+          window.location = "/home";
         } else {
           alert("User or Password incorrect");
           return;
         }
       } catch (err) {
+        console.log(err);
         alert("Please try again");
         return;
       }
