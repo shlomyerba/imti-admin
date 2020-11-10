@@ -19,23 +19,29 @@
         <button>Login</button>
       </div>
     </form>
+
+    <h1>aaa</h1>
+    <h1>{{ token }}</h1>
   </div>
 </template>
 
 <script>
 import { reactive } from "vue";
 import axios from "axios";
+import { useStore } from "vuex";
+// import { computed } from "vue";
 
 export default {
   name: "Login",
   setup() {
+    const store = useStore();
+    // const token = computed(() => store.state.token);
     const state = reactive({
       username: "",
       password: "",
     });
 
     async function login() {
-      console.log(state.username);
       try {
         let response = await axios.get(
           `http://localhost:8080/admin/login?password=X%2376saNR!tA`
@@ -43,9 +49,10 @@ export default {
         if (response.data) {
           state.username = "";
           state.password = "";
+          await store.dispatch("Token/setToken", response.data);
+          console.log("store.state.token" + store.state.Token.token);
           // VueCookies.set("keyName", response.data, "1d");
-          console.log(response.data);
-          window.location = "/home";
+          window.location = "/";
         } else {
           alert("User or Password incorrect");
           return;
@@ -60,6 +67,7 @@ export default {
     return {
       state,
       login,
+      // token,
     };
   },
 };

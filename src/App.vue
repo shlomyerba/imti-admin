@@ -3,15 +3,38 @@
     <router-link to="/">
       <div class="navigation_logo">Imti</div>
     </router-link>
-    <div class="navigation_user">Admin</div>
+    <div class="navigation_user" @submit.prevent="exit">Exit</div>
   </nav>
   <div id="nav">
-    <router-link to="/">Login</router-link> |
-    <router-link to="/home">Home</router-link>
+    <router-link to="/">Admin</router-link> |
+    <router-link to="/Login">Login </router-link>
   </div>
   <router-view />
 </template>
 
+
+<script>
+import { useStore } from "vuex";
+
+export default {
+  setup() {
+    const store = useStore();
+
+    async function exit() {
+      await store.dispatch("Token/setToken", null);
+      console.log("store.state.token" + store.state.Token.token);
+
+      window.location = "/login";
+    }
+
+    return {
+      exit,
+    };
+  },
+};
+</script>
+
+  
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
