@@ -3,7 +3,7 @@
     <router-link to="/">
       <div class="navigation_logo">Imti</div>
     </router-link>
-    <div class="navigation_user" @submit.prevent="exit">Exit</div>
+    <button class="navigation_user" @click="exit">Exit</button>
   </nav>
   <div id="nav">
     <router-link to="/">Admin</router-link> |
@@ -22,8 +22,7 @@ export default {
 
     async function exit() {
       await store.dispatch("Token/setToken", null);
-      console.log("store.state.token" + store.state.Token.token);
-
+      console.log("store.state.token " + store.state.Token.token);
       window.location = "/login";
     }
 
@@ -53,6 +52,16 @@ export default {
     color: white;
     font-weight: bold;
     font-size: 24px;
+
+    button {
+      background: none !important;
+      border: none;
+      padding: 0 !important;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 24px;
+    }
   }
 }
 

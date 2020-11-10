@@ -50,7 +50,7 @@ export default {
           state.username = "";
           state.password = "";
           await store.dispatch("Token/setToken", response.data);
-          console.log("store.state.token" + store.state.Token.token);
+          console.log("store.state.token " + store.state.Token.token);
           // VueCookies.set("keyName", response.data, "1d");
           window.location = "/";
         } else {
