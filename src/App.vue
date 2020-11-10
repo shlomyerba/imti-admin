@@ -5,10 +5,10 @@
     </router-link>
     <button class="navigation_user" @click="exit">Exit</button>
   </nav>
-  <div id="nav">
+  <!-- <div id="nav">
     <router-link to="/">Admin</router-link> |
     <router-link to="/Login">Login </router-link>
-  </div>
+  </div> -->
   <router-view />
 </template>
 
