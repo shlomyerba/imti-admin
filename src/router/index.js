@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import Admin from '../views/Admin.vue'
-// import store from '../store'
+import VueCookies from "vue-cookies";
 
 const routes = [
 
@@ -9,9 +9,6 @@ const routes = [
     path: '/',
     name: 'Admin',
     component: Admin,
-    // meta: {
-    //   requiresAdmin: true
-    // }
   },
   {
     path: '/login',
@@ -25,18 +22,11 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach(async (to, from, next) => {
-//   const token = store.state.Token.token;
+router.beforeEach(async (to, from, next) => {
+  const token = VueCookies.get("token");
+  if (to.name !== 'Login' && !token) next({ name: 'Login' })
+  else next()
+})
 
-//   if (!token) {
-//     window.location = "/login";
-//   } else {
-//     const isAdmin = true;
-//     const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
-
-//     if (requiresAdmin && !isAdmin) next({ name: 'Login' });
-//     else next();
-//   }
-// })
 
 export default router

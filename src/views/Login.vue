@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Login</h1>
     <form class="login_form" @submit.prevent="login">
       <div class="login_container">
         <label>User Name</label>
@@ -19,39 +18,36 @@
         <button>Login</button>
       </div>
     </form>
-
-    <h1>aaa</h1>
-    <h1>{{ token }}</h1>
   </div>
 </template>
 
 <script>
 import { reactive } from "vue";
 import axios from "axios";
-import { useStore } from "vuex";
-// import { computed } from "vue";
+import VueCookies from "vue-cookies";
 
 export default {
   name: "Login",
   setup() {
-    const store = useStore();
-    // const token = computed(() => store.state.token);
     const state = reactive({
       username: "",
       password: "",
+      timeout: null,
+      tempToken: "X%2376saNR!tA", //temp
     });
 
     async function login() {
       try {
         let response = await axios.get(
-          `http://localhost:8080/admin/login?password=X%2376saNR!tA`
+          `http://localhost:8080/admin/login?password=${state.tempToken}`
         );
         if (response.data) {
           state.username = "";
           state.password = "";
-          await store.dispatch("Token/setToken", response.data);
-          console.log("store.state.token " + store.state.Token.token);
-          // VueCookies.set("keyName", response.data, "1d");
+
+          //saving cooky for 30 minutes:
+          VueCookies.set("token", `${response.data} ${new Date()}`, 60 * 30);
+
           window.location = "/";
         } else {
           alert("User or Password incorrect");
@@ -67,7 +63,6 @@ export default {
     return {
       state,
       login,
-      // token,
     };
   },
 };
