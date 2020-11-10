@@ -4,9 +4,18 @@
     <form class="login_form" @submit.prevent="login">
       <div class="login_container">
         <label>User Name</label>
-        <input type="email" placeholder="Enter Email" />
+        <input
+          type="text"
+          placeholder="Enter UserName"
+          v-model="state.username"
+        />
         <label>password</label>
-        <input type="password" placeholder="Enter Password" required />
+        <input
+          type="password"
+          placeholder="Enter Password"
+          v-model="state.password"
+          required
+        />
         <button>Login</button>
       </div>
     </form>
@@ -14,12 +23,43 @@
 </template>
 
 <script>
-import {reactive} from 'vue';
+import { reactive } from "vue";
+import axios from "axios";
+
 export default {
   name: "Login",
-  setup(){
-    
-  }
+  setup() {
+    const state = reactive({
+      username: "",
+      password: "",
+    });
+
+    async function login() {
+      console.log(state.username);
+      try {
+        let response = await axios.get(
+          `http://localhost:8080/admin/login?password=X%2376saNR!tA`
+        );
+        if (response.data) {
+          // VueCookies.set("keyName", response.data, "1d");
+          console.log(response.data);
+
+          // this.$router.replace(`/Home/`);
+        } else {
+          alert("User or Password incorrect");
+          return;
+        }
+      } catch (err) {
+        alert("Please try again");
+        return;
+      }
+    }
+
+    return {
+      state,
+      login,
+    };
+  },
 };
 </script>
 
