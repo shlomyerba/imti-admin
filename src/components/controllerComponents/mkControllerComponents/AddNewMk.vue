@@ -4,21 +4,21 @@
       <div class="add-new-mk_container">
         <label>Email</label>
         <input type="email" placeholder="Enter Email" v-model="state.email" />
-        <label>First Name*</label>
+        <label>First Name *</label>
         <input
           type="text"
           placeholder="Enter firstName"
           v-model="state.firstName"
           required
         />
-        <label>Last name*</label>
+        <label>Last name *</label>
         <input
           type="text"
           placeholder="Enter lasttName"
           v-model="state.lastName"
           required
         />
-        <label>Party*</label>
+        <label>Party *</label>
         <select id="addParty" v-model="state.selectedParty" required>
           <option
             :value="option.value"
@@ -35,7 +35,7 @@
           placeholder="Enter phone number"
           v-model="state.phone"
         />
-        <label>Photo*</label>
+        <label>Photo *</label>
         <input
           type="file"
           placeholder="upload photo"

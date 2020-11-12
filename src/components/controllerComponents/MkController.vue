@@ -111,7 +111,7 @@ export default {
   
 <style lang="scss" scoped>
 .mk-controller-panel_main-menu {
-  border-bottom: 2px solid gray;
+  // border-bottom: 2px solid gray;
 
   .link_button {
     color: gray;

@@ -70,11 +70,11 @@ export default {
   
 <style lang="scss" scoped>
 .controller-panel_main-menu {
-  border-bottom: 2px solid gray;
+  border-bottom: double;
 
   .link_button {
     color: gray;
-    font-size: 20px;
+    font-size: 24px;
   }
 }
 </style>
