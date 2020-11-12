@@ -33,21 +33,24 @@ export default {
     });
 
     function goToController() {
+      closeAll();
       state.isController = true;
-      state.isEvents = false;
-      state.isReports = false;
     }
 
     function goToEvents() {
-      state.isController = false;
+      closeAll();
       state.isEvents = true;
-      state.isReports = false;
     }
 
     function goToReports() {
+      closeAll();
+      state.isReports = true;
+    }
+
+    function closeAll() {
       state.isController = false;
       state.isEvents = false;
-      state.isReports = true;
+      state.isReports = false;
     }
 
     return {
@@ -55,6 +58,7 @@ export default {
       goToController,
       goToEvents,
       goToReports,
+      closeAll
     };
   },
 };

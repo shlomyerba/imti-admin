@@ -36,28 +36,32 @@ export default {
     });
 
     function goToMkOptions() {
+      closeAll();
       state.isMk = true;
-      state.isParty = false;
-      state.isUser = false;
     }
 
     function goToPartyOptions() {
-      state.isMk = false;
+      closeAll();
       state.isParty = true;
-      state.isUser = false;
     }
 
     function goToUserOptions() {
-      state.isMk = false;
-      state.isParty = false;
+      closeAll();
       state.isUser = true;
     }
 
+    function closeAll() {
+      state.isMk = false;
+      state.isParty = false;
+      state.isUser = false;
+    }
+    
     return {
       state,
       goToMkOptions,
       goToPartyOptions,
       goToUserOptions,
+      closeAll,
     };
   },
 };
