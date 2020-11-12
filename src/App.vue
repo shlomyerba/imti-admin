@@ -14,15 +14,14 @@
 
 
 <script>
-import { useStore } from "vuex";
+import VueCookies from "vue-cookies";
 
 export default {
   setup() {
-    const store = useStore();
 
     async function exit() {
-      await store.dispatch("Token/setToken", null);
-      console.log("store.state.token " + store.state.Token.token);
+      VueCookies.set("token", null);
+      console.log("VueCookies.set" + VueCookies.get("token"));
       window.location = "/login";
     }
 

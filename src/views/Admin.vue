@@ -2,26 +2,64 @@
   <div class="Admin">
     <div class="admin-panel">
       <div class="admin-panel_main-menu">
-        <button class="admin-panel_main-menu_button" @click="exit">
-          Controller
-        </button>
-        <button class="admin-panel_main-menu_button" @click="exit">
-          Events
-        </button>
-        <button class="admin-panel_main-menu_button" @click="exit">
-          Reports
-        </button>
+        <button class="link_button" @click="goToController">Controller</button>
+        <button class="link_button" @click="goToEvents">Events</button>
+        <button class="link_button" @click="goToReports">Reports</button>
       </div>
 
       <div class="admin-panel_action-screen">
-        <h1>action 1</h1>
-        <h1>action 2</h1>
-        <h1>action 3</h1>
-        <h1>action 4</h1>
+        <Controller v-if="state.isController" />
+        <Events v-else-if="state.isEvents" />
+        <Reports v-else-if="state.isReports" />
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import Controller from "../components/Controller";
+import Events from "../components/Events";
+import Reports from "../components/Reports";
+import { reactive } from "vue";
+
+export default {
+  name: "Admin",
+  components: { Controller, Events, Reports },
+  setup() {
+    const state = reactive({
+      isController: true,
+      isEvents: false,
+      isReports: false,
+    });
+
+    function goToController() {
+      state.isController = true;
+      state.isEvents = false;
+      state.isReports = false;
+    }
+
+    function goToEvents() {
+      state.isController = false;
+      state.isEvents = true;
+      state.isReports = false;
+    }
+
+    function goToReports() {
+      state.isController = false;
+      state.isEvents = false;
+      state.isReports = true;
+    }
+
+    return {
+      state,
+      goToController,
+      goToEvents,
+      goToReports,
+    };
+  },
+};
+</script>
+
 
 <style lang="scss" scoped>
 .admin-panel {
@@ -36,18 +74,9 @@
     padding: 10px 1%;
     border-right: 2px solid blueviolet;
 
-    .admin-panel_main-menu_button {
-      background: none !important;
-      border: none;
-      padding: 15px !important;
+    .link_button {
       color: blueviolet;
-      cursor: pointer;
-      font-weight: bold;
       font-size: 24px;
-
-      &:hover {
-        opacity: 0.5;
-      }
     }
   }
 
@@ -55,7 +84,7 @@
     width: 70%;
     display: flex;
     flex-direction: column;
-    padding: 10px 15%;
+    padding: 10px 10%;
   }
 }
 </style>
