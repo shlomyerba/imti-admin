@@ -21,7 +21,7 @@
         <label>Party *</label>
         <select id="addParty" v-model="state.selectedParty" required>
           <option
-            :value="option.value"
+            :value="option.id"
             v-for="(option, index) in state.parties"
             :key="index"
           >
@@ -53,7 +53,7 @@
 <script>
 import axios from "axios";
 import VueCookies from "vue-cookies";
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 
 export default {
   name: "AddNewMk",
@@ -65,12 +65,7 @@ export default {
       phone: "",
       photo: null,
       selectedParty: null,
-      parties: [
-        { value: null, name: "Choose a party" },
-        { value: 1, name: "Licud" },
-        { value: 2, name: "Avoda" },
-        { value: 3, name: "Yesh_Atid" },
-      ],
+      parties: [],
     });
 
     async function saveMk() {
@@ -85,24 +80,36 @@ export default {
       }
       url += `&uuid=${token}`;
 
+      console.log(url);
+
       let fd = new FormData();
       fd.append("image", state.photo, state.photo.name);
 
-      //   let header = {
-      //     header: {
-      //       accept: "*/*",
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   };
-
       try {
-        let response = await axios.post(url, fd);
+        let response = await axios.post(url, fd, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
-        console.log("response", response.data);
+        console.log("response", response);
       } catch (e) {
         console.log("e", e);
       }
     }
+
+    onMounted(async () => {
+      let token = await VueCookies.get("token");
+      let url = `http://localhost:8080/admin/report/party/all?uuid=${token}`;
+      try {
+        let response = await axios.get(url);
+        if (response.data) {
+          state.parties = response.data;
+        }
+      } catch (e) {
+        console.log("e", e);
+      }
+    });
 
     async function uploadPhoto(event) {
       state.photo = event.target.files[0];
@@ -132,7 +139,9 @@ export default {
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
-
+  option {
+    font-size: 15px;
+  }
   button {
     background-color: blueviolet;
     color: white;

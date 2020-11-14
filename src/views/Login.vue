@@ -46,7 +46,7 @@ export default {
           state.password = "";
 
           //saving cooky for 30 minutes:
-          VueCookies.set("token", `${response.data} ${new Date()}`, 60 * 30);
+          VueCookies.set("token", response.data, 60 * 30);
 
           window.location = "/";
         } else {
