@@ -2,15 +2,8 @@
   <div class="update-email">
     <form class="update-email_form" @submit.prevent="updateEmail">
       <div class="update-email_container">
-        <label>Email *</label>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          v-model="state.email"
-          required
-        />
         <label>Mks *</label>
-        <select id="ChooseParty" v-model="state.selectedMk" required>
+        <select id="chooseMk" v-model="state.selectedMk" required>
           <option
             :value="option.id"
             v-for="(option, index) in state.Mks"
@@ -19,6 +12,13 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
+        <label>Email *</label>
+        <input
+          type="email"
+          placeholder="Enter Email"
+          v-model="state.email"
+          required
+        />
         <button>update</button>
       </div>
     </form>
@@ -44,7 +44,7 @@ export default {
     async function updateEmail() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/email?email=${state.email}&mkId=${state.selectedMk}&uuid=${token}`;
-      console.log(url)
+      console.log(url);
       try {
         let response = await axios.post(url);
 

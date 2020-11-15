@@ -1,18 +1,129 @@
 <template>
   <div class="update-party">
-      <h1>Update Party</h1>
-    
+    <form class="update-party_form" @submit.prevent="updateParty">
+      <div class="update-party_container">
+        <label>Mks *</label>
+        <select id="chooseMk" v-model="state.selectedMk" required>
+          <option
+            :value="option.id"
+            v-for="(option, index) in state.Mks"
+            :key="index"
+          >
+            {{ `${option.first} ${option.last}` }}
+          </option>
+        </select>
+        <label>Party *</label>
+        <select id="chooseParty" v-model="state.selectedParty" required>
+          <option
+            :value="option.id"
+            v-for="(option, index) in state.parties"
+            :key="index"
+          >
+            {{ option.name }}
+          </option>
+        </select>
+        <button>update</button>
+      </div>
+    </form>
   </div>
 </template>
 
 
 <script>
+import axios from "axios";
+import VueCookies from "vue-cookies";
+import { reactive, onMounted } from "vue";
+import { baseUrl } from "../../../assets/url";
+
 export default {
   name: "UpdateParty",
+  setup() {
+    const state = reactive({
+      selectedMk: null,
+      Mks: [],
+      selectedParty: null,
+      parties: [],
+    });
+
+    async function updateParty() {
+      let token = VueCookies.get("token");
+      let url = `${baseUrl}/admin/mk/update/party?mkId=${state.selectedMk}&partyId=${state.selectedParty}&uuid=${token}`;
+      console.log(url);
+      try {
+        let response = await axios.post(url);
+
+        console.log("response", response);
+      } catch (e) {
+        console.log("e", e);
+      }
+    }
+
+    onMounted(async () => {
+      let token = await VueCookies.get("token");
+      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
+      console.log(url);
+      try {
+        let response = await axios.get(url);
+        if (response.data) {
+          state.Mks = response.data;
+        }
+      } catch (e) {
+        console.log("e", e);
+      }
+    });
+
+    onMounted(async () => {
+      let token = await VueCookies.get("token");
+      let url = `${baseUrl}/admin/report/party/all?uuid=${token}`;
+      console.log(url);
+      try {
+        let response = await axios.get(url);
+        if (response.data) {
+          state.parties = response.data;
+        }
+      } catch (e) {
+        console.log("e", e);
+      }
+    });
+
+    return {
+      state,
+      updateParty,
+    };
+  },
 };
 </script>
 
   
 <style lang="scss" scoped>
+.update-party_form {
+  padding: 16px;
+  font-weight: bold;
 
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  option {
+    font-size: 15px;
+  }
+  button {
+    background-color: blueviolet;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
 </style>
