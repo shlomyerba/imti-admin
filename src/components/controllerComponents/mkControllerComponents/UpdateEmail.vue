@@ -41,9 +41,9 @@ export default {
   name: "UpdateEmail",
   setup() {
     const state = reactive({
-      email: "",
       selectedMk: null,
       Mks: [],
+      email: "",
     });
 
     async function findCurrentEmail() {
@@ -65,7 +65,8 @@ export default {
       console.log(url);
       try {
         let response = await axios.get(url);
-
+        state.selectedMk = "";
+        state.email = "";
         console.log("response", response);
       } catch (e) {
         console.log("e", e);
@@ -90,7 +91,7 @@ export default {
     return {
       state,
       updateEmail,
-      findCurrentEmail
+      findCurrentEmail,
     };
   },
 };

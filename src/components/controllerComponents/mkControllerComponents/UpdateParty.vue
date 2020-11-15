@@ -69,6 +69,8 @@ export default {
       console.log(url);
       try {
         let response = await axios.get(url);
+        state.selectedMk = "";
+        state.selectedParty = "";
 
         console.log("response", response);
       } catch (e) {
@@ -107,7 +109,7 @@ export default {
     return {
       state,
       updateParty,
-      findCurrentParty
+      findCurrentParty,
     };
   },
 };
