@@ -48,7 +48,7 @@
           required
         />
 
-        <button>Add</button>
+        <button>add</button>
       </div>
     </form>
   </div>

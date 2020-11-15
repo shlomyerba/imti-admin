@@ -30,7 +30,7 @@
             {{ option.id }}
           </option>
         </select>
-        <button>remove</button>
+        <button>update</button>
       </div>
     </form>
   </div>
