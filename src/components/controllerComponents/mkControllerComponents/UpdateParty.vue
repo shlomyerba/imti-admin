@@ -53,11 +53,9 @@ export default {
     async function findCurrentParty() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
         state.selectedParty = response.data.party.id;
-        console.log("response", response);
       } catch (e) {
         console.log("e", e);
       }
@@ -66,12 +64,10 @@ export default {
     async function updateParty() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/party?mkId=${state.selectedMk}&partyId=${state.selectedParty}&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
         state.selectedMk = "";
         state.selectedParty = "";
-
         console.log("response", response);
       } catch (e) {
         console.log("e", e);
@@ -81,7 +77,6 @@ export default {
     onMounted(async () => {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
         if (response.data) {
@@ -95,7 +90,6 @@ export default {
     onMounted(async () => {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/party/all?uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
         if (response.data) {

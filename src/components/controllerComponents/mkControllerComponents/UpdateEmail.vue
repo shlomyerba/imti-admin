@@ -49,11 +49,9 @@ export default {
     async function findCurrentEmail() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
         state.email = response.data.email;
-        console.log("response", response);
       } catch (e) {
         console.log("e", e);
       }
@@ -62,7 +60,6 @@ export default {
     async function updateEmail() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/email?email=${state.email}&mkId=${state.selectedMk}&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
         state.selectedMk = "";
@@ -76,10 +73,8 @@ export default {
     onMounted(async () => {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
-        console.log(response);
         if (response.data) {
           state.Mks = response.data;
         }

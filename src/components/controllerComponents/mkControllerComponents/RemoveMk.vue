@@ -38,7 +38,6 @@ export default {
       let url = `${baseUrl}/admin/mk/remove?mkId=${state.selectedMk}&uuid=${token}`;
       try {
         let response = await axios.get(url);
-
         console.log("response", response);
       } catch (e) {
         console.log("e", e);
@@ -48,10 +47,8 @@ export default {
     onMounted(async () => {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
-        console.log(response);
         if (response.data) {
           state.Mks = response.data;
         }

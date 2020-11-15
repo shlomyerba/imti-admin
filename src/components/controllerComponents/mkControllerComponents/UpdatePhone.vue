@@ -1,6 +1,6 @@
 <template>
   <div class="update-phone">
-<form class="update-phone_form" @submit.prevent="updatePhone">
+    <form class="update-phone_form" @submit.prevent="updatePhone">
       <div class="update-phone_container">
         <label>Mks *</label>
         <select
@@ -17,7 +17,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-         <label>Phone *</label>
+        <label>Phone *</label>
         <input
           type="number"
           placeholder="Enter phone number"
@@ -26,7 +26,7 @@
         />
         <button>update</button>
       </div>
-    </form>    
+    </form>
   </div>
 </template>
 
@@ -49,11 +49,9 @@ export default {
     async function findCurrentPhone() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
         state.phone = response.data.phone;
-        console.log("response", response);
       } catch (e) {
         console.log("e", e);
       }
@@ -62,7 +60,6 @@ export default {
     async function updatePhone() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/phone?phone=${state.phone}&mkId=${state.selectedMk}&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
         state.selectedMk = "";
@@ -76,10 +73,8 @@ export default {
     onMounted(async () => {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      console.log(url);
       try {
         let response = await axios.get(url);
-        console.log(response);
         if (response.data) {
           state.Mks = response.data;
         }
