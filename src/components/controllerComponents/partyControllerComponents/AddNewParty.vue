@@ -34,6 +34,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive } from "vue";
 import { baseUrl } from "../../../assets/url";
+import { orientations } from "../../../assets/orientation";
 
 export default {
   name: "AddNewParty",
@@ -41,7 +42,7 @@ export default {
     const state = reactive({
       name: "",
       selectedOrientation: null,
-      Orientations: [{ id: "LEFT" }, { id: "RIGHT" }, { id: "CENTER" }],
+      Orientations: orientations,
     });
 
     async function addNewParty() {
