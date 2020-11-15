@@ -9,13 +9,19 @@
           v-model="state.name"
           required
         />
-        <label>orientation *</label>
-        <input
-          type="orientation"
-          placeholder="Enter orientation"
-          v-model="state.orientation"
+        <select
+          id="ChooseOrientation"
+          v-model="state.selectedOrientation"
           required
-        />
+        >
+          <option
+            :value="option.id"
+            v-for="(option, index) in state.Orientations"
+            :key="index"
+          >
+            {{ option.id }}
+          </option>
+        </select>
         <button>add</button>
       </div>
     </form>
@@ -34,17 +40,18 @@ export default {
   setup() {
     const state = reactive({
       name: "",
-      orientation: "",
+      selectedOrientation: null,
+      Orientations: [{ id: "LEFT" }, { id: "RIGHT" }, { id: "CENTER" }],
     });
 
     async function addNewParty() {
       let token = VueCookies.get("token");
 
-      let url = `${baseUrl}/admin/party/add?name=${state.name}&orientation=${state.orientation}&uuid=${token}`;
+      let url = `${baseUrl}/admin/party/add?name=${state.name}&orientation=${state.selectedOrientation}&uuid=${token}`;
       try {
         let response = await axios.get(url);
         state.name = "";
-        state.orientation = "";
+        state.selectedOrientation = "";
         console.log("response", response);
       } catch (e) {
         console.log("e", e);
@@ -65,13 +72,17 @@ export default {
   padding: 16px;
   font-weight: bold;
 
-  input {
+  input,
+  select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+  }
+  option {
+    font-size: 15px;
   }
 
   button {

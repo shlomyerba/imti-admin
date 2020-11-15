@@ -40,27 +40,34 @@ export default {
         let response = await axios.get(url);
         state.selectedMk = "";
         console.log("response", response);
+        await updateMks();
+      } catch (e) {
+        console.log("e", e);
+      }
+    }
+
+    async function updateMks() {
+      let token = await VueCookies.get("token");
+      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
+      try {
+        let response = await axios.get(url);
+        if (response.data) {
+          console.log(response.data);
+          state.Mks = response.data;
+        }
       } catch (e) {
         console.log("e", e);
       }
     }
 
     onMounted(async () => {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          state.Mks = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      await updateMks();
     });
 
     return {
       state,
       removeMk,
+      updateMks,
     };
   },
 };
