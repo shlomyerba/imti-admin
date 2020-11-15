@@ -3,7 +3,12 @@
     <form class="update-email_form" @submit.prevent="updateEmail">
       <div class="update-email_container">
         <label>Mks *</label>
-        <select id="chooseMk" v-model="state.selectedMk" required>
+        <select
+          id="chooseMk"
+          v-model="state.selectedMk"
+          @change="findCurrentEmail"
+          required
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.Mks"
@@ -41,12 +46,25 @@ export default {
       Mks: [],
     });
 
+    async function findCurrentEmail() {
+      let token = VueCookies.get("token");
+      let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
+      console.log(url);
+      try {
+        let response = await axios.get(url);
+        state.email = response.data.email;
+        console.log("response", response);
+      } catch (e) {
+        console.log("e", e);
+      }
+    }
+
     async function updateEmail() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/email?email=${state.email}&mkId=${state.selectedMk}&uuid=${token}`;
       console.log(url);
       try {
-        let response = await axios.post(url);
+        let response = await axios.get(url);
 
         console.log("response", response);
       } catch (e) {
@@ -72,6 +90,7 @@ export default {
     return {
       state,
       updateEmail,
+      findCurrentEmail
     };
   },
 };

@@ -3,7 +3,12 @@
     <form class="update-party_form" @submit.prevent="updateParty">
       <div class="update-party_container">
         <label>Mks *</label>
-        <select id="chooseMk" v-model="state.selectedMk" required>
+        <select
+          id="chooseMk"
+          v-model="state.selectedMk"
+          @change="findCurrentParty"
+          required
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.Mks"
@@ -45,12 +50,25 @@ export default {
       parties: [],
     });
 
+    async function findCurrentParty() {
+      let token = VueCookies.get("token");
+      let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
+      console.log(url);
+      try {
+        let response = await axios.get(url);
+        state.selectedParty = response.data.party.id;
+        console.log("response", response);
+      } catch (e) {
+        console.log("e", e);
+      }
+    }
+
     async function updateParty() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/party?mkId=${state.selectedMk}&partyId=${state.selectedParty}&uuid=${token}`;
       console.log(url);
       try {
-        let response = await axios.post(url);
+        let response = await axios.get(url);
 
         console.log("response", response);
       } catch (e) {
@@ -89,6 +107,7 @@ export default {
     return {
       state,
       updateParty,
+      findCurrentParty
     };
   },
 };

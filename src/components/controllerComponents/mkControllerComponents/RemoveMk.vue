@@ -37,7 +37,7 @@ export default {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/remove?mkId=${state.selectedMk}&uuid=${token}`;
       try {
-        let response = await axios.post(url);
+        let response = await axios.get(url);
 
         console.log("response", response);
       } catch (e) {
