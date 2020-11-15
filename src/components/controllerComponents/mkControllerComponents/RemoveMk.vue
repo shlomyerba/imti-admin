@@ -38,6 +38,7 @@ export default {
       let url = `${baseUrl}/admin/mk/remove?mkId=${state.selectedMk}&uuid=${token}`;
       try {
         let response = await axios.get(url);
+        state.selectedMk = "";
         console.log("response", response);
       } catch (e) {
         console.log("e", e);
