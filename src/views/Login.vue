@@ -25,6 +25,7 @@
 import { reactive } from "vue";
 import axios from "axios";
 import VueCookies from "vue-cookies";
+import { baseUrl } from "../assets/data";
 
 export default {
   name: "Login",
@@ -39,7 +40,7 @@ export default {
     async function login() {
       try {
         let response = await axios.get(
-          `http://localhost:8080/admin/login?password=${state.tempToken}`
+          `${baseUrl}/admin/login?password=${state.tempToken}`
         );
         if (response.data) {
           state.username = "";

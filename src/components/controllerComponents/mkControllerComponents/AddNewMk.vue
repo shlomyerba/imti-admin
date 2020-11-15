@@ -2,8 +2,13 @@
   <div class="add-new-mk">
     <form class="add-new-mk_form" @submit.prevent="saveMk">
       <div class="add-new-mk_container">
-        <label>Email</label>
-        <input type="email" placeholder="Enter Email" v-model="state.email" />
+        <label>Email *</label>
+        <input
+          type="email"
+          placeholder="Enter Email"
+          v-model="state.email"
+          required
+        />
         <label>First Name *</label>
         <input
           type="text"
@@ -54,6 +59,7 @@
 import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
+import { baseUrl } from "../../../assets/data";
 
 export default {
   name: "AddNewMk",
@@ -70,7 +76,7 @@ export default {
 
     async function saveMk() {
       let token = VueCookies.get("token");
-      let url = `http://localhost:8080/admin/mk/add?`;
+      let url = `${baseUrl}/admin/mk/add?`;
       if (state.email) {
         url += `email=${state.email}&`;
       }
@@ -82,11 +88,10 @@ export default {
 
       console.log(url);
 
-      let fd = new FormData();
-      fd.append("image", state.photo, state.photo.name);
-
+      let formData = new FormData();
+      formData.append("image", state.photo);
       try {
-        let response = await axios.post(url, fd, {
+        let response = await axios.post(url, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -100,7 +105,7 @@ export default {
 
     onMounted(async () => {
       let token = await VueCookies.get("token");
-      let url = `http://localhost:8080/admin/report/party/all?uuid=${token}`;
+      let url = `${baseUrl}/admin/report/party/all?uuid=${token}`;
       try {
         let response = await axios.get(url);
         if (response.data) {
@@ -111,7 +116,7 @@ export default {
       }
     });
 
-    async function uploadPhoto(event) {
+    function uploadPhoto(event) {
       state.photo = event.target.files[0];
     }
 
