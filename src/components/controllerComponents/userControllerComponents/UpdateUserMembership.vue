@@ -6,7 +6,7 @@
         <select
           id="chooseMk"
           v-model="state.selectedUser"
-          @change="findCurrentEmail"
+          @change="findCurrentMembership"
           required
         >
           <option
@@ -53,7 +53,7 @@ export default {
       memberships: [{ id: false }, { id: true }],
     });
 
-    async function findCurrentEmail() {
+    async function findCurrentMembership() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/user/info?userId=${state.selectedUser}&uuid=${token}`;
       try {
@@ -93,7 +93,7 @@ export default {
     return {
       state,
       updateMembership,
-      findCurrentEmail,
+      findCurrentMembership,
     };
   },
 };

@@ -69,12 +69,12 @@ export default {
 .admin-panel {
   display: flex;
   justify-content: space-between;
-  padding: 50px 5%;
+  padding: 50px 2%;
 
   .admin-panel_main-menu {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 20%;
     padding: 10px 1%;
     border-right: 2px solid blueviolet;
 
@@ -85,7 +85,7 @@ export default {
   }
 
   .admin-panel_action-screen {
-    width: 70%;
+    width:  90%;
     display: flex;
     flex-direction: column;
     padding: 10px 10%;
