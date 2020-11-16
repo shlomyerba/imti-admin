@@ -9,6 +9,7 @@
           v-model="state.name"
           required
         />
+        <label>Orientation *</label>
         <select
           id="ChooseOrientation"
           v-model="state.selectedOrientation"

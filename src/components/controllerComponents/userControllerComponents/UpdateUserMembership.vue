@@ -17,6 +17,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
+        <label>Membership *</label>
         <select
           id="ChooseMembership"
           v-model="state.selectedMembership"

@@ -17,6 +17,7 @@
             {{ option.name }}
           </option>
         </select>
+        <label>Orientation *</label>
         <select
           id="ChooseOrientation"
           v-model="state.selectedOrientation"
@@ -93,7 +94,7 @@ export default {
     return {
       state,
       updateOrientation,
-      findCurrentOrientation
+      findCurrentOrientation,
     };
   },
 };
