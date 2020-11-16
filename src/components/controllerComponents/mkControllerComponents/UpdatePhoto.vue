@@ -45,16 +45,14 @@ export default {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/photo?mkId=${state.selectedMk}&uuid=${token}`;
       let formData = new FormData();
-      formData.append("image", state.photo);
-      console.log(url);
+      formData.append("photo", state.photo);
       try {
         let response = await axios.post(url, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/mixed; boundary=gc0p4Jq0M2Yt08jU534c0p"
           },
         });
         state.selectedMk = "";
-        state.photo = "";
         console.log("response", response);
       } catch (e) {
         console.log("e", e);

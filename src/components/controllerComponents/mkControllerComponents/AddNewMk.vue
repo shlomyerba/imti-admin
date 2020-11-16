@@ -87,15 +87,20 @@ export default {
       url += `&uuid=${token}`;
 
       console.log(url);
-
       let formData = new FormData();
-      formData.append("image", state.photo);
+      formData.append("photo", state.photo);
       try {
         let response = await axios.post(url, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/mixed; boundary=gc0p4Jq0M2Yt08jU534c0p",
           },
         });
+        state.email = "";
+        state.firstName = "";
+        state.lastName = "";
+        state.phone = "";
+        state.selectedParty = null;
+
         console.log("response", response);
       } catch (e) {
         console.log("e", e);
