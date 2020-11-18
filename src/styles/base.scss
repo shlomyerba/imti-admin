@@ -19,3 +19,17 @@ a{
       opacity: 0.5;
     }
 }
+
+.link_button_choose{
+    background: none;
+    border: none;
+    padding: 15px !important;
+    cursor: pointer;
+    font-weight: bold;
+    outline: none;
+    text-shadow: 1px 1px;
+
+    &:hover {
+      opacity: 0.5;
+    }
+}

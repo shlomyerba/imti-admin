@@ -2,9 +2,34 @@
   <div class="Admin">
     <div class="admin-panel">
       <div class="admin-panel_main-menu">
-        <button class="link_button" @click="goToController">Controller</button>
-        <button class="link_button" @click="goToEvents">Events</button>
-        <button class="link_button" @click="goToReports">Reports</button>
+        <button
+          class="link_button_choose"
+          @click="goToController"
+          v-if="state.isController"
+        >
+          Controller
+        </button>
+        <button class="link_button" @click="goToController" v-else>
+          Controller
+        </button>
+
+        <button
+          class="link_button_choose"
+          @click="goToEvents"
+          v-if="state.isEvents"
+        >
+          Events
+        </button>
+        <button class="link_button" @click="goToEvents" v-else>Events</button>
+
+        <button
+          class="link_button_choose"
+          @click="goToReports"
+          v-if="state.isReports"
+        >
+          Reports
+        </button>
+        <button class="link_button" @click="goToReports" v-else>Reports</button>
       </div>
 
       <div class="admin-panel_action-screen">
@@ -58,7 +83,7 @@ export default {
       goToController,
       goToEvents,
       goToReports,
-      closeAll
+      closeAll,
     };
   },
 };
@@ -82,10 +107,15 @@ export default {
       color: blueviolet;
       font-size: 24px;
     }
+
+    .link_button_choose {
+      color: blueviolet;
+      font-size: 35px;
+    }
   }
 
   .admin-panel_action-screen {
-    width:  90%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     padding: 10px 10%;

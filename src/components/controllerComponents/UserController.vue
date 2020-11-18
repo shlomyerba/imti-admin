@@ -2,21 +2,47 @@
   <div class="user-controller">
     <div class="user-controller-panel">
       <div class="user-controller-panel_main-menu">
-        <button class="link_button" @click="goToRemoveUser">remove user</button>
-        <button class="link_button" @click="goToUpdateEmail">
+        <button class="link_button_choose" @click="goToRemoveUser" v-if="state.isRemoveUser">remove user</button>
+        <button class="link_button" @click="goToRemoveUser" v-else>remove user</button>
+
+        <button class="link_button_choose" @click="goToUpdateEmail" v-if="state.isUpdateUserEmail" >
           update email
         </button>
-        <button class="link_button" @click="goToUpdateMembership">
+         <button class="link_button" @click="goToUpdateEmail" v-else>
+          update email
+        </button>
+
+
+        <button class="link_button_choose" @click="goToUpdateMembership" v-if="state.isUpdateUserMembership">
           update membership
         </button>
-        <button class="link_button" @click="goToUpdatePhone">
+         <button class="link_button" @click="goToUpdateMembership" v-else>
+          update membership
+        </button>
+
+
+        <button class="link_button_choose" @click="goToUpdatePhone" v-if="state.isUpdateUserPhone">
           update phone
         </button>
-        <button class="link_button" @click="goToViewActivity">
+         <button class="link_button" @click="goToUpdatePhone" v-else>
+          update phone
+        </button>
+
+
+        <button class="link_button_choose" @click="goToViewActivity" v-if="state.isUserViewActivity">
           view activity
         </button>
-        <button class="link_button" @click="goToViewEvents">view events</button>
-        <button class="link_button" @click="goToViewInfo">view info</button>
+        <button class="link_button" @click="goToViewActivity" v-else>
+          view activity
+        </button>
+
+
+        <button class="link_button_choose" @click="goToViewEvents" v-if="state.isUserViewEvents">view events</button>
+        <button class="link_button" @click="goToViewEvents" v-else>view events</button>
+
+
+        <button class="link_button_choose" @click="goToViewInfo" v-if="state.isUserViewInfo">view info</button>
+        <button class="link_button" @click="goToViewInfo" v-else>view info</button>
       </div>
 
       <div class="user-controller-panel_action-screen">
@@ -125,6 +151,11 @@ export default {
   .link_button {
     color: gray;
     font-size: 15px;
+  }
+
+   .link_button_choose {
+    color: gray;
+    font-size: 20px;
   }
 }
 </style>

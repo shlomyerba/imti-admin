@@ -2,11 +2,35 @@
   <div class="party-controller">
     <div class="party-controller-panel">
       <div class="party-controller-panel_main-menu">
-        <button class="link_button" @click="goToAddParty">add party</button>
-        <button class="link_button" @click="goToRemoveParty">
+        <button
+          class="link_button_choose"
+          @click="goToAddParty"
+          v-if="state.isAddParty"
+        >
+          add party
+        </button>
+        <button class="link_button" @click="goToAddParty" v-else>
+          add party
+        </button>
+        <button
+          class="link_button_choose"
+          @click="goToRemoveParty"
+          v-if="state.isRemoveParty"
+        >
           remove party
         </button>
-        <button class="link_button" @click="goToUpdateOrientation">
+        <button class="link_button" @click="goToRemoveParty" v-else>
+          remove party
+        </button>
+
+        <button
+          class="link_button_choose"
+          @click="goToUpdateOrientation"
+          v-if="state.isUpdateOrientation"
+        >
+          update orientation
+        </button>
+        <button class="link_button" @click="goToUpdateOrientation" v-else>
           update orientation
         </button>
       </div>
@@ -80,6 +104,11 @@ export default {
   .link_button {
     color: gray;
     font-size: 15px;
+  }
+
+  .link_button_choose {
+    color: gray;
+    font-size: 20px;
   }
 }
 </style>

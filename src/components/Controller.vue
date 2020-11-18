@@ -2,15 +2,42 @@
   <div class="controller">
     <div class="controller-panel">
       <div class="controller-panel_main-menu">
-        <button class="link_button" @click="goToMkOptions">mk</button>
-        <button class="link_button" @click="goToPartyOptions">party</button>
-        <button class="link_button" @click="goToUserOptions">user</button>
+        <button
+          class="link_button_choose"
+          @click="goToMkOptions"
+          v-if="state.isMkChoose"
+        >
+          mk
+        </button>
+        <button class="link_button" @click="goToMkOptions" v-else>mk</button>
+
+        <button
+          class="link_button_choose"
+          @click="goToPartyOptions"
+          v-if="state.isPartyChoose"
+        >
+          party
+        </button>
+        <button class="link_button" @click="goToPartyOptions" v-else>
+          party
+        </button>
+
+        <button
+          class="link_button_choose"
+          @click="goToUserOptions"
+          v-if="state.isUserChoose"
+        >
+          user
+        </button>
+        <button class="link_button" @click="goToUserOptions" v-else>
+          user
+        </button>
       </div>
 
       <div class="controller-panel_action-screen">
-        <MkController v-if="state.isMk" />
-        <PartyController v-else-if="state.isParty" />
-        <UserController v-else-if="state.isUser" />
+        <MkController v-if="state.isMkChoose" />
+        <PartyController v-else-if="state.isPartyChoose" />
+        <UserController v-else-if="state.isUserChoose" />
       </div>
     </div>
   </div>
@@ -30,32 +57,32 @@ export default {
 
   setup() {
     const state = reactive({
-      isMk: true,
-      isParty: false,
-      isUser: false,
+      isMkChoose: true,
+      isPartyChoose: false,
+      isUserChoose: false,
     });
 
     function goToMkOptions() {
       closeAll();
-      state.isMk = true;
+      state.isMkChoose = true;
     }
 
     function goToPartyOptions() {
       closeAll();
-      state.isParty = true;
+      state.isPartyChoose = true;
     }
 
     function goToUserOptions() {
       closeAll();
-      state.isUser = true;
+      state.isUserChoose = true;
     }
 
     function closeAll() {
-      state.isMk = false;
-      state.isParty = false;
-      state.isUser = false;
+      state.isMkChoose = false;
+      state.isPartyChoose = false;
+      state.isUserChoose = false;
     }
-    
+
     return {
       state,
       goToMkOptions,
@@ -75,6 +102,10 @@ export default {
   .link_button {
     color: gray;
     font-size: 24px;
+  }
+  .link_button_choose {
+    color: gray;
+    font-size: 35px;
   }
 }
 </style>
