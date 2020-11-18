@@ -24,7 +24,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const token = VueCookies.get("token");
-  if (to.name !== 'Login' && !token) next({ name: 'Login' })
+  if (to.name !== 'Login' && (!token || token === 'null')) next({ name: 'Login' })
   else next()
 })
 
