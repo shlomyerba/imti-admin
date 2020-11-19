@@ -112,7 +112,7 @@ export default {
     flex-direction: column;
     width: 20%;
     padding: 10px 1%;
-    border-right: 2px solid blueviolet;
+    border-left: 2px solid blueviolet;
 
     .link_button {
       color: blueviolet;
