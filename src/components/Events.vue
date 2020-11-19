@@ -21,7 +21,7 @@
           remove event
         </button>
         <button class="link_button" @click="goToRemoveEvent" v-else>
-          new event
+          remove event
         </button>
 
         <button
