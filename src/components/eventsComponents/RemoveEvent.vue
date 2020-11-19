@@ -2,7 +2,7 @@
   <div class="remove-event">
     <form class="remove-event_form" @submit.prevent="removeEvent">
       <div class="remove-event_container">
-        <label>Mks *</label><br />
+        <label>Events *</label><br />
         <select id="ChooseParty" v-model="state.selectedEvents" required>
           <option
             :value="option.id"
@@ -26,7 +26,7 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 
 export default {
-  name: "RemoveMk",
+  name: "RemoveEvent",
   setup() {
     const state = reactive({
       selectedEvents: null,
