@@ -45,7 +45,8 @@
 import Controller from "../components/Controller";
 import Events from "../components/Events";
 import Reports from "../components/Reports";
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+import VueCookies from "vue-cookies";
 
 export default {
   name: "Admin",
@@ -77,6 +78,16 @@ export default {
       state.isEvents = false;
       state.isReports = false;
     }
+
+    //check if token is expired every 10 seconds:
+    onMounted(async () => {
+      setInterval(function () {
+        let token = VueCookies.get("token");
+        if (!token || token === "token") {
+          window.location = "/login";
+        }
+      }, 10000);
+    });
 
     return {
       state,
