@@ -81,7 +81,7 @@ export default {
 
     //check if token is expired every 10 seconds:
     onMounted(async () => {
-      setInterval(function () {
+      setInterval(() => {
         let token = VueCookies.get("token");
         if (!token || token === "token") {
           window.location = "/login";
