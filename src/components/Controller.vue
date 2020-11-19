@@ -101,11 +101,11 @@ export default {
 
   .link_button {
     color: gray;
-    font-size: 24px;
+    font-size: 18px;
   }
   .link_button_choose {
     color: gray;
-    font-size: 35px;
+    font-size: 30px;
   }
 }
 </style>
