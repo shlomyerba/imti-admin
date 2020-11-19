@@ -83,7 +83,7 @@ export default {
     onMounted(async () => {
       setInterval(() => {
         let token = VueCookies.get("token");
-        if (!token || token === "token") {
+        if (!token || token === "null") {
           window.location = "/login";
         }
       }, 10000);
