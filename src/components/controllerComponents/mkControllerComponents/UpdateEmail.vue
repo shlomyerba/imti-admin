@@ -2,7 +2,7 @@
   <div class="update-email">
     <form class="update-email_form" @submit.prevent="updateEmail">
       <div class="update-email_container">
-        <label>Mks *</label>
+        <label>Mks *</label><br />
         <select
           id="chooseMk"
           v-model="state.selectedMk"
@@ -17,7 +17,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Email *</label>
+        <label>Email *</label><br />
         <input
           type="email"
           placeholder="Enter Email"

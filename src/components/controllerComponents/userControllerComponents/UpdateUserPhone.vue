@@ -2,7 +2,7 @@
   <div class="update-phone">
     <form class="update-phone_form" @submit.prevent="updatePhone">
       <div class="update-phone_container">
-        <label>Users *</label>
+        <label>Users *</label><br />
         <select
           id="chooseMk"
           v-model="state.selectedUser"
@@ -17,7 +17,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Phone *</label>
+        <label>Phone *</label><br />
         <input
           type="phone"
           placeholder="Enter Phone"

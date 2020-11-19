@@ -119,7 +119,7 @@ export default {
     cursor: pointer;
     width: 45%;
     font-weight: bold;
-    margin-left: 5%;
+    margin-right: 5%;
 
     &:hover {
       opacity: 0.8;

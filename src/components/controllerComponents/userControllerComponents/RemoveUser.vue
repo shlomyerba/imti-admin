@@ -2,7 +2,7 @@
   <div class="remove-user">
     <form class="remove-user_form" @submit.prevent="removeUser">
       <div class="remove-user_container">
-        <label>Users *</label>
+        <label>Users *</label><br />
         <select id="ChooseUser" v-model="state.selectedUser" required>
           <option
             :value="option.id"

@@ -2,7 +2,7 @@
   <div class="update-party">
     <form class="update-party_form" @submit.prevent="updateParty">
       <div class="update-party_container">
-        <label>Mks *</label>
+        <label>Mks *</label><br />
         <select
           id="chooseMk"
           v-model="state.selectedMk"
@@ -17,7 +17,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Party *</label>
+        <label>Party *</label><br />
         <select id="chooseParty" v-model="state.selectedParty" required>
           <option
             :value="option.id"

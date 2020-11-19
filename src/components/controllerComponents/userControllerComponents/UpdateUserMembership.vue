@@ -2,7 +2,7 @@
   <div class="update-membership">
     <form class="update-membership_form" @submit.prevent="updateMembership">
       <div class="update-membership_container">
-        <label>Users *</label>
+        <label>Users *</label><br />
         <select
           id="chooseMk"
           v-model="state.selectedUser"
@@ -17,7 +17,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Membership *</label>
+        <label>Membership *</label><br />
         <select
           id="ChooseMembership"
           v-model="state.selectedMembership"

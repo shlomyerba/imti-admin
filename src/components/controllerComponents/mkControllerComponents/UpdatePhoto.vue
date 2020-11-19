@@ -2,7 +2,7 @@
   <div class="update-phone">
     <form class="update-phone_form" @submit.prevent="updatePhoto">
       <div class="update-phone_container">
-        <label>Mks *</label>
+        <label>Mks *</label><br />
         <select id="chooseMk" v-model="state.selectedMk" required>
           <option
             :value="option.id"
@@ -12,7 +12,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Photo *</label>
+        <label>Photo *</label><br />
         <input
           type="file"
           placeholder="upload photo"

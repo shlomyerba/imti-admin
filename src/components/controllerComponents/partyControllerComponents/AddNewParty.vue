@@ -2,14 +2,14 @@
   <div class="add-new-party">
     <form class="add-new-party_form" @submit.prevent="addNewParty">
       <div class="add-new-party_container">
-        <label>name *</label>
+        <label>name *</label><br />
         <input
           type="name"
           placeholder="Enter party name"
           v-model="state.name"
           required
         />
-        <label>Orientation *</label>
+        <label>Orientation *</label><br />
         <select
           id="ChooseOrientation"
           v-model="state.selectedOrientation"

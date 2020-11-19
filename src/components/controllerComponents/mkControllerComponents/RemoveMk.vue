@@ -2,7 +2,7 @@
   <div class="remove-mk">
     <form class="remove-mk_form" @submit.prevent="removeMk">
       <div class="remove-mk_container">
-        <label>Mks *</label>
+        <label>Mks *</label><br />
         <select id="ChooseParty" v-model="state.selectedMk" required>
           <option
             :value="option.id"
