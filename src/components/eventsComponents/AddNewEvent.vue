@@ -47,7 +47,7 @@
             v-for="(option, index) in state.Importances"
             :key="index"
           >
-            {{ option.id }}
+            {{ option.name }}
           </option>
         </select>
         <label>Min *</label><br />
@@ -98,6 +98,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
+import { importances } from "../../assets/importances";
 
 export default {
   name: "AddNewMk",
@@ -109,12 +110,7 @@ export default {
       mks: [],
       hour: "",
       selectedImportance: null,
-      Importances: [
-        { id: "CRITICAL" },
-        { id: "HIGH" },
-        { id: "MEDIUM" },
-        { id: "LOW" },
-      ],
+      Importances: importances,
       min: "",
       month: "",
       textMessageToMKs: "",

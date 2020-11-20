@@ -28,7 +28,7 @@
             v-for="(option, index) in state.Orientations"
             :key="index"
           >
-            {{ option.id }}
+            {{ option.name }}
           </option>
         </select>
         <button>update</button>

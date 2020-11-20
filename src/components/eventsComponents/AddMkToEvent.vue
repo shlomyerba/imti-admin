@@ -30,7 +30,7 @@
             v-for="(option, index) in state.votes"
             :key="index"
           >
-            {{ option.id }}
+            {{ option.name }}
           </option>
         </select>
         <button>add</button>
@@ -45,6 +45,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
+import { votes } from "../../assets/votes";
 
 export default {
   name: "AddMkToEvent",
@@ -55,7 +56,7 @@ export default {
       selectedMk: null,
       Mks: [],
       selectedVotes: null,
-      votes: [{ id: "YES" }, { id: "NO" }, { id: "MISSING" }, { id: "NONE" }],
+      votes: votes,
     });
 
     async function addMkToEvent() {
