@@ -38,6 +38,8 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
+import { getDateFormat} from "../../../assets/getDateFormat";
+import { getHourAndMinuteFormat} from "../../../assets/getHourAndMinuteFormat";
 
 export default {
   name: "EventUpdateDate",
@@ -69,24 +71,7 @@ export default {
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
       let response = await axios.get(url);
       let oldDate = new Date(response.data.timestamp);
-      
-      let min = oldDate.getMinutes();
-      if (oldDate.getMinutes() < 10) {
-        min = `0${oldDate.getMinutes()}`;
-      }
-      let hour = oldDate.getHours();
-      if (oldDate.getHours() < 10) {
-        hour = `0${oldDate.getHours()}`;
-      }
-      let day = oldDate.getDate();
-      if (oldDate.getDate() < 10) {
-        day = `0${oldDate.getDate()}`;
-      }
-      let month = oldDate.getMonth() + 1;
-      if (oldDate.getMonth() + 1 < 10) {
-        month = `0${oldDate.getMonth() + 1}`;
-      }
-      state.date = `${oldDate.getFullYear()}-${month}-${day}T${hour}:${min}`;
+      state.date = `${getDateFormat(oldDate)}T${getHourAndMinuteFormat(oldDate)}`;
       console.log("response", response);
     }
 

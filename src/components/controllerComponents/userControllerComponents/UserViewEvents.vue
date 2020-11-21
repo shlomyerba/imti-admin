@@ -36,6 +36,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
+import { getDateFormat } from "../../../assets/getDateFormat";
 
 export default {
   name: "ViewUserEvents",
@@ -60,16 +61,7 @@ export default {
 
     function findDate(timestamp) {
       let date = new Date(timestamp);
-      console.log("date", date);
-      let day = date.getDate();
-      if (date.getDate() < 10) {
-        day = `0${date.getDate()}`;
-      }
-      let month = date.getMonth() + 1;
-      if (date.getMonth() + 1 < 10) {
-        month = `0${date.getMonth() + 1}`;
-      }
-      return `${day}-${month}-${date.getFullYear()}`;
+      return `${getDateFormat(date)}`;
     }
     onMounted(async () => {
       let token = VueCookies.get("token");
