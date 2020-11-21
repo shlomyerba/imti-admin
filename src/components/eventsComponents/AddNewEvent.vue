@@ -2,11 +2,11 @@
   <div class="add-new-event">
     <form class="add-new-event_form" @submit.prevent="addNewEvent">
       <div class="add-new-event_container">
-        <label>Day *</label><br />
+        <label>Title *</label><br />
         <input
-          type="number"
-          placeholder="Enter Day"
-          v-model="state.day"
+          type="text"
+          placeholder="Enter Title"
+          v-model="state.title"
           required
         />
         <label>Description *</label><br />
@@ -14,6 +14,13 @@
           type="text"
           placeholder="Enter Description"
           v-model="state.description"
+          required
+        />
+        <label>Date *</label><br />
+        <input
+          type="datetime-local"
+          placeholder="Enter Date"
+          v-model="state.date"
           required
         />
 
@@ -27,14 +34,6 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-
-        <label>Hour *</label><br />
-        <input
-          type="text"
-          placeholder="Enter Hour"
-          v-model="state.hour"
-          required
-        />
 
         <label>Importance *</label><br />
         <select
@@ -50,20 +49,6 @@
             {{ option.name }}
           </option>
         </select>
-        <label>Min *</label><br />
-        <input
-          type="number"
-          placeholder="Enter Min"
-          v-model="state.min"
-          required
-        />
-        <label>Month *</label><br />
-        <input
-          type="number"
-          placeholder="Enter Month"
-          v-model="state.month"
-          required
-        />
         <label>TextMessageToMKs *</label><br />
         <input
           type="text"
@@ -71,21 +56,6 @@
           v-model="state.textMessageToMKs"
           required
         />
-        <label>Title *</label><br />
-        <input
-          type="text"
-          placeholder="Enter Title"
-          v-model="state.title"
-          required
-        />
-        <label>Year *</label><br />
-        <input
-          type="number"
-          placeholder="Enter Year"
-          v-model="state.year"
-          required
-        />
-
         <button>add</button>
       </div>
     </form>
@@ -104,38 +74,31 @@ export default {
   name: "AddNewMk",
   setup() {
     const state = reactive({
-      day: "",
       description: "",
       selectedMk: null,
       mks: [],
-      hour: "",
       selectedImportance: null,
       Importances: importances,
-      min: "",
-      month: "",
       textMessageToMKs: "",
       title: "",
-      year: "",
+      date: "",
     });
 
     async function addNewEvent() {
       let token = VueCookies.get("token");
+      let timestamp = new Date(state.date).getTime();
 
-      let url = `${baseUrl}/admin/event/new?day=${state.day}&description=${state.description}&founderMKId=${state.selectedMk}&`;
-      url += `hour=${state.hour}&importance=${state.selectedImportance}&min=${state.min}&month=${state.month}&`;
-      url += `textMessageToMKs=${state.textMessageToMKs}&title=${state.title}&uuid=${token}&year=${state.year}`;
+      let url = `${baseUrl}/admin/event/new?description=${state.description}&founderMKId=${state.selectedMk}&`;
+      url += `importance=${state.selectedImportance}&textMessageToMKs=${state.textMessageToMKs}&`;
+      url += `timestamp=${timestamp}&title=${state.title}&uuid=${token}`;
       try {
         let response = await axios.get(url);
-        state.day = "";
         state.description = "";
         state.selectedMk = null;
-        state.hour = "";
         state.selectedImportance = null;
-        state.min = "";
-        state.month = "";
         state.textMessageToMKs = "";
         state.title = "";
-        state.year = "";
+        state.date = "";
         console.log("response", response);
       } catch (e) {
         console.log("e", e);
