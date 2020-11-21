@@ -61,9 +61,9 @@ export default {
     function findDate(timestamp) {
       let date = new Date(timestamp);
       console.log("date", date);
-      let day = date.getDay();
-      if (date.getDay() < 10) {
-        day = `0${date.getDay()}`;
+      let day = date.getDate();
+      if (date.getDate() < 10) {
+        day = `0${date.getDate()}`;
       }
       let month = date.getMonth() + 1;
       if (date.getMonth() + 1 < 10) {
