@@ -20,7 +20,7 @@
     <table class="user_info">
       <tr>
         <th>Title</th>
-        <th>Description</th>
+        <th width="200">Description</th>
         <th>Importance</th>
         <th>Mk Founder</th>
         <th>Msg To MKs</th>
