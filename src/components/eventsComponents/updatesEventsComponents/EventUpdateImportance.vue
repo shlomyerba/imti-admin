@@ -9,7 +9,7 @@
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
-          @change="findOldFounder"
+          @change="findOldImportance"
           required
         >
           <option
@@ -73,7 +73,7 @@ export default {
       }
     }
 
-    async function findOldFounder() {
+    async function findOldImportance() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
       let response = await axios.get(url);
@@ -105,7 +105,7 @@ export default {
       state,
       eventUpdateImportance,
       updateEvents,
-      findOldFounder,
+      findOldImportance,
     };
   },
 };
