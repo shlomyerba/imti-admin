@@ -53,8 +53,6 @@ export default {
     async function eventUpdateDate() {
       let token = VueCookies.get("token");
       let timestamp = new Date(state.date).getTime();
-      console.log(state.date);
-      console.log(new Date(state.date).getTime());
       let url = `${baseUrl}/admin/event/update/date?eventId=${state.selectedEvents}&timestamp=${timestamp}&uuid=${token}`;
       try {
         let response = await axios.get(url);
