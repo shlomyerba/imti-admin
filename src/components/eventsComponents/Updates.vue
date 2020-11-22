@@ -22,9 +22,6 @@
         <button class="link_button" @click="goToUpdateMessageToMks" v-else>update message</button>
 
 
-<button class="link_button_choose" @click="goToUpdateMkVote" v-if="state.isUpdateMkVote">update vote</button>
-        <button class="link_button" @click="goToUpdateMkVote" v-else>update vote</button>
-
 
 <button class="link_button_choose" @click="goUpdateStatus" v-if="state.isUpdateStatus">update status</button>
         <button class="link_button" @click="goUpdateStatus" v-else>update status</button>
@@ -39,7 +36,6 @@
         <EventUpdateFounder v-else-if="state.isUpdateFounder" />
         <EventUpdateImportance v-else-if="state.isUpdateImportance" />
         <EventUpdateMessageToMks v-else-if="state.isUpdateMessageToMks" />
-        <EventUpdateMkVote v-else-if="state.isUpdateMkVote" />
         <EventUpdateStatus v-else-if="state.isUpdateStatus" />
       </div>
     </div>
@@ -53,7 +49,6 @@ import EventUpdateDescription from "./updatesEventsComponents/EventUpdateDescrip
 import EventUpdateFounder from "./updatesEventsComponents/EventUpdateFounder";
 import EventUpdateImportance from "./updatesEventsComponents/EventUpdateImportance";
 import EventUpdateMessageToMks from "./updatesEventsComponents/EventUpdateMessageToMks";
-import EventUpdateMkVote from "./updatesEventsComponents/EventUpdateMkVote";
 import EventUpdateStatus from "./updatesEventsComponents/EventUpdateStatus";
 import { reactive } from "vue";
 
@@ -65,7 +60,6 @@ export default {
     EventUpdateFounder,
     EventUpdateImportance,
     EventUpdateMessageToMks,
-    EventUpdateMkVote,
     EventUpdateStatus,
   },
   setup() {
@@ -75,7 +69,6 @@ export default {
       isUpdateFounder: false,
       isUpdateImportance: false,
       isUpdateMessageToMks: false,
-      isUpdateMkVote: false,
       isUpdateStatus: false,
     });
 
@@ -99,10 +92,7 @@ export default {
       closeAll();
       state.isUpdateMessageToMks = true;
     }
-    function goToUpdateMkVote() {
-      closeAll();
-      state.isUpdateMkVote = true;
-    }
+    
     function goUpdateStatus() {
       closeAll();
       state.isUpdateStatus = true;
@@ -113,7 +103,6 @@ export default {
       state.isUpdateFounder = false;
       state.isUpdateImportance = false;
       state.isUpdateMessageToMks = false;
-      state.isUpdateMkVote = false;
       state.isUpdateStatus = false;
     }
     return {
@@ -124,7 +113,6 @@ export default {
       goToUpdateFounder,
       goToUpdateImportance,
       goToUpdateMessageToMks,
-      goToUpdateMkVote,
       goUpdateStatus,
     };
   },

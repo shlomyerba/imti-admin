@@ -18,9 +18,9 @@
       </div>
 
       <div class="user-controller-panel_action-screen">
-        <EventViewInfo v-if="state.isUpdateDate" />
-        <EventViewMkEventAll v-else-if="state.isUpdateDescription" />
-        <EventViewMkEventInfo v-else-if="state.isUpdateFounder" />
+        <EventViewInfo v-if="state.isViewInfo" />
+        <EventViewMkEventAll v-else-if="state.isViewMkEventAll" />
+        <EventViewMkEventInfo v-else-if="state.isViewMkEventInfo" />
           </div>
     </div>
   </div>

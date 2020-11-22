@@ -3,7 +3,7 @@
     <form class="remove-event_form" @submit.prevent="removeEvent">
       <div class="remove-event_container">
         <label>Events *</label><br />
-        <select id="ChooseParty" v-model="state.selectedEvents" required>
+        <select id="ChooseEvent" v-model="state.selectedEvents" required>
           <option
             :value="option.id"
             v-for="(option, index) in state.events"

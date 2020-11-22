@@ -26,34 +26,23 @@
 
         <button
           class="link_button_choose"
-          @click="goToAddMkToEvent"
-          v-if="state.isAddMkToEvent"
-        >
-          add mk to event
-        </button>
-        <button class="link_button" @click="goToAddMkToEvent" v-else>
-          add mk to event
-        </button>
-
-        <button
-          class="link_button_choose"
-          @click="goToRemoveMkFromEvent"
-          v-if="state.isRemoveMkFromEvent"
-        >
-          remove mk event
-        </button>
-        <button class="link_button" @click="goToRemoveMkFromEvent" v-else>
-          remove mk event
-        </button>
-
-        <button
-          class="link_button_choose"
           @click="goToUpdates"
           v-if="state.isUpdates"
         >
           updates
         </button>
         <button class="link_button" @click="goToUpdates" v-else>updates</button>
+
+        <button
+          class="link_button_choose"
+          @click="goToMkToEvent"
+          v-if="state.isMkToEvent"
+        >
+          mk to event
+        </button>
+        <button class="link_button" @click="goToMkToEvent" v-else>
+          mk to event
+        </button>
 
         <button
           class="link_button_choose"
@@ -68,8 +57,7 @@
       <div class="controller-panel_action-screen">
         <AddNewEvent v-if="state.isNewEvent" />
         <RemoveEvent v-else-if="state.isRemoveEvent" />
-        <AddMkToEvent v-else-if="state.isAddMkToEvent" />
-        <RemoveMkFromEvent v-else-if="state.isRemoveMkFromEvent" />
+        <MkToEvent v-else-if="state.isMkToEvent" />
         <Updates v-else-if="state.isUpdates" />
         <Views v-else-if="state.isViews" />
       </div>
@@ -81,8 +69,7 @@
 <script>
 import AddNewEvent from "./eventsComponents/AddNewEvent";
 import RemoveEvent from "./eventsComponents/RemoveEvent";
-import AddMkToEvent from "./eventsComponents/AddMkToEvent";
-import RemoveMkFromEvent from "./eventsComponents/RemoveMkFromEvent";
+import MkToEvent from "./eventsComponents/MkToEvent";
 import Updates from "./eventsComponents/Updates";
 import Views from "./eventsComponents/Views";
 
@@ -93,8 +80,7 @@ export default {
   components: {
     AddNewEvent,
     RemoveEvent,
-    AddMkToEvent,
-    RemoveMkFromEvent,
+    MkToEvent,
     Updates,
     Views,
   },
@@ -102,8 +88,7 @@ export default {
     const state = reactive({
       isNewEvent: true,
       isRemoveEvent: false,
-      isAddMkToEvent: false,
-      isRemoveMkFromEvent: false,
+      isMkToEvent: false,
       isUpdates: false,
       isViews: false,
     });
@@ -118,14 +103,9 @@ export default {
       state.isRemoveEvent = true;
     }
 
-    function goToAddMkToEvent() {
+    function goToMkToEvent() {
       closeAll();
-      state.isAddMkToEvent = true;
-    }
-
-    function goToRemoveMkFromEvent() {
-      closeAll();
-      state.isRemoveMkFromEvent = true;
+      state.isMkToEvent = true;
     }
 
     function goToUpdates() {
@@ -140,18 +120,16 @@ export default {
     function closeAll() {
       state.isNewEvent = false;
       state.isRemoveEvent = false;
-      state.isAddMkToEvent = false;
-      state.isRemoveMkFromEvent = false;
-      state.isUpdates= false;
-      state.isViews= false;
+      state.isMkToEvent = false;
+      state.isUpdates = false;
+      state.isViews = false;
     }
 
     return {
       state,
       goToNewEvent,
       goToRemoveEvent,
-      goToAddMkToEvent,
-      goToRemoveMkFromEvent,
+      goToMkToEvent,
       goToUpdates,
       goToViews,
       closeAll,

@@ -1,9 +1,14 @@
 <template>
-  <div class="add-mk-to-event">
-    <form class="add-mk-to-event_form" @submit.prevent="addMkToEvent">
-      <div class="add-mk-to-event_container">
+  <div class="remove-mk-from-event">
+    <form class="remove-mk-from-event_form" @submit.prevent="removeMkFromEvent">
+      <div class="remove-mk-from-event_container">
         <label>Events *</label><br />
-        <select id="ChooseParty" v-model="state.selectedEvents" required>
+        <select
+          id="ChooseParty"
+          v-model="state.selectedEvents"
+          @change="getMksByEvent"
+          required
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.events"
@@ -12,28 +17,17 @@
             {{ option.title }}
           </option>
         </select>
-        <label>Mks *</label><br />
-        <select id="ChooseParty" v-model="state.selectedMk" required>
+        <label>Mks by event *</label><br />
+        <select id="ChooseParty" v-model="state.selectedMkByEvent" required>
           <option
             :value="option.id"
-            v-for="(option, index) in state.Mks"
+            v-for="(option, index) in state.MksByEvent"
             :key="index"
           >
-            {{ `${option.first} ${option.last}` }}
+            {{ `${option.mk.first} ${option.mk.last}` }}
           </option>
         </select>
-
-        <label>Vote *</label><br />
-        <select id="chooseImportance" v-model="state.selectedVotes" required>
-          <option
-            :value="option.id"
-            v-for="(option, index) in state.votes"
-            :key="index"
-          >
-            {{ option.name }}
-          </option>
-        </select>
-        <button>add</button>
+        <button>remove</button>
       </div>
     </form>
   </div>
@@ -44,37 +38,32 @@
 import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
-import { baseUrl } from "../../assets/url";
-import { votes } from "../../assets/votes";
+import { baseUrl } from "../../../assets/url";
 
 export default {
-  name: "AddMkToEvent",
+  name: "RemoveMkFromEvent",
   setup() {
     const state = reactive({
       selectedEvents: null,
       events: [],
-      selectedMk: null,
-      Mks: [],
-      selectedVotes: null,
-      votes: votes,
+      selectedMkByEvent: null,
+      MksByEvent: [],
     });
 
-    async function addMkToEvent() {
+    async function removeMkFromEvent() {
       let token = VueCookies.get("token");
-      let url = `${baseUrl}/admin/event/add/mk?eventId=${state.selectedEvents}&mkId=${state.selectedMk}&uuid=${token}&vote=${state.selectedVotes}`;
+      let url = `${baseUrl}/admin/event/remove/mk?mkeId=${state.selectedMkByEvent}&uuid=${token}`;
       try {
         let response = await axios.get(url);
-        state.selectedEvents = null;
-        state.selectedMk = null;
-        state.selectedVotes = null;
-
+        state.selectedEvents = "";
         console.log("response", response);
+        await updateEvents();
       } catch (e) {
         console.log("e", e);
       }
     }
 
-    onMounted(async () => {
+    async function updateEvents() {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/all?uuid=${token}`;
       try {
@@ -82,29 +71,37 @@ export default {
         if (response.data) {
           console.log(response.data);
           state.events = response.data;
+          state.MksByEvent = [];
         }
       } catch (e) {
         console.log("e", e);
       }
-    });
+    }
 
-    onMounted(async () => {
+    async function getMksByEvent() {
       let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
+      let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&uuid=${token}`;
       try {
         let response = await axios.get(url);
         if (response.data) {
           console.log(response.data);
-          state.Mks = response.data;
+          state.MksByEvent = response.data;
         }
       } catch (e) {
         console.log("e", e);
+        state.MksByEvent = [];
       }
+    }
+
+    onMounted(async () => {
+      await updateEvents();
     });
 
     return {
       state,
-      addMkToEvent,
+      removeMkFromEvent,
+      updateEvents,
+      getMksByEvent,
     };
   },
 };
@@ -112,11 +109,10 @@ export default {
 
   
 <style lang="scss" scoped>
-.add-mk-to-event_container {
+.remove-mk-from-event_container {
   padding: 16px;
   font-weight: bold;
 
-  input,
   select {
     width: 100%;
     padding: 12px 20px;
