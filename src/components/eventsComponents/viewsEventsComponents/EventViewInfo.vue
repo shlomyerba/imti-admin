@@ -23,7 +23,7 @@
         <th width="200">Description</th>
         <th>Importance</th>
         <th>Mk Founder</th>
-        <th>Msg To MKs</th>
+        <th width="200">Msg To MKs</th>
         <th>Date</th>
         <th>Time</th>
         <th>Status</th>
@@ -50,6 +50,8 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getDateFormat } from "../../../assets/getDateFormat";
 import { getHourAndMinuteFormat } from "../../../assets/getHourAndMinuteFormat";
+import { getHebrewImportances } from "../../../assets/getHebrewImportances";
+import { getHebrewStatus } from "../../../assets/getHebrewStatus";
 
 export default {
   name: "EventViewInfo",
@@ -66,6 +68,8 @@ export default {
       try {
         let response = await axios.get(url);
         state.info = response.data;
+        state.info.status = getHebrewStatus(state.info.status);
+        state.info.importance = getHebrewImportances(state.info.importance);
         state.info.date = getDateFormat(new Date(state.info.timestamp));
         state.info.time = getHourAndMinuteFormat(
           new Date(state.info.timestamp)
