@@ -3,10 +3,8 @@
     <div class="report-event_container">
       <label>Choose report by *</label><br />
       <select
-        id="chooseReportBy"
         v-model="state.selectedBy"
         @change="findNext"
-        required
       >
         <option
           :value="option.id"
@@ -116,7 +114,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
-import { reportEventOptions } from "../../assets/reportEventOptions";
+import { reportEventOptions } from "../../assets/report/reportEventOptions";
 import { importances } from "../../assets/importances";
 import { status } from "../../assets/status";
 import { getDateFormat } from "../../assets/getDateFormat";
