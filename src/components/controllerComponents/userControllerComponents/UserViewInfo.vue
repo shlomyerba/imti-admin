@@ -1,9 +1,9 @@
 <template>
   <div class="user-view-info">
-    <form class="user-view-info_form" @submit.prevent="userViewInfo">
+    <form class="user-view-info_form" >
       <div class="user-view-info_container">
         <label>Users *</label><br />
-        <select id="ChooseUser" v-model="state.selectedUser" required>
+        <select id="ChooseUser" v-model="state.selectedUser" @change="userViewInfo" required>
           <option
             :value="option.id"
             v-for="(option, index) in state.users"
@@ -12,7 +12,6 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <button>view</button>
       </div>
     </form>
   </div>
@@ -93,11 +92,12 @@ export default {
   
 <style lang="scss">
 .user-view-info_container {
-  padding: 16px;
+   padding: 16px;
   font-weight: bold;
 
+  input,
   select {
-    width: 45%;
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -114,9 +114,8 @@ export default {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 45%;
+    width: 100%;
     font-weight: bold;
-    margin-right: 5%;
 
     &:hover {
       opacity: 0.8;

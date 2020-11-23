@@ -82,7 +82,7 @@ export default {
       }
     }
 
-  async function getMksByEvent() {
+    async function getMksByEvent() {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&uuid=${token}`;
       try {
@@ -114,7 +114,7 @@ export default {
     return {
       state,
       eventViewMkEventInfo,
-      getMksByEvent
+      getMksByEvent,
     };
   },
 };

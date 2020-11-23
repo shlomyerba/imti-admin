@@ -1,9 +1,9 @@
 <template>
   <div class="user-view-events">
-    <form class="user-view-events_form" @submit.prevent="viewUserEvents">
+    <form class="user-view-events_form" >
       <div class="user-view-events_container">
         <label>Users *</label><br />
-        <select id="ChooseUser" v-model="state.selectedUser" required>
+        <select id="ChooseUser" v-model="state.selectedUser" @change="viewUserEvents" required>
           <option
             :value="option.id"
             v-for="(option, index) in state.users"
@@ -12,11 +12,10 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <button>view</button>
       </div>
     </form>
   </div>
-  <div v-if="state.events.length">
+  <div v-if="state.events">
     <table class="event_info">
       <tr>
         <th>Evevt</th>
@@ -24,7 +23,7 @@
       </tr>
       <tr v-for="(event, index) in state.events" :key="index">
         <td>{{ event.title }}</td>
-        <td>{{ findDate(event.timestamp) }}</td>
+        <td>{{ state.getDateFormat(new Date(event.timestamp)) }}</td>
       </tr>
     </table>
   </div>
@@ -44,7 +43,8 @@ export default {
     const state = reactive({
       selectedUser: null,
       users: [],
-      events: [],
+      events: "",
+      getDateFormat:getDateFormat
     });
 
     async function viewUserEvents() {
@@ -59,10 +59,7 @@ export default {
       }
     }
 
-    function findDate(timestamp) {
-      let date = new Date(timestamp);
-      return `${getDateFormat(date)}`;
-    }
+    
     onMounted(async () => {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/user/all?uuid=${token}`;
@@ -79,7 +76,6 @@ export default {
     return {
       state,
       viewUserEvents,
-      findDate,
     };
   },
 };
@@ -88,11 +84,12 @@ export default {
   
 <style lang="scss">
 .user-view-events_container {
-  padding: 16px;
+   padding: 16px;
   font-weight: bold;
 
+  input,
   select {
-    width: 45%;
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -109,9 +106,8 @@ export default {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 45%;
+    width: 100%;
     font-weight: bold;
-    margin-right: 5%;
 
     &:hover {
       opacity: 0.8;

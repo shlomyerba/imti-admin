@@ -1,12 +1,14 @@
 <template>
   <div class="event-view-mk-event-all">
-    <form
-      class="event-view-mk-event-all_form"
-      @submit.prevent="eventViewMkEventAll"
-    >
+    <form class="event-view-mk-event-all_form">
       <div class="event-view-mk-event-all_container">
         <label>Events *</label><br />
-        <select id="ChooseEvent" v-model="state.selectedEvents" required>
+        <select
+          id="ChooseEvent"
+          v-model="state.selectedEvents"
+          @change="eventViewMkEventAll"
+          required
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.events"
@@ -15,11 +17,10 @@
             {{ option.title }}
           </option>
         </select>
-        <button>view</button>
       </div>
     </form>
   </div>
-  <div v-if="state.info.length">
+  <div v-if="state.info">
     <table class="user_info">
       <tr>
         <th>Title</th>
@@ -59,7 +60,6 @@ export default {
       try {
         let response = await axios.get(url);
         state.info = response.data;
-        // state.info.vote = getHebrewVote(state.info.vote);
         console.log("response", response.data);
       } catch (e) {
         console.log("e", e);
@@ -91,11 +91,11 @@ export default {
   
 <style lang="scss">
 .event-view-mk-event-all_container {
-  padding: 16px;
+   padding: 16px;
   font-weight: bold;
 
   select {
-    width: 45%;
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -112,9 +112,8 @@ export default {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 45%;
+    width: 100%;
     font-weight: bold;
-    margin-right: 5%;
 
     &:hover {
       opacity: 0.8;
