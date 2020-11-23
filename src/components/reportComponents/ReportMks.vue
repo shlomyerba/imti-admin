@@ -87,6 +87,9 @@
         <td>{{ event.phone }}</td>
       </tr>
     </table>
+    <div class="report-mk_img" v-if="state.src">
+      <img v-bind:src="state.src" />
+    </div>
   </div>
 </template>
 
@@ -120,6 +123,7 @@ export default {
       parties: [],
       selectedMk: null,
       mks: [],
+      src: null,
     });
 
     function findNext() {
@@ -145,7 +149,9 @@ export default {
 
     async function viewAllReport() {
       state.info = "";
+      state.src = null;
       let token = await VueCookies.get("token");
+      let imageIncluded = `false`;
       console.log("viewAllReport");
       let url = `${baseUrl}/admin/report/mk`;
       if (state.isAll) {
@@ -158,14 +164,16 @@ export default {
         url += `/by/party?partyId=${state.selectedByParty}&`;
       } else if (state.isSpecificMkInfo) {
         url += `/info?mkId=${state.selectedMk}&`;
+        imageIncluded = `true`;
       }
-      url += `imageIncluded=false&uuid=${token}`;
-      console.log(url);
+      url += `imageIncluded=${imageIncluded}&uuid=${token}`;
+      console.log("url", url);
       try {
         let response = await axios.get(url);
         state.info = response.data;
         if (state.isSpecificMkInfo) {
           state.info = [response.data];
+          state.src = `data:${response.data.photo.type};base64,${response.data.photo.picByte}`;
         }
         console.log("response", response);
       } catch (e) {
@@ -244,6 +252,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.report-mk_img {
+  text-align: center;
+  padding-top: 20px;
+  max-width: 100%;
+}
 .report-mk_container {
   padding: 16px;
   font-weight: bold;
