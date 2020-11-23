@@ -17,9 +17,18 @@
         </option>
       </select>
 
-      <input v-model="state.timestamp" type="date" v-if="state.isByDate" />
+      <input
+        v-model="state.timestamp"
+        type="date"
+        @change="chosen"
+        v-if="state.isByDate"
+      />
 
-      <select v-model="state.selectedMk" v-else-if="state.isByFounder">
+      <select
+        v-model="state.selectedMk"
+        @change="chosen"
+        v-else-if="state.isByFounder"
+      >
         <option
           :value="option.id"
           v-for="(option, index) in state.mks"
@@ -31,6 +40,7 @@
 
       <select
         v-model="state.selectedByImportances"
+        @change="chosen"
         v-else-if="state.isByImportance"
       >
         <option
@@ -42,7 +52,11 @@
         </option>
       </select>
 
-      <select v-model="state.selectedStatus" v-else-if="state.isByStatus">
+      <select
+        v-model="state.selectedStatus"
+        @change="chosen"
+        v-else-if="state.isByStatus"
+      >
         <option
           :value="option.id"
           v-for="(option, index) in state.statuses"
@@ -54,6 +68,7 @@
 
       <select
         v-model="state.selectedEvents"
+        @change="chosen"
         v-else-if="state.isSpecificEventInfo"
       >
         <option
@@ -65,7 +80,7 @@
         </option>
       </select>
 
-      <button @click="viewAllReport" v-if="state.isEventByChoose">view</button>
+      <button @click="viewAllReport" v-if="state.isChoose">view</button>
     </div>
   </div>
 
@@ -113,7 +128,7 @@ export default {
   name: "ReportEvent",
   setup() {
     const state = reactive({
-      isEventByChoose: false,
+      isChoose: false,
       isAll: false,
       isByDate: false,
       isByFounder: false,
@@ -143,6 +158,7 @@ export default {
       closeAll();
       if (state.selectedBy === "all") {
         state.isAll = true;
+        state.isChoose = true;
       } else if (state.selectedBy === "byDate") {
         state.isByDate = true;
       } else if (state.selectedBy === "byFounder") {
@@ -154,7 +170,10 @@ export default {
       } else if (state.selectedBy === "specificEventInfo") {
         state.isSpecificEventInfo = true;
       }
-      state.isEventByChoose = true;
+    }
+
+    function chosen() {
+      state.isChoose = true;
     }
 
     async function viewAllReport() {
@@ -190,6 +209,7 @@ export default {
     }
 
     function closeAll() {
+      state.isChoose = false;
       state.isAll = false;
       state.isByDate = false;
       state.isByFounder = false;
@@ -236,6 +256,7 @@ export default {
       closeAll,
       getAllEvents,
       getAllMks,
+      chosen,
     };
   },
 };
