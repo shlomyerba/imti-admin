@@ -2,12 +2,7 @@
   <div class="home">
     <form class="login_form" @submit.prevent="login">
       <div class="login_container">
-        <label>User Name</label>
-        <input
-          type="text"
-          placeholder="Enter UserName"
-          v-model="state.username"
-        />
+        
         <label>password</label>
         <input
           type="password"
