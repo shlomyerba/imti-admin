@@ -60,6 +60,7 @@ import {
   getHebrewImportances,
   getHebrewStatus,
 } from "../../../assets/getHebrewOptions";
+import { getAllEvents } from "../../../assets/apiRequest";
 
 export default {
   name: "EventViewInfo",
@@ -87,17 +88,7 @@ export default {
     }
 
     onMounted(async () => {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/event/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.events = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.events = await getAllEvents();
     });
 
     return {

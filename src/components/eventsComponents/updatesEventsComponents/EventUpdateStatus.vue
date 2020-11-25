@@ -1,9 +1,6 @@
 <template>
   <div class="event-update-status">
-    <form
-      class="event-update-status_form"
-      @submit.prevent="eventUpdateStatus"
-    >
+    <form class="event-update-status_form" @submit.prevent="eventUpdateStatus">
       <div class="event-update-status_container">
         <label>Events *</label><br />
         <select
@@ -22,11 +19,7 @@
         </select>
 
         <label>Status *</label><br />
-        <select
-          id="chooseImportance"
-          v-model="state.selectedStatus"
-          required
-        >
+        <select id="chooseImportance" v-model="state.selectedStatus" required>
           <option
             :value="option.id"
             v-for="(option, index) in state.statuses"
@@ -49,12 +42,13 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { status } from "../../../assets/staticOptions";
+import { getAllEvents } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateStatus",
   setup() {
     const state = reactive({
-     selectedStatus: null,
+      selectedStatus: null,
       statuses: status,
       selectedEvents: null,
       events: [],
@@ -77,31 +71,19 @@ export default {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
       let response = await axios.get(url);
-      if(response.data.status){
-      state.selectedStatus = response.data.status;
+      if (response.data.status) {
+        state.selectedStatus = response.data.status;
       }
       console.log("response", response);
     }
 
     async function updateEvents() {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/event/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.events = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.events = await getAllEvents();
     }
 
     onMounted(async () => {
       await updateEvents();
     });
-
-    
 
     return {
       state,

@@ -39,6 +39,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
+import { getAllEvents } from "../../../assets/apiRequest";
 
 export default {
   name: "RemoveMkFromEvent",
@@ -64,18 +65,8 @@ export default {
     }
 
     async function updateEvents() {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/event/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.events = response.data;
-          state.MksByEvent = [];
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.events = await getAllEvents();
+      state.MksByEvent = [];
     }
 
     async function getMksByEvent() {

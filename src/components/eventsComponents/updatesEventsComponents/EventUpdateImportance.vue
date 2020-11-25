@@ -49,12 +49,13 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { importances } from "../../../assets/staticOptions";
+import { getAllEvents } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateImportance",
   setup() {
     const state = reactive({
-     selectedImportance: null,
+      selectedImportance: null,
       Importances: importances,
       selectedEvents: null,
       events: [],
@@ -82,24 +83,12 @@ export default {
     }
 
     async function updateEvents() {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/event/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.events = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.events = await getAllEvents();
     }
 
     onMounted(async () => {
       await updateEvents();
     });
-
-    
 
     return {
       state,

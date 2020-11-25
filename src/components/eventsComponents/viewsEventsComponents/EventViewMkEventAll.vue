@@ -43,6 +43,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getHebrewVote } from "../../../assets/getHebrewOptions";
+import { getAllEvents } from "../../../assets/apiRequest";
 
 export default {
   name: "EventViewMkEventAll",
@@ -67,17 +68,7 @@ export default {
     }
 
     onMounted(async () => {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/event/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.events = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.events = await getAllEvents();
     });
 
     return {
@@ -91,7 +82,7 @@ export default {
   
 <style lang="scss">
 .event-view-mk-event-all_container {
-   padding: 16px;
+  padding: 16px;
   font-weight: bold;
 
   select {

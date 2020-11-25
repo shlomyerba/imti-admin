@@ -18,7 +18,11 @@
           </option>
         </select>
         <label>Mks by event *</label><br />
-        <select id="ChooseParty" v-model="state.selectedMkByEvent" @change="getOldVote">
+        <select
+          id="ChooseParty"
+          v-model="state.selectedMkByEvent"
+          @change="getOldVote"
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.MksByEvent"
@@ -27,7 +31,7 @@
             {{ `${option.mk.first} ${option.mk.last}` }}
           </option>
         </select>
-         <label>Vote *</label><br />
+        <label>Vote *</label><br />
         <select id="chooseImportance" v-model="state.selectedVotes" required>
           <option
             :value="option.id"
@@ -50,6 +54,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { votes } from "../../../assets/staticOptions";
+import { getAllEvents } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateMkVote",
@@ -66,7 +71,7 @@ export default {
     async function eventUpdateMkVote() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/update/mk/vote?mkeId=${state.selectedMkByEvent}&uuid=${token}&vote=${state.selectedVotes}`;
-      console.log(url)
+      console.log(url);
       try {
         let response = await axios.get(url);
         state.selectedEvents = "";
@@ -81,18 +86,8 @@ export default {
     }
 
     async function updateEvents() {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/event/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.events = response.data;
-          state.MksByEvent = [];
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.events = await getAllEvents();
+      state.MksByEvent = [];
     }
 
     async function getMksByEvent() {
@@ -134,7 +129,7 @@ export default {
       eventUpdateMkVote,
       updateEvents,
       getMksByEvent,
-      getOldVote
+      getOldVote,
     };
   },
 };

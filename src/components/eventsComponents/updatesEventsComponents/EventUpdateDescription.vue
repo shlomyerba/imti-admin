@@ -1,6 +1,9 @@
 <template>
   <div class="event-update-description">
-    <form class="event-update-description_form" @submit.prevent="eventUpdateDescription">
+    <form
+      class="event-update-description_form"
+      @submit.prevent="eventUpdateDescription"
+    >
       <div class="event-update-description_container">
         <label>Events *</label><br />
         <select
@@ -18,7 +21,7 @@
           </option>
         </select>
 
-       <label>Description *</label><br />
+        <label>Description *</label><br />
         <input
           type="text"
           placeholder="Enter Description"
@@ -38,6 +41,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
+import { getAllEvents } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateDescription",
@@ -70,17 +74,7 @@ export default {
     }
 
     async function updateEvents() {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/event/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.events = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.events = await getAllEvents();
     }
 
     onMounted(async () => {
