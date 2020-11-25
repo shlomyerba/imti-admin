@@ -68,7 +68,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
-import { importances } from "../../assets/importances";
+import { importances } from "../../assets/staticOptions";
 
 export default {
   name: "AddNewMk",

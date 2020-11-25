@@ -45,7 +45,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { votes } from "../../../assets/votes";
+import { votes } from "../../../assets/staticOptions";
 
 export default {
   name: "AddMkToEvent",

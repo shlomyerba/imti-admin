@@ -95,7 +95,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportMkEventOptions } from "../../assets/reportsOptions";
-import { votes } from "../../assets/votes";
+import { votes } from "../../assets/staticOptions";
 import { getHebrewVote } from "../../assets/getHebrewOptions";
 
 

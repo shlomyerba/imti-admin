@@ -1,7 +1,5 @@
-import { importances } from "./importances";
-import { orientations } from "./orientation";
-import { status } from "./status";
-import { votes } from "./votes";
+import { importances, orientations, status, votes } from "./staticOptions";
+
 
 
 export function getHebrewImportances(englishImportance) {
@@ -11,7 +9,7 @@ export function getHebrewImportances(englishImportance) {
         }
     }
     return ``;
-} 
+}
 
 
 
@@ -22,7 +20,7 @@ export function getHebrewOrientation(englishOrientation) {
         }
     }
     return ``;
-} 
+}
 
 
 
@@ -33,7 +31,7 @@ export function getHebrewStatus(englishStatus) {
         }
     }
     return ``;
-} 
+}
 
 
 

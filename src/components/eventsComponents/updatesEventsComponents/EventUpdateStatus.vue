@@ -48,7 +48,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { status } from "../../../assets/status";
+import { status } from "../../../assets/staticOptions";
 
 export default {
   name: "EventUpdateStatus",

@@ -100,7 +100,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportMkOptions } from "../../assets/reportsOptions";
-import { orientations } from "../../assets/orientation";
+import { orientations } from "../../assets/staticOptions";
 
 export default {
   name: "ReportMks",

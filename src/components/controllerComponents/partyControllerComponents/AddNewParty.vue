@@ -35,7 +35,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { orientations } from "../../../assets/orientation";
+import { orientations } from "../../../assets/staticOptions";
 
 export default {
   name: "AddNewParty",

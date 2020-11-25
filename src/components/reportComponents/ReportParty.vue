@@ -67,7 +67,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportPartyOptions } from "../../assets/reportsOptions";
-import { orientations } from "../../assets/orientation";
+import { orientations } from "../../assets/staticOptions";
 import { getHebrewOrientation } from "../../assets/getHebrewOptions";
 
 export default {
