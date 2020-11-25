@@ -3,7 +3,12 @@
     <form class="user-view-activity_form">
       <div class="user-view-activity_container">
         <label>Users *</label><br />
-        <select id="ChooseUser" v-model="state.selectedUser" @change="viewUserActivity" required>
+        <select
+          id="ChooseUser"
+          v-model="state.selectedUser"
+          @change="viewUserActivity"
+          required
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.users"
@@ -15,17 +20,8 @@
       </div>
     </form>
   </div>
-  <div v-if="state.activities.length">
-    <table class="activity_info">
-      <tr>
-        <th>Evevt</th>
-        <th>Mk</th>
-      </tr>
-      <tr v-for="(activity, index) in state.activities" :key="index">
-        <td>{{ activity.event.title }}</td>
-        <td>{{ `${activity.mk.first} ${activity.mk.last}` }}</td>
-      </tr>
-    </table>
+  <div v-if="state.info.length">
+    <ActivityTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -35,22 +31,25 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
+import ActivityTable from "../../commonHtml/ActivityTable";
 
 export default {
   name: "UserViewActivity",
+  components: { ActivityTable },
   setup() {
     const state = reactive({
       selectedUser: null,
       users: [],
-      activities: [],
+      info: [],
     });
 
     async function viewUserActivity() {
+      state.info = "";
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/view/activity?userId=${state.selectedUser}&uuid=${token}`;
       try {
         let response = await axios.get(url);
-        state.activities = response.data;
+        state.info = response.data;
         console.log("response", response);
       } catch (e) {
         console.log("e", e);

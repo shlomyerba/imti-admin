@@ -97,16 +97,7 @@
   </div>
 
   <div v-if="state.info && state.isUserActivity">
-    <table class="user_info">
-      <tr>
-        <th>Evevt</th>
-        <th>Mk</th>
-      </tr>
-      <tr v-for="(event, index) in state.info" :key="index">
-        <td>{{ event.event.title }}</td>
-        <td>{{ `${event.mk.first} ${event.mk.last}` }}</td>
-      </tr>
-    </table>
+    <ActivityTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -124,9 +115,11 @@ import {
   getHebrewStatus,
   getHebrewMembership,
 } from "../../assets/getHebrewOptions";
+import ActivityTable from "../commonHtml/ActivityTable";
 
 export default {
   name: "ReportUser",
+  components: { ActivityTable },
   setup() {
     const state = reactive({
       isChoose: false,
