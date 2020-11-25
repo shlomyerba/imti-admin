@@ -64,7 +64,7 @@
         <td>{{ event.first }}</td>
         <td>{{ event.last }}</td>
         <td>{{ event.email }}</td>
-        <td>{{ event.membership }}</td>
+        <td>{{ state.getHebrewMembership(event.membership) }}</td>
         <td>{{ event.password }}</td>
         <td>{{ event.phone }}</td>
       </tr>
@@ -118,10 +118,11 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportUserOptions } from "../../assets/reportsOptions";
 import { getDateFormat } from "../../assets/getDateFormat";
-import { getHourAndMinuteFormat } from "../../assets/getHourAndMinuteFormat";
+import { getHourAndMinuteFormat } from "../../assets/getDateFormat";
 import {
   getHebrewImportances,
   getHebrewStatus,
+  getHebrewMembership,
 } from "../../assets/getHebrewOptions";
 
 export default {
@@ -141,6 +142,7 @@ export default {
       getHourAndMinuteFormat: getHourAndMinuteFormat,
       getHebrewImportances: getHebrewImportances,
       getHebrewStatus: getHebrewStatus,
+      getHebrewMembership: getHebrewMembership,
       info: "",
       selectedUsers: null,
       users: [],

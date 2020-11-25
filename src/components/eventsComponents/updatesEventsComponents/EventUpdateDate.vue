@@ -39,7 +39,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getDateFormat} from "../../../assets/getDateFormat";
-import { getHourAndMinuteFormat} from "../../../assets/getHourAndMinuteFormat";
+import { getHourAndMinuteFormat} from "../../../assets/getDateFormat";
 
 export default {
   name: "EventUpdateDate",

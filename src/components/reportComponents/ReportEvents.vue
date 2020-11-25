@@ -114,7 +114,7 @@ import { baseUrl } from "../../assets/url";
 import { reportEventOptions } from "../../assets/reportsOptions";
 import { importances, status } from "../../assets/staticOptions";
 import { getDateFormat } from "../../assets/getDateFormat";
-import { getHourAndMinuteFormat } from "../../assets/getHourAndMinuteFormat";
+import { getHourAndMinuteFormat } from "../../assets/getDateFormat";
 import {
   getHebrewImportances,
   getHebrewStatus,

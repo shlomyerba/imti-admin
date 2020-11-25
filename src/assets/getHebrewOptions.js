@@ -1,4 +1,4 @@
-import { importances, orientations, status, votes } from "./staticOptions";
+import { importances, orientations, status, votes, memberships } from "./staticOptions";
 
 
 
@@ -42,4 +42,13 @@ export function getHebrewVote(englishVote) {
         }
     }
     return ``;
-} 
+}
+
+export function getHebrewMembership(englishMembership) {
+    for (let membership of memberships) {
+        if (membership.id === englishMembership) {
+            return membership.name;
+        }
+    }
+    return ``;
+}

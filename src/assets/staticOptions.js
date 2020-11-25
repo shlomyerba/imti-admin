@@ -11,4 +11,4 @@ export const status = [{ id: "OPEN", name: "פתוח" }, { id: "SUCCESS", name: 
 export const votes = [{ id: "YES", name: "כן" }, { id: "NO", name: "לא" },
 { id: "MISSING", name: "חסר" }, { id: "NONE", name: "לא רלוונטי" }];
 
-export const memberships = [{ id: "true", name: "כן" }, { id: "false", name: "לא" }];
+export const memberships = [{ id: true, name: "כן" }, { id: false, name: "לא" }];
