@@ -116,7 +116,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
-import { reportUserOptions } from "../../assets/report/reportUserOptions";
+import { reportUserOptions } from "../../assets/reportsOptions";
 import { getDateFormat } from "../../assets/getDateFormat";
 import { getHourAndMinuteFormat } from "../../assets/getHourAndMinuteFormat";
 import { getHebrewImportances } from "../../assets/getHebrewImportances";

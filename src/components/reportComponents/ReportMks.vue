@@ -99,7 +99,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
-import { reportMkOptions } from "../../assets/report/reportMkOptions";
+import { reportMkOptions } from "../../assets/reportsOptions";
 import { orientations } from "../../assets/orientation";
 
 export default {

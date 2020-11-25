@@ -66,7 +66,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
-import { reportPartyOptions } from "../../assets/report/reportPartyOptions";
+import { reportPartyOptions } from "../../assets/reportsOptions";
 import { orientations } from "../../assets/orientation";
 import { getHebrewOrientation } from "../../assets/getHebrewOrientation";
 

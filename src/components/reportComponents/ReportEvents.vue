@@ -114,7 +114,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
-import { reportEventOptions } from "../../assets/report/reportEventOptions";
+import { reportEventOptions } from "../../assets/reportsOptions";
 import { importances } from "../../assets/importances";
 import { status } from "../../assets/status";
 import { getDateFormat } from "../../assets/getDateFormat";
