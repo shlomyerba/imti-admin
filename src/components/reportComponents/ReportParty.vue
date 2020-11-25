@@ -68,7 +68,7 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportPartyOptions } from "../../assets/reportsOptions";
 import { orientations } from "../../assets/orientation";
-import { getHebrewOrientation } from "../../assets/getHebrewOrientation";
+import { getHebrewOrientation } from "../../assets/getHebrewOptions";
 
 export default {
   name: "ReportParty",

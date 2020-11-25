@@ -56,7 +56,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getHebrewVote } from "../../../assets/getHebrewVote";
+import { getHebrewVote } from "../../../assets/getHebrewOptions";
 
 export default {
   name: "EventViewMkEventInfo",

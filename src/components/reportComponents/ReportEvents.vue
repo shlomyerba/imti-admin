@@ -2,10 +2,7 @@
   <div class="report-event">
     <div class="report-event_container">
       <label>Choose report by *</label><br />
-      <select
-        v-model="state.selectedBy"
-        @change="findNext"
-      >
+      <select v-model="state.selectedBy" @change="findNext">
         <option
           :value="option.id"
           v-for="(option, index) in state.reportEventOptions"
@@ -119,8 +116,10 @@ import { importances } from "../../assets/importances";
 import { status } from "../../assets/status";
 import { getDateFormat } from "../../assets/getDateFormat";
 import { getHourAndMinuteFormat } from "../../assets/getHourAndMinuteFormat";
-import { getHebrewImportances } from "../../assets/getHebrewImportances";
-import { getHebrewStatus } from "../../assets/getHebrewStatus";
+import {
+  getHebrewImportances,
+  getHebrewStatus,
+} from "../../assets/getHebrewOptions";
 
 export default {
   name: "ReportEvent",

@@ -3,7 +3,12 @@
     <form class="event-view-info_form">
       <div class="event-view-info_container">
         <label>Events *</label><br />
-        <select id="ChooseEvent" v-model="state.selectedEvents" @change="eventViewInfo" required>
+        <select
+          id="ChooseEvent"
+          v-model="state.selectedEvents"
+          @change="eventViewInfo"
+          required
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.events"
@@ -34,7 +39,9 @@
         <td>{{ `${state.info.founder.first} ${state.info.founder.last}` }}</td>
         <td>{{ state.info.msgToMKs }}</td>
         <td>{{ state.getDateFormat(new Date(state.info.timestamp)) }}</td>
-        <td>{{ state.getHourAndMinuteFormat(new Date(state.info.timestamp)) }}</td>
+        <td>
+          {{ state.getHourAndMinuteFormat(new Date(state.info.timestamp)) }}
+        </td>
         <td>{{ state.getHebrewStatus(state.info.status) }}</td>
       </tr>
     </table>
@@ -49,8 +56,10 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getDateFormat } from "../../../assets/getDateFormat";
 import { getHourAndMinuteFormat } from "../../../assets/getHourAndMinuteFormat";
-import { getHebrewImportances } from "../../../assets/getHebrewImportances";
-import { getHebrewStatus } from "../../../assets/getHebrewStatus";
+import {
+  getHebrewImportances,
+  getHebrewStatus,
+} from "../../../assets/getHebrewOptions";
 
 export default {
   name: "EventViewInfo",
@@ -102,7 +111,7 @@ export default {
   
 <style lang="scss">
 .event-view-info_container {
-   padding: 16px;
+  padding: 16px;
   font-weight: bold;
 
   select {

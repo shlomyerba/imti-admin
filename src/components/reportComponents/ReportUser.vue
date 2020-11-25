@@ -119,8 +119,10 @@ import { baseUrl } from "../../assets/url";
 import { reportUserOptions } from "../../assets/reportsOptions";
 import { getDateFormat } from "../../assets/getDateFormat";
 import { getHourAndMinuteFormat } from "../../assets/getHourAndMinuteFormat";
-import { getHebrewImportances } from "../../assets/getHebrewImportances";
-import { getHebrewStatus } from "../../assets/getHebrewStatus";
+import {
+  getHebrewImportances,
+  getHebrewStatus,
+} from "../../assets/getHebrewOptions";
 
 export default {
   name: "ReportUser",
