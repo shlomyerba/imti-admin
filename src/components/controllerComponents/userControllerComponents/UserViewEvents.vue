@@ -20,17 +20,8 @@
       </div>
     </form>
   </div>
-  <div v-if="state.events">
-    <table class="event_info">
-      <tr>
-        <th>Evevt</th>
-        <th>Date</th>
-      </tr>
-      <tr v-for="(event, index) in state.events" :key="index">
-        <td>{{ event.title }}</td>
-        <td>{{ state.getDateFormat(new Date(event.timestamp)) }}</td>
-      </tr>
-    </table>
+  <div v-if="state.info">
+    <EventTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -41,21 +32,24 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getDateFormat } from "../../../assets/getDateFormat";
 import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
+import EventTable from "../../commonHtml/EventTable";
 
 export default {
   name: "ViewUserEvents",
+  components: { EventTable },
   setup() {
     const state = reactive({
       selectedUser: null,
       users: [],
-      events: "",
+      info: "",
       getDateFormat: getDateFormat,
     });
 
     async function viewUserEvents() {
+      state.info = "";
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/view/events?userId=${state.selectedUser}&uuid=${token}`;
-      state.events = await generalGetRequest(url);
+      state.info = await generalGetRequest(url);
     }
 
     onMounted(async () => {

@@ -35,18 +35,7 @@
     </form>
   </div>
   <div v-if="state.info">
-    <table class="user_info">
-      <tr>
-        <th>Title</th>
-        <th>Mk</th>
-        <th>Vote</th>
-      </tr>
-      <tr>
-        <td>{{ state.info.event.title }}</td>
-        <td>{{ `${state.info.mk.first} ${state.info.mk.last}` }}</td>
-        <td>{{ state.getHebrewVote(state.info.vote) }}</td>
-      </tr>
-    </table>
+    <MkEventTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -57,9 +46,11 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getHebrewVote } from "../../../assets/getHebrewOptions";
 import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
+import MkEventTable from "../../commonHtml/MkEventTable";
 
 export default {
   name: "EventViewMkEventInfo",
+  components: { MkEventTable },
   setup() {
     const state = reactive({
       selectedEvents: null,
@@ -71,9 +62,10 @@ export default {
     });
 
     async function eventViewMkEventInfo() {
+      state.info = "";
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/view/mk-event/info?mkeId=${state.selectedMkByEvent}&uuid=${token}`;
-      state.info = await generalGetRequest(url);
+      state.info = [await generalGetRequest(url)];
     }
 
     async function getMksByEvent() {

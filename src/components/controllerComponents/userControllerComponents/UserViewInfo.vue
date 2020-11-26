@@ -21,26 +21,7 @@
     </form>
   </div>
   <div v-if="state.info">
-    <table class="user_info">
-      <tr>
-        <th>Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Membership</th>
-        <th>Password</th>
-        <th>Phone</th>
-      </tr>
-      <tr>
-        <td>{{ state.info.id }}</td>
-        <td>{{ state.info.first }}</td>
-        <td>{{ state.info.last }}</td>
-        <td>{{ state.info.email }}</td>
-        <td>{{ state.info.membership }}</td>
-        <td>{{ state.info.password }}</td>
-        <td>{{ state.info.phone }}</td>
-      </tr>
-    </table>
+    <UserTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -50,9 +31,11 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
+import UserTable from "../../commonHtml/UserTable";
 
 export default {
   name: "UserViewInfo",
+  components: { UserTable },
   setup() {
     const state = reactive({
       selectedUser: null,
@@ -61,9 +44,10 @@ export default {
     });
 
     async function userViewInfo() {
+      state.info = "";
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/view/info?userId=${state.selectedUser}&uuid=${token}`;
-      state.info = await generalGetRequest(url);
+      state.info = [await generalGetRequest(url)];
     }
 
     onMounted(async () => {

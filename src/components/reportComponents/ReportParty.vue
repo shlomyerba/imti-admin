@@ -45,18 +45,7 @@
   </div>
 
   <div v-if="state.info">
-    <table class="user_info">
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Orientation</th>
-      </tr>
-      <tr v-for="(event, index) in state.info" :key="index">
-        <td>{{ event.id }}</td>
-        <td>{{ event.name }}</td>
-        <td>{{ state.getHebrewOrientation(event.orientation) }}</td>
-      </tr>
-    </table>
+    <PartyTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -69,9 +58,11 @@ import { reportPartyOptions } from "../../assets/reportsOptions";
 import { orientations } from "../../assets/staticOptions";
 import { getHebrewOrientation } from "../../assets/getHebrewOptions";
 import { getAllParties, generalGetRequest } from "../../assets/apiRequest";
+import PartyTable from "../commonHtml/PartyTable";
 
 export default {
   name: "ReportParty",
+  components: { PartyTable },
   setup() {
     const state = reactive({
       isChoose: false,

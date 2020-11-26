@@ -49,51 +49,11 @@
       state.info && (state.isAll || state.isByEvent || state.isSpecificUserInfo)
     "
   >
-    <table class="user_info">
-      <tr>
-        <th>Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Membership</th>
-        <th>Password</th>
-        <th>Phone</th>
-      </tr>
-      <tr v-for="(event, index) in state.info" :key="index">
-        <td>{{ event.id }}</td>
-        <td>{{ event.first }}</td>
-        <td>{{ event.last }}</td>
-        <td>{{ event.email }}</td>
-        <td>{{ state.getHebrewMembership(event.membership) }}</td>
-        <td>{{ event.password }}</td>
-        <td>{{ event.phone }}</td>
-      </tr>
-    </table>
+    <UserTable v-bind:info="state.info" />
   </div>
 
   <div v-if="state.info && state.isAllEvents">
-    <table class="user_info">
-      <tr>
-        <th>Title</th>
-        <th width="200">Description</th>
-        <th>Importance</th>
-        <th>Mk Founder</th>
-        <th width="200">Msg To MKs</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Status</th>
-      </tr>
-      <tr v-for="(event, index) in state.info" :key="index">
-        <td>{{ event.title }}</td>
-        <td>{{ event.description }}</td>
-        <td>{{ state.getHebrewImportances(event.importance) }}</td>
-        <td>{{ `${event.founder.first} ${event.founder.last}` }}</td>
-        <td>{{ event.msgToMKs }}</td>
-        <td>{{ state.getDateFormat(new Date(event.timestamp)) }}</td>
-        <td>{{ state.getHourAndMinuteFormat(new Date(event.timestamp)) }}</td>
-        <td>{{ state.getHebrewStatus(event.status) }}</td>
-      </tr>
-    </table>
+    <EventTable v-bind:info="state.info" />
   </div>
 
   <div v-if="state.info && state.isUserActivity">
@@ -107,14 +67,9 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportUserOptions } from "../../assets/reportsOptions";
-import { getDateFormat } from "../../assets/getDateFormat";
-import { getHourAndMinuteFormat } from "../../assets/getDateFormat";
-import {
-  getHebrewImportances,
-  getHebrewStatus,
-  getHebrewMembership,
-} from "../../assets/getHebrewOptions";
 import ActivityTable from "../commonHtml/ActivityTable";
+import EventTable from "../commonHtml/EventTable";
+import UserTable from "../commonHtml/UserTable";
 import {
   getAllEvents,
   getAllUsers,
@@ -123,7 +78,7 @@ import {
 
 export default {
   name: "ReportUser",
-  components: { ActivityTable },
+  components: { ActivityTable, EventTable, UserTable },
   setup() {
     const state = reactive({
       isChoose: false,
@@ -135,11 +90,6 @@ export default {
       isSpecificUserInfo: false,
       selectedBy: null,
       reportUserOptions: reportUserOptions,
-      getDateFormat: getDateFormat,
-      getHourAndMinuteFormat: getHourAndMinuteFormat,
-      getHebrewImportances: getHebrewImportances,
-      getHebrewStatus: getHebrewStatus,
-      getHebrewMembership: getHebrewMembership,
       info: "",
       selectedUsers: null,
       users: [],
