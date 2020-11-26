@@ -116,7 +116,7 @@ import {
   getHebrewMembership,
 } from "../../assets/getHebrewOptions";
 import ActivityTable from "../commonHtml/ActivityTable";
-import { getAllEvents } from "../../assets/apiRequest";
+import { getAllEvents, getAllUsers } from "../../assets/apiRequest";
 
 export default {
   name: "ReportUser",
@@ -218,21 +218,12 @@ export default {
     async function updateEventsList() {
       state.events = await getAllEvents();
     }
-    async function getAllUsers() {
-      let token = VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/user/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          state.users = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+    async function updateUserList() {
+      state.users = await getAllUsers();
     }
     onMounted(async () => {
       await updateEventsList();
-      await getAllUsers();
+      await updateUserList();
     });
 
     return {
@@ -241,7 +232,7 @@ export default {
       viewAllReport,
       closeAll,
       updateEventsList,
-      getAllUsers,
+      updateUserList,
       chosen,
     };
   },

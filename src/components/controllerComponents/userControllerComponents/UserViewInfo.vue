@@ -1,9 +1,14 @@
 <template>
   <div class="user-view-info">
-    <form class="user-view-info_form" >
+    <form class="user-view-info_form">
       <div class="user-view-info_container">
         <label>Users *</label><br />
-        <select id="ChooseUser" v-model="state.selectedUser" @change="userViewInfo" required>
+        <select
+          id="ChooseUser"
+          v-model="state.selectedUser"
+          @change="userViewInfo"
+          required
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.users"
@@ -45,6 +50,7 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
+import { getAllUsers } from "../../../assets/apiRequest";
 
 export default {
   name: "UserViewInfo",
@@ -69,16 +75,7 @@ export default {
     }
 
     onMounted(async () => {
-      let token = VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/user/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          state.users = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.users = await getAllUsers();
     });
 
     return {
@@ -92,7 +89,7 @@ export default {
   
 <style lang="scss">
 .user-view-info_container {
-   padding: 16px;
+  padding: 16px;
   font-weight: bold;
 
   input,
@@ -142,7 +139,6 @@ td {
   text-align: center;
   padding: 8px;
   font-size: 14px;
-
 }
 
 tr:nth-child(even) {

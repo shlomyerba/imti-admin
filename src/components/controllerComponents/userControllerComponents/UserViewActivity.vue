@@ -32,6 +32,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import ActivityTable from "../../commonHtml/ActivityTable";
+import { getAllUsers } from "../../../assets/apiRequest";
 
 export default {
   name: "UserViewActivity",
@@ -57,16 +58,7 @@ export default {
     }
 
     onMounted(async () => {
-      let token = VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/user/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          state.users = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.users = await getAllUsers();
     });
 
     return {

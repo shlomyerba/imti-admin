@@ -44,3 +44,17 @@ export async function getAllMks() {
         console.log("e", e);
     }
 }
+
+
+export async function getAllUsers() {
+    let token = VueCookies.get("token");
+    let url = `${baseUrl}/admin/report/user/all?uuid=${token}`;
+    try {
+        let response = await axios.get(url);
+        if (response.data) {
+            return response.data;
+        }
+    } catch (e) {
+        console.log("e", e);
+    }
+}

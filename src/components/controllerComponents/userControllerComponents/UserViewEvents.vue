@@ -1,9 +1,14 @@
 <template>
   <div class="user-view-events">
-    <form class="user-view-events_form" >
+    <form class="user-view-events_form">
       <div class="user-view-events_container">
         <label>Users *</label><br />
-        <select id="ChooseUser" v-model="state.selectedUser" @change="viewUserEvents" required>
+        <select
+          id="ChooseUser"
+          v-model="state.selectedUser"
+          @change="viewUserEvents"
+          required
+        >
           <option
             :value="option.id"
             v-for="(option, index) in state.users"
@@ -36,6 +41,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getDateFormat } from "../../../assets/getDateFormat";
+import { getAllUsers } from "../../../assets/apiRequest";
 
 export default {
   name: "ViewUserEvents",
@@ -44,7 +50,7 @@ export default {
       selectedUser: null,
       users: [],
       events: "",
-      getDateFormat:getDateFormat
+      getDateFormat: getDateFormat,
     });
 
     async function viewUserEvents() {
@@ -59,18 +65,8 @@ export default {
       }
     }
 
-    
     onMounted(async () => {
-      let token = VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/user/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          state.users = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.users = await getAllUsers();
     });
 
     return {
@@ -84,7 +80,7 @@ export default {
   
 <style lang="scss">
 .user-view-events_container {
-   padding: 16px;
+  padding: 16px;
   font-weight: bold;
 
   input,
