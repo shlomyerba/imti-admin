@@ -69,6 +69,7 @@ import { baseUrl } from "../../assets/url";
 import { reportPartyOptions } from "../../assets/reportsOptions";
 import { orientations } from "../../assets/staticOptions";
 import { getHebrewOrientation } from "../../assets/getHebrewOptions";
+import { getAllParties } from "../../assets/apiRequest";
 
 export default {
   name: "ReportParty",
@@ -139,16 +140,7 @@ export default {
     }
 
     onMounted(async () => {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/party/all?uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          state.parties = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.parties = await getAllParties();
     });
 
     return {
