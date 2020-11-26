@@ -97,7 +97,7 @@ import { baseUrl } from "../../assets/url";
 import { reportMkEventOptions } from "../../assets/reportsOptions";
 import { votes } from "../../assets/staticOptions";
 import { getHebrewVote } from "../../assets/getHebrewOptions";
-import { getAllEvents } from "../../assets/apiRequest";
+import { getAllEvents, getAllMks } from "../../assets/apiRequest";
 
 export default {
   name: "ReportMkEvent",
@@ -150,7 +150,7 @@ export default {
       } else if (state.selectedBy === "byEventAndVote") {
         state.isVote = true;
       } else if (state.selectedBy === "specificMkEventInfo") {
-        await getAllMksByEvent();
+        await updateMksListByEvent();
         state.isSpecificMKEventInfo = true;
       }
     }
@@ -195,7 +195,7 @@ export default {
       state.events = await getAllEvents();
     }
 
-    async function getAllMksByEvent() {
+    async function updateMksListByEvent() {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&imageIncluded=false&uuid=${token}`;
       try {
@@ -209,22 +209,12 @@ export default {
       }
     }
 
-    async function getAllMks() {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.mks = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+    async function updateMksList() {
+      state.mks = await getAllMks();
     }
     onMounted(async () => {
       await updateEventsList();
-      await getAllMks();
+      await updateMksList();
     });
 
     return {
@@ -233,10 +223,10 @@ export default {
       viewAllReport,
       closeAll,
       updateEventsList,
-      getAllMks,
+      updateMksList,
       chosen,
       chosenEvent,
-      getAllMksByEvent,
+      updateMksListByEvent,
     };
   },
 };

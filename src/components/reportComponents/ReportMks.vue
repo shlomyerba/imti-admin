@@ -101,7 +101,11 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportMkOptions } from "../../assets/reportsOptions";
 import { orientations } from "../../assets/staticOptions";
-import { getAllEvents, getAllParties } from "../../assets/apiRequest";
+import {
+  getAllEvents,
+  getAllParties,
+  getAllMks,
+} from "../../assets/apiRequest";
 
 export default {
   name: "ReportMks",
@@ -195,18 +199,8 @@ export default {
     async function updateEventsList() {
       state.events = await getAllEvents();
     }
-    async function getAllMks() {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.mks = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+    async function updateMksList() {
+      state.mks = await getAllMks();
     }
 
     async function updatePartiesList() {
@@ -214,7 +208,7 @@ export default {
     }
     onMounted(async () => {
       await updateEventsList();
-      await getAllMks();
+      await updateMksList();
       await updatePartiesList();
     });
 
@@ -224,7 +218,7 @@ export default {
       viewAllReport,
       closeAll,
       updateEventsList,
-      getAllMks,
+      updateMksList,
       updatePartiesList,
       chosen,
     };

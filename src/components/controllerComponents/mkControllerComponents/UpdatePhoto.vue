@@ -6,7 +6,7 @@
         <select id="chooseMk" v-model="state.selectedMk" required>
           <option
             :value="option.id"
-            v-for="(option, index) in state.Mks"
+            v-for="(option, index) in state.mks"
             :key="index"
           >
             {{ `${option.first} ${option.last}` }}
@@ -31,13 +31,14 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
+import { getAllMks } from "../../../assets/apiRequest";
 
 export default {
   name: "UpdatePhone",
   setup() {
     const state = reactive({
       selectedMk: null,
-      Mks: [],
+      mks: [],
       photo: null,
     });
 
@@ -49,7 +50,7 @@ export default {
       try {
         let response = await axios.post(url, formData, {
           headers: {
-            "Content-Type": "multipart/mixed; boundary=gc0p4Jq0M2Yt08jU534c0p"
+            "Content-Type": "multipart/mixed; boundary=gc0p4Jq0M2Yt08jU534c0p",
           },
         });
         state.selectedMk = "";
@@ -60,19 +61,11 @@ export default {
     }
 
     onMounted(async () => {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          state.Mks = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.mks = await getAllMks();
     });
+    
     function uploadPhoto(event) {
-            console.log(event.target.files[0]);
+      console.log(event.target.files[0]);
 
       state.photo = event.target.files[0];
     }

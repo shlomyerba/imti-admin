@@ -16,7 +16,7 @@
         <select id="ChooseParty" v-model="state.selectedMk" required>
           <option
             :value="option.id"
-            v-for="(option, index) in state.Mks"
+            v-for="(option, index) in state.mks"
             :key="index"
           >
             {{ `${option.first} ${option.last}` }}
@@ -46,7 +46,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { votes } from "../../../assets/staticOptions";
-import { getAllEvents } from "../../../assets/apiRequest";
+import { getAllEvents, getAllMks } from "../../../assets/apiRequest";
 
 export default {
   name: "AddMkToEvent",
@@ -55,7 +55,7 @@ export default {
       selectedEvents: null,
       events: [],
       selectedMk: null,
-      Mks: [],
+      mks: [],
       selectedVotes: null,
       votes: votes,
     });
@@ -80,17 +80,7 @@ export default {
     });
 
     onMounted(async () => {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.Mks = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.mks = await getAllMks();
     });
 
     return {

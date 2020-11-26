@@ -29,3 +29,18 @@ export async function getAllParties() {
         console.log("e", e);
     }
 }
+
+
+export async function getAllMks() {
+    let token = await VueCookies.get("token");
+    let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
+    try {
+        let response = await axios.get(url);
+        if (response.data) {
+            console.log(response.data);
+            return response.data;
+        }
+    } catch (e) {
+        console.log("e", e);
+    }
+}

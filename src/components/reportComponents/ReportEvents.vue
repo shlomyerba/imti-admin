@@ -119,7 +119,7 @@ import {
   getHebrewImportances,
   getHebrewStatus,
 } from "../../assets/getHebrewOptions";
-import { getAllEvents } from "../../assets/apiRequest";
+import { getAllEvents, getAllMks } from "../../assets/apiRequest";
 
 export default {
   name: "ReportEvent",
@@ -218,22 +218,12 @@ export default {
     async function updateEventsList() {
       state.events = await getAllEvents();
     }
-    async function getAllMks() {
-      let token = await VueCookies.get("token");
-      let url = `${baseUrl}/admin/report/mk/all?imageIncluded=false&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.mks = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+    async function updateMksList() {
+      state.mks = await getAllMks();
     }
     onMounted(async () => {
       await updateEventsList();
-      await getAllMks();
+      await updateMksList();
     });
 
     return {
@@ -242,7 +232,7 @@ export default {
       viewAllReport,
       closeAll,
       updateEventsList,
-      getAllMks,
+      updateMksList,
       chosen,
     };
   },
