@@ -69,22 +69,7 @@
   </div>
 
   <div v-if="state.info">
-    <table class="user_info">
-      <tr>
-        <th>Id</th>
-        <th>Mk</th>
-        <th>Event</th>
-        <th width="200">Description</th>
-        <th>Vote</th>
-      </tr>
-      <tr v-for="(event, index) in state.info" :key="index">
-        <td>{{ event.id }}</td>
-        <td>{{ `${event.mk.first} ${event.mk.last}` }}</td>
-        <td>{{ event.event.title }}</td>
-        <td>{{ event.event.description }}</td>
-        <td>{{ state.getHebrewVote(event.vote) }}</td>
-      </tr>
-    </table>
+    <MkEventTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -95,15 +80,16 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportMkEventOptions } from "../../assets/reportsOptions";
 import { votes } from "../../assets/staticOptions";
-import { getHebrewVote } from "../../assets/getHebrewOptions";
 import {
   getAllEvents,
   getAllMks,
   generalGetRequest,
 } from "../../assets/apiRequest";
+import MkEventTable from "../commonHtml/MkEventTable";
 
 export default {
   name: "ReportMkEvent",
+  components: { MkEventTable },
   setup() {
     const state = reactive({
       isChoose: false,
@@ -113,7 +99,6 @@ export default {
       isSpecificMKEventInfo: false,
       selectedBy: null,
       reportMkEventOptions: reportMkEventOptions,
-      getHebrewVote: getHebrewVote,
       info: "",
       selectedEvents: null,
       events: [],

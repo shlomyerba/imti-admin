@@ -21,30 +21,7 @@
     </form>
   </div>
   <div v-if="state.info">
-    <table class="user_info">
-      <tr>
-        <th>Title</th>
-        <th width="200">Description</th>
-        <th>Importance</th>
-        <th>Mk Founder</th>
-        <th width="200">Msg To MKs</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>{{ state.info.title }}</td>
-        <td>{{ state.info.description }}</td>
-        <td>{{ state.getHebrewImportances(state.info.importance) }}</td>
-        <td>{{ `${state.info.founder.first} ${state.info.founder.last}` }}</td>
-        <td>{{ state.info.msgToMKs }}</td>
-        <td>{{ state.getDateFormat(new Date(state.info.timestamp)) }}</td>
-        <td>
-          {{ state.getHourAndMinuteFormat(new Date(state.info.timestamp)) }}
-        </td>
-        <td>{{ state.getHebrewStatus(state.info.status) }}</td>
-      </tr>
-    </table>
+    <EventTable v-bind:info="state.info" />
   </div>
 </template>
  
@@ -53,31 +30,23 @@
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getDateFormat } from "../../../assets/getDateFormat";
-import { getHourAndMinuteFormat } from "../../../assets/getDateFormat";
-import {
-  getHebrewImportances,
-  getHebrewStatus,
-} from "../../../assets/getHebrewOptions";
 import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
+import EventTable from "../../commonHtml/EventTable";
 
 export default {
   name: "EventViewInfo",
+  components: { EventTable },
   setup() {
     const state = reactive({
       selectedEvents: null,
       events: [],
       info: "",
-      getDateFormat: getDateFormat,
-      getHourAndMinuteFormat: getHourAndMinuteFormat,
-      getHebrewImportances: getHebrewImportances,
-      getHebrewStatus: getHebrewStatus,
     });
 
     async function eventViewInfo() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/view/info?eventId=${state.selectedEvents}&uuid=${token}`;
-      state.info = await generalGetRequest(url);
+      state.info = [await generalGetRequest(url)];
     }
 
     onMounted(async () => {

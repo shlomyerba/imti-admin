@@ -21,18 +21,7 @@
     </form>
   </div>
   <div v-if="state.info">
-    <table class="user_info">
-      <tr>
-        <th>Title</th>
-        <th>Mk</th>
-        <th>Vote</th>
-      </tr>
-      <tr v-for="(event, index) in state.info" :key="index">
-        <td>{{ event.event.title }}</td>
-        <td>{{ `${event.mk.first} ${event.mk.last}` }}</td>
-        <td>{{ state.getHebrewVote(event.vote) }}</td>
-      </tr>
-    </table>
+    <MkEventTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -41,20 +30,21 @@
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getHebrewVote } from "../../../assets/getHebrewOptions";
 import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
+import MkEventTable from "../../commonHtml/MkEventTable";
 
 export default {
   name: "EventViewMkEventAll",
+  components: { MkEventTable },
   setup() {
     const state = reactive({
       selectedEvents: null,
       events: [],
       info: "",
-      getHebrewVote: getHebrewVote,
     });
 
     async function eventViewMkEventAll() {
+      state.info = "";
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/view/mk-event/all?eventId=${state.selectedEvents}&uuid=${token}`;
       state.info = await generalGetRequest(url);

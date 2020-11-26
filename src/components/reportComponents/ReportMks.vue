@@ -73,20 +73,7 @@
   </div>
 
   <div v-if="state.info">
-    <table class="user_info">
-      <tr>
-        <th>Name</th>
-        <th>Party</th>
-        <th>Email</th>
-        <th>Phone</th>
-      </tr>
-      <tr v-for="(event, index) in state.info" :key="index">
-        <td>{{ `${event.first} ${event.last}` }}</td>
-        <td>{{ event.party.name }}</td>
-        <td>{{ event.email }}</td>
-        <td>{{ event.phone }}</td>
-      </tr>
-    </table>
+    <MkTable v-bind:info="state.info" />
     <div class="report-mk_img" v-if="state.src">
       <img v-bind:src="state.src" />
     </div>
@@ -106,9 +93,11 @@ import {
   getAllMks,
   generalGetRequest,
 } from "../../assets/apiRequest";
+import MkTable from "../commonHtml/MkTable";
 
 export default {
   name: "ReportMks",
+  components: { MkTable },
   setup() {
     const state = reactive({
       isChoose: false,

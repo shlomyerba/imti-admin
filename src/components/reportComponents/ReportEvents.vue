@@ -80,28 +80,7 @@
   </div>
 
   <div v-if="state.info">
-    <table class="user_info">
-      <tr>
-        <th>Title</th>
-        <th width="200">Description</th>
-        <th>Importance</th>
-        <th>Mk Founder</th>
-        <th width="200">Msg To MKs</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Status</th>
-      </tr>
-      <tr v-for="(event, index) in state.info" :key="index">
-        <td>{{ event.title }}</td>
-        <td>{{ event.description }}</td>
-        <td>{{ state.getHebrewImportances(event.importance) }}</td>
-        <td>{{ `${event.founder.first} ${event.founder.last}` }}</td>
-        <td>{{ event.msgToMKs }}</td>
-        <td>{{ state.getDateFormat(new Date(event.timestamp)) }}</td>
-        <td>{{ state.getHourAndMinuteFormat(new Date(event.timestamp)) }}</td>
-        <td>{{ state.getHebrewStatus(event.status) }}</td>
-      </tr>
-    </table>
+    <EventTable v-bind:info="state.info" />
   </div>
 </template>
 
@@ -112,12 +91,8 @@ import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportEventOptions } from "../../assets/reportsOptions";
 import { importances, status } from "../../assets/staticOptions";
-import { getDateFormat } from "../../assets/getDateFormat";
-import { getHourAndMinuteFormat } from "../../assets/getDateFormat";
-import {
-  getHebrewImportances,
-  getHebrewStatus,
-} from "../../assets/getHebrewOptions";
+import EventTable from "../commonHtml/EventTable";
+
 import {
   getAllEvents,
   getAllMks,
@@ -126,6 +101,7 @@ import {
 
 export default {
   name: "ReportEvent",
+  components: { EventTable },
   setup() {
     const state = reactive({
       isChoose: false,
@@ -137,10 +113,6 @@ export default {
       isSpecificEventInfo: false,
       selectedBy: null,
       reportEventOptions: reportEventOptions,
-      getDateFormat: getDateFormat,
-      getHourAndMinuteFormat: getHourAndMinuteFormat,
-      getHebrewImportances: getHebrewImportances,
-      getHebrewStatus: getHebrewStatus,
       info: "",
       timestamp: "",
       selectedMk: null,
