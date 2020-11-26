@@ -37,12 +37,11 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { status } from "../../../assets/staticOptions";
-import { getAllEvents } from "../../../assets/apiRequest";
+import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateStatus",
@@ -57,24 +56,16 @@ export default {
     async function eventUpdateStatus() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/update/status?eventId=${state.selectedEvents}&status=${state.selectedStatus}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = null;
-        state.selectedStatus = null;
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedEvents = null;
+      state.selectedStatus = null;
     }
 
     async function findOldStatus() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
-      let response = await axios.get(url);
-      if (response.data.status) {
-        state.selectedStatus = response.data.status;
-      }
-      console.log("response", response);
+      let data = await generalGetRequest(url);
+      state.selectedStatus = data.status;
     }
 
     async function updateEvents() {

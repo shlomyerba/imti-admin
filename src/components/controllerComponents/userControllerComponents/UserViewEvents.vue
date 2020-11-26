@@ -36,12 +36,11 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getDateFormat } from "../../../assets/getDateFormat";
-import { getAllUsers } from "../../../assets/apiRequest";
+import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "ViewUserEvents",
@@ -56,13 +55,7 @@ export default {
     async function viewUserEvents() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/view/events?userId=${state.selectedUser}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.events = response.data;
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.events = await generalGetRequest(url);
     }
 
     onMounted(async () => {

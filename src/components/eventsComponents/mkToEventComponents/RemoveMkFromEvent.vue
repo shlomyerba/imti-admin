@@ -35,11 +35,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllEvents } from "../../../assets/apiRequest";
+import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "RemoveMkFromEvent",
@@ -54,14 +53,9 @@ export default {
     async function removeMkFromEvent() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/remove/mk?mkeId=${state.selectedMkByEvent}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = "";
-        console.log("response", response);
-        await updateEvents();
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedEvents = "";
+      await updateEvents();
     }
 
     async function updateEvents() {
@@ -72,16 +66,7 @@ export default {
     async function getMksByEvent() {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.MksByEvent = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-        state.MksByEvent = [];
-      }
+      state.MksByEvent = await generalGetRequest(url);
     }
 
     onMounted(async () => {

@@ -90,14 +90,17 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportMkEventOptions } from "../../assets/reportsOptions";
 import { votes } from "../../assets/staticOptions";
 import { getHebrewVote } from "../../assets/getHebrewOptions";
-import { getAllEvents, getAllMks } from "../../assets/apiRequest";
+import {
+  getAllEvents,
+  getAllMks,
+  generalGetRequest,
+} from "../../assets/apiRequest";
 
 export default {
   name: "ReportMkEvent",
@@ -170,16 +173,11 @@ export default {
         url += `/by/mk?mkId=${state.selectedMk}&`;
       }
       url += `uuid=${token}`;
-      console.log(url);
-      try {
-        let response = await axios.get(url);
-        state.info = response.data;
-        if (state.isSpecificMKEventInfo) {
-          state.info = [response.data];
-        }
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
+      let data = await generalGetRequest(url);
+      if (state.isSpecificMKEventInfo) {
+        state.info = [data];
+      } else {
+        state.info = data;
       }
     }
 
@@ -198,15 +196,7 @@ export default {
     async function updateMksListByEvent() {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&imageIncluded=false&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.mksByEvent = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.mksByEvent = await generalGetRequest(url);
     }
 
     async function updateMksList() {

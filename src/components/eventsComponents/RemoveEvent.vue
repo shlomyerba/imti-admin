@@ -20,11 +20,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
-import { getAllEvents } from "../../assets/apiRequest";
+import { getAllEvents, generalGetRequest } from "../../assets/apiRequest";
 
 export default {
   name: "RemoveEvent",
@@ -38,29 +37,18 @@ export default {
       let token = VueCookies.get("token");
 
       let url = `${baseUrl}/admin/event/remove?eventId=${state.selectedEvents}&uuid=${token}`;
-      console.log(url);
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = "";
-        console.log("response", response);
-        await updateEvents();
-      } catch (e) {
-        console.log("e", e);
-      }
-    }
-
-    async function updateEvents() {
+      await generalGetRequest(url);
+      state.selectedEvents = "";
       state.events = await getAllEvents();
     }
 
     onMounted(async () => {
-      await updateEvents();
+      state.events = await getAllEvents();
     });
 
     return {
       state,
       removeEvent,
-      updateEvents,
     };
   },
 };

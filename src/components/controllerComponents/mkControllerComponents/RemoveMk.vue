@@ -20,11 +20,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllMks } from "../../../assets/apiRequest";
+import { getAllMks, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "RemoveMk",
@@ -37,14 +36,9 @@ export default {
     async function removeMk() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/remove?mkId=${state.selectedMk}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedMk = "";
-        console.log("response", response);
-        await updateMks();
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedMk = "";
+      await updateMks();
     }
 
     async function updateMks() {

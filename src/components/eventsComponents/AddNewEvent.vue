@@ -64,12 +64,11 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { importances } from "../../assets/staticOptions";
-import { getAllMks } from "../../assets/apiRequest";
+import { getAllMks, generalGetRequest } from "../../assets/apiRequest";
 
 export default {
   name: "AddNewMk",
@@ -92,18 +91,13 @@ export default {
       let url = `${baseUrl}/admin/event/new?description=${state.description}&founderMKId=${state.selectedMk}&`;
       url += `importance=${state.selectedImportance}&textMessageToMKs=${state.textMessageToMKs}&`;
       url += `timestamp=${timestamp}&title=${state.title}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.description = "";
-        state.selectedMk = null;
-        state.selectedImportance = null;
-        state.textMessageToMKs = "";
-        state.title = "";
-        state.date = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.description = "";
+      state.selectedMk = null;
+      state.selectedImportance = null;
+      state.textMessageToMKs = "";
+      state.title = "";
+      state.date = "";
     }
 
     onMounted(async () => {

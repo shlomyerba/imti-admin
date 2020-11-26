@@ -39,11 +39,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllUsers } from "../../../assets/apiRequest";
+import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "updateMembership",
@@ -58,25 +57,16 @@ export default {
     async function findCurrentMembership() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/user/info?userId=${state.selectedUser}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedMembership = response.data.membership;
-      } catch (e) {
-        console.log("e", e);
-      }
+      let data = await generalGetRequest(url);
+      state.selectedMembership = data.membership;
     }
 
     async function updateMembership() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/update/membership?membership=${state.selectedMembership}&userId=${state.selectedUser}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedUser = "";
-        state.selectedMembership = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedUser = "";
+      state.selectedMembership = "";
     }
 
     onMounted(async () => {

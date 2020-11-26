@@ -35,11 +35,14 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllParties, getAllMks } from "../../../assets/apiRequest";
+import {
+  getAllParties,
+  getAllMks,
+  generalGetRequest,
+} from "../../../assets/apiRequest";
 
 export default {
   name: "UpdateParty",
@@ -54,25 +57,16 @@ export default {
     async function findCurrentParty() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedParty = response.data.party.id;
-      } catch (e) {
-        console.log("e", e);
-      }
+      let data = await generalGetRequest(url);
+      state.selectedParty = data.party.id;
     }
 
     async function updateParty() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/party?mkId=${state.selectedMk}&partyId=${state.selectedParty}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedMk = "";
-        state.selectedParty = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedMk = "";
+      state.selectedParty = "";
     }
 
     onMounted(async () => {

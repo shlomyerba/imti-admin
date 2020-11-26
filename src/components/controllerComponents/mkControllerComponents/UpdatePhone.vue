@@ -32,11 +32,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllMks } from "../../../assets/apiRequest";
+import { getAllMks, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "UpdatePhone",
@@ -50,25 +49,16 @@ export default {
     async function findCurrentPhone() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.phone = response.data.phone;
-      } catch (e) {
-        console.log("e", e);
-      }
+      let data = await generalGetRequest(url);
+      state.phone = data.phone;
     }
 
     async function updatePhone() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/mk/update/phone?phone=${state.phone}&mkId=${state.selectedMk}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedMk = "";
-        state.phone = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedMk = "";
+      state.phone = "";
     }
 
     onMounted(async () => {

@@ -37,11 +37,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllEvents } from "../../../assets/apiRequest";
+import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateDescription",
@@ -55,22 +54,16 @@ export default {
     async function eventUpdateDescription() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/update/description?eventId=${state.selectedEvents}&description=${state.description}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = null;
-        state.description = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedEvents = null;
+      state.description = "";
     }
 
     async function findOldDescription() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
-      let response = await axios.get(url);
-      state.description = response.data.description;
-      console.log("response", response);
+      let data = await generalGetRequest(url);
+      state.description = data.description;
     }
 
     async function updateEvents() {

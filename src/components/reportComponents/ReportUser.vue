@@ -103,7 +103,6 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
@@ -116,7 +115,11 @@ import {
   getHebrewMembership,
 } from "../../assets/getHebrewOptions";
 import ActivityTable from "../commonHtml/ActivityTable";
-import { getAllEvents, getAllUsers } from "../../assets/apiRequest";
+import {
+  getAllEvents,
+  getAllUsers,
+  generalGetRequest,
+} from "../../assets/apiRequest";
 
 export default {
   name: "ReportUser",
@@ -192,16 +195,11 @@ export default {
         url += `/info?userId=${state.selectedUsers}&`;
       }
       url += `uuid=${token}`;
-      console.log(url);
-      try {
-        let response = await axios.get(url);
-        state.info = response.data;
-        if (state.isSpecificUserInfo) {
-          state.info = [response.data];
-        }
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
+      let data = await generalGetRequest(url);
+      if (state.isSpecificUserInfo) {
+        state.info = [data];
+      } else {
+        state.info = data;
       }
     }
 

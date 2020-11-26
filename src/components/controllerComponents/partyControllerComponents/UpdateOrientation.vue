@@ -39,12 +39,11 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { orientations } from "../../../assets/staticOptions";
-import { getAllParties } from "../../../assets/apiRequest";
+import { getAllParties, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "UpdateOrientation",
@@ -59,25 +58,16 @@ export default {
     async function updateOrientation() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/party/update/orientation?orientation=${state.selectedOrientation}&partyId=${state.selectedParty}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedParty = "";
-        state.selectedOrientation = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedParty = "";
+      state.selectedOrientation = "";
     }
 
     async function findCurrentOrientation() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/party/info?partyId=${state.selectedParty}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedOrientation = response.data.orientation;
-      } catch (e) {
-        console.log("e", e);
-      }
+      let data = await generalGetRequest(url);
+      state.selectedOrientation = data.orientation;
     }
     onMounted(async () => {
       state.parties = await getAllParties();

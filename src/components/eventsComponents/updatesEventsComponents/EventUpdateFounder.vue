@@ -40,11 +40,14 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllEvents, getAllMks } from "../../../assets/apiRequest";
+import {
+  getAllEvents,
+  getAllMks,
+  generalGetRequest,
+} from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateFounder",
@@ -59,22 +62,16 @@ export default {
     async function eventUpdateFounder() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/update/founder?eventId=${state.selectedEvents}&founderMKId=${state.selectedFounder}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = null;
-        state.selectedFounder = null;
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedEvents = null;
+      state.selectedFounder = null;
     }
 
     async function findOldFounder() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
-      let response = await axios.get(url);
-      state.selectedFounder = response.data.founder.id;
-      console.log("response", response);
+      let data = await generalGetRequest(url);
+      state.selectedFounder = data.founder.id;
     }
 
     async function updateEvents() {

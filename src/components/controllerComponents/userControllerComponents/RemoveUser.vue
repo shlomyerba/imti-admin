@@ -20,11 +20,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllUsers } from "../../../assets/apiRequest";
+import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "RemoveParty",
@@ -37,14 +36,9 @@ export default {
     async function removeUser() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/remove?userId=${state.selectedUser}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedUser = "";
-        console.log("response", response);
-        await updateUsers();
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedUser = "";
+      await updateUsers();
     }
 
     async function updateUsers() {

@@ -62,14 +62,13 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
 import { reportPartyOptions } from "../../assets/reportsOptions";
 import { orientations } from "../../assets/staticOptions";
 import { getHebrewOrientation } from "../../assets/getHebrewOptions";
-import { getAllParties } from "../../assets/apiRequest";
+import { getAllParties, generalGetRequest } from "../../assets/apiRequest";
 
 export default {
   name: "ReportParty",
@@ -119,16 +118,11 @@ export default {
         url += `/info?partyId=${state.selectedParty}&`;
       }
       url += `uuid=${token}`;
-      console.log(url);
-      try {
-        let response = await axios.get(url);
-        state.info = response.data;
-        if (state.isSpecificPartyInfo) {
-          state.info = [response.data];
-        }
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
+      let data = await generalGetRequest(url);
+      if (state.isSpecificPartyInfo) {
+        state.info = [data];
+      } else {
+        state.info = data;
       }
     }
 

@@ -34,13 +34,12 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getDateFormat } from "../../../assets/getDateFormat";
 import { getHourAndMinuteFormat } from "../../../assets/getDateFormat";
-import { getAllEvents } from "../../../assets/apiRequest";
+import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateDate",
@@ -55,25 +54,19 @@ export default {
       let token = VueCookies.get("token");
       let timestamp = new Date(state.date).getTime();
       let url = `${baseUrl}/admin/event/update/date?eventId=${state.selectedEvents}&timestamp=${timestamp}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = null;
-        state.date = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedEvents = null;
+      state.date = "";
     }
 
     async function findOldDate() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
-      let response = await axios.get(url);
-      let oldDate = new Date(response.data.timestamp);
+      let data = await generalGetRequest(url);
+      let oldDate = new Date(data.timestamp);
       state.date = `${getDateFormat(oldDate)}T${getHourAndMinuteFormat(
         oldDate
       )}`;
-      console.log("response", response);
     }
 
     async function updateEvents() {

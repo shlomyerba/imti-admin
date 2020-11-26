@@ -44,12 +44,11 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { importances } from "../../../assets/staticOptions";
-import { getAllEvents } from "../../../assets/apiRequest";
+import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateImportance",
@@ -64,22 +63,16 @@ export default {
     async function eventUpdateImportance() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/update/importance?eventId=${state.selectedEvents}&importance=${state.selectedImportance}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = null;
-        state.selectedImportance = null;
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedEvents = null;
+      state.selectedImportance = null;
     }
 
     async function findOldImportance() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
-      let response = await axios.get(url);
-      state.selectedImportance = response.data.importance;
-      console.log("response", response);
+      let data = await generalGetRequest(url);
+      state.selectedImportance = data.importance;
     }
 
     async function updateEvents() {

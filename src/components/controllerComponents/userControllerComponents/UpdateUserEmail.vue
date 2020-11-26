@@ -32,11 +32,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllUsers } from "../../../assets/apiRequest";
+import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "UpdateEmail",
@@ -50,25 +49,16 @@ export default {
     async function findCurrentEmail() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/user/info?userId=${state.selectedUser}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.email = response.data.email;
-      } catch (e) {
-        console.log("e", e);
-      }
+      let data = await generalGetRequest(url);
+      state.email = data.email;
     }
 
     async function updateEmail() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/update/email?email=${state.email}&userId=${state.selectedUser}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedUser = "";
-        state.email = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedUser = "";
+      state.email = "";
     }
 
     onMounted(async () => {

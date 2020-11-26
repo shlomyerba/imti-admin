@@ -27,12 +27,11 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import ActivityTable from "../../commonHtml/ActivityTable";
-import { getAllUsers } from "../../../assets/apiRequest";
+import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "UserViewActivity",
@@ -48,13 +47,7 @@ export default {
       state.info = "";
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/view/activity?userId=${state.selectedUser}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.info = response.data;
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.info = await generalGetRequest(url);
     }
 
     onMounted(async () => {

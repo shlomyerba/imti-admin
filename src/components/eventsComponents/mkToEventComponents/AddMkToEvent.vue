@@ -41,12 +41,15 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { votes } from "../../../assets/staticOptions";
-import { getAllEvents, getAllMks } from "../../../assets/apiRequest";
+import {
+  getAllEvents,
+  getAllMks,
+  generalGetRequest,
+} from "../../../assets/apiRequest";
 
 export default {
   name: "AddMkToEvent",
@@ -63,16 +66,10 @@ export default {
     async function addMkToEvent() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/add/mk?eventId=${state.selectedEvents}&mkId=${state.selectedMk}&uuid=${token}&vote=${state.selectedVotes}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = null;
-        state.selectedMk = null;
-        state.selectedVotes = null;
-
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedEvents = null;
+      state.selectedMk = null;
+      state.selectedVotes = null;
     }
 
     onMounted(async () => {

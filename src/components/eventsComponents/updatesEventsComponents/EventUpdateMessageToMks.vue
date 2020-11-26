@@ -37,11 +37,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllEvents } from "../../../assets/apiRequest";
+import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "EventUpdateMessageToMks",
@@ -55,22 +54,16 @@ export default {
     async function eventUpdateMessageToMks() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/update/messageToMKs?eventId=${state.selectedEvents}&message=${state.textMessageToMKs}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.selectedEvents = null;
-        state.textMessageToMKs = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.selectedEvents = null;
+      state.textMessageToMKs = "";
     }
 
     async function findOldMessageToMks() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
-      let response = await axios.get(url);
-      state.textMessageToMKs = response.data.msgToMKs;
-      console.log("response", response);
+      let data = await generalGetRequest(url);
+      state.textMessageToMKs = data.msgToMKs;
     }
 
     async function updateEvents() {

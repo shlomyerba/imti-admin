@@ -31,11 +31,11 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { orientations } from "../../../assets/staticOptions";
+import { generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "AddNewParty",
@@ -50,14 +50,9 @@ export default {
       let token = VueCookies.get("token");
 
       let url = `${baseUrl}/admin/party/add?name=${state.name}&orientation=${state.selectedOrientation}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.name = "";
-        state.selectedOrientation = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalGetRequest(url);
+      state.name = "";
+      state.selectedOrientation = "";
     }
 
     return {

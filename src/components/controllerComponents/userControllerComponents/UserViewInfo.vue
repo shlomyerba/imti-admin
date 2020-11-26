@@ -46,11 +46,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllUsers } from "../../../assets/apiRequest";
+import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "UserViewInfo",
@@ -64,14 +63,7 @@ export default {
     async function userViewInfo() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/user/view/info?userId=${state.selectedUser}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.info = response.data;
-        console.log("response", response);
-        console.log(state.info);
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.info = await generalGetRequest(url);
     }
 
     onMounted(async () => {

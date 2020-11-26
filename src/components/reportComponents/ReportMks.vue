@@ -95,7 +95,6 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
@@ -105,6 +104,7 @@ import {
   getAllEvents,
   getAllParties,
   getAllMks,
+  generalGetRequest,
 } from "../../assets/apiRequest";
 
 export default {
@@ -172,17 +172,13 @@ export default {
         imageIncluded = `true`;
       }
       url += `imageIncluded=${imageIncluded}&uuid=${token}`;
-      console.log("url", url);
-      try {
-        let response = await axios.get(url);
-        state.info = response.data;
-        if (state.isSpecificMkInfo) {
-          state.info = [response.data];
-          state.src = `data:${response.data.photo.type};base64,${response.data.photo.picByte}`;
-        }
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
+
+      let data = await generalGetRequest(url);
+      if (state.isSpecificMkInfo) {
+        state.info = [data];
+        state.src = `data:${data.photo.type};base64,${data.photo.picByte}`;
+      } else {
+        state.info = data;
       }
     }
 

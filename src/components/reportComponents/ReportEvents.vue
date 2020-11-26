@@ -107,7 +107,6 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../assets/url";
@@ -119,7 +118,11 @@ import {
   getHebrewImportances,
   getHebrewStatus,
 } from "../../assets/getHebrewOptions";
-import { getAllEvents, getAllMks } from "../../assets/apiRequest";
+import {
+  getAllEvents,
+  getAllMks,
+  generalGetRequest,
+} from "../../assets/apiRequest";
 
 export default {
   name: "ReportEvent",
@@ -192,16 +195,11 @@ export default {
         url += `/info?eventId=${state.selectedEvents}&`;
       }
       url += `uuid=${token}`;
-      console.log(url);
-      try {
-        let response = await axios.get(url);
-        state.info = response.data;
-        if (state.isSpecificEventInfo) {
-          state.info = [response.data];
-        }
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
+      let data = await generalGetRequest(url);
+      if (state.isSpecificEventInfo) {
+        state.info = [data];
+      } else {
+        state.info = data;
       }
     }
 

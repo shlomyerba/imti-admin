@@ -52,12 +52,11 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getHebrewVote } from "../../../assets/getHebrewOptions";
-import { getAllEvents } from "../../../assets/apiRequest";
+import { getAllEvents, generalGetRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "EventViewMkEventInfo",
@@ -74,28 +73,13 @@ export default {
     async function eventViewMkEventInfo() {
       let token = VueCookies.get("token");
       let url = `${baseUrl}/admin/event/view/mk-event/info?mkeId=${state.selectedMkByEvent}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        state.info = response.data;
-        console.log("response", response.data);
-      } catch (e) {
-        console.log("e", e);
-      }
+      state.info = await generalGetRequest(url);
     }
 
     async function getMksByEvent() {
       let token = await VueCookies.get("token");
       let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&uuid=${token}`;
-      try {
-        let response = await axios.get(url);
-        if (response.data) {
-          console.log(response.data);
-          state.MksByEvent = response.data;
-        }
-      } catch (e) {
-        console.log("e", e);
-        state.MksByEvent = [];
-      }
+      state.MksByEvent = await generalGetRequest(url);
     }
 
     onMounted(async () => {
