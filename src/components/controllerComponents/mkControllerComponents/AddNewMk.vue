@@ -56,11 +56,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllParties } from "../../../assets/apiRequest";
+import { getAllParties, generalPostRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "AddNewMk",
@@ -90,22 +89,12 @@ export default {
       console.log(url);
       let formData = new FormData();
       formData.append("photo", state.photo);
-      try {
-        let response = await axios.post(url, formData, {
-          headers: {
-            "Content-Type": "multipart/mixed; boundary=gc0p4Jq0M2Yt08jU534c0p",
-          },
-        });
-        state.email = "";
-        state.firstName = "";
-        state.lastName = "";
-        state.phone = "";
-        state.selectedParty = null;
-
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalPostRequest(url, formData);
+      state.email = "";
+      state.firstName = "";
+      state.lastName = "";
+      state.phone = "";
+      state.selectedParty = null;
     }
 
     onMounted(async () => {

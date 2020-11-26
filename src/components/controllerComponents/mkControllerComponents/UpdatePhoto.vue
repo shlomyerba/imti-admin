@@ -27,11 +27,10 @@
 
 
 <script>
-import axios from "axios";
 import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
-import { getAllMks } from "../../../assets/apiRequest";
+import { getAllMks, generalPostRequest } from "../../../assets/apiRequest";
 
 export default {
   name: "UpdatePhone",
@@ -47,23 +46,14 @@ export default {
       let url = `${baseUrl}/admin/mk/update/photo?mkId=${state.selectedMk}&uuid=${token}`;
       let formData = new FormData();
       formData.append("photo", state.photo);
-      try {
-        let response = await axios.post(url, formData, {
-          headers: {
-            "Content-Type": "multipart/mixed; boundary=gc0p4Jq0M2Yt08jU534c0p",
-          },
-        });
-        state.selectedMk = "";
-        console.log("response", response);
-      } catch (e) {
-        console.log("e", e);
-      }
+      await generalPostRequest(url, formData);
+      state.selectedMk = "";
     }
 
     onMounted(async () => {
       state.mks = await getAllMks();
     });
-    
+
     function uploadPhoto(event) {
       console.log(event.target.files[0]);
 
