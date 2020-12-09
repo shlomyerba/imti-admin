@@ -98,7 +98,7 @@ export default {
 
     async function viewAllReport() {
       state.info = "";
-      let token = await VueCookies.get("token");
+      let token = await VueCookies.get("adminToken");
       console.log("viewAllReport");
       let url = `${baseUrl}/admin/report/party`;
       if (state.isAll) {

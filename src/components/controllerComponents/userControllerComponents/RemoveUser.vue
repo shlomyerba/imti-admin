@@ -34,7 +34,7 @@ export default {
     });
 
     async function removeUser() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/user/remove?userId=${state.selectedUser}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedUser = "";

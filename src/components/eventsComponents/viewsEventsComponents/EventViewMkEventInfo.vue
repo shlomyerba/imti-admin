@@ -63,13 +63,13 @@ export default {
 
     async function eventViewMkEventInfo() {
       state.info = "";
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/view/mk-event/info?mkeId=${state.selectedMkByEvent}&uuid=${token}`;
       state.info = [await generalGetRequest(url)];
     }
 
     async function getMksByEvent() {
-      let token = await VueCookies.get("token");
+      let token = await VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&uuid=${token}`;
       state.MksByEvent = await generalGetRequest(url);
     }

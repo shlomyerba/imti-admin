@@ -42,7 +42,7 @@ export default {
     });
 
     async function updatePhoto() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/mk/update/photo?mkId=${state.selectedMk}&uuid=${token}`;
       let formData = new FormData();
       formData.append("photo", state.photo);

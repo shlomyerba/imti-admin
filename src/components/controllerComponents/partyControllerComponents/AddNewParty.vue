@@ -47,7 +47,7 @@ export default {
     });
 
     async function addNewParty() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
 
       let url = `${baseUrl}/admin/party/add?name=${state.name}&orientation=${state.selectedOrientation}&uuid=${token}`;
       await generalGetRequest(url);

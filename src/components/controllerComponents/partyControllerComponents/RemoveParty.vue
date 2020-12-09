@@ -34,7 +34,7 @@ export default {
     });
 
     async function removeParty() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/party/remove?partyId=${state.selectedParty}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedParty = "";

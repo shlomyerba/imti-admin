@@ -60,7 +60,7 @@ export default {
     });
 
     async function eventUpdateFounder() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/update/founder?eventId=${state.selectedEvents}&founderMKId=${state.selectedFounder}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedEvents = null;
@@ -68,7 +68,7 @@ export default {
     }
 
     async function findOldFounder() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
       let data = await generalGetRequest(url);
       state.selectedFounder = data.founder.id;

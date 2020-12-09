@@ -56,7 +56,7 @@ export default {
     });
 
     async function updateOrientation() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/party/update/orientation?orientation=${state.selectedOrientation}&partyId=${state.selectedParty}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedParty = "";
@@ -64,7 +64,7 @@ export default {
     }
 
     async function findCurrentOrientation() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/party/info?partyId=${state.selectedParty}&uuid=${token}`;
       let data = await generalGetRequest(url);
       state.selectedOrientation = data.orientation;

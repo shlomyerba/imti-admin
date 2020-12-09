@@ -51,7 +51,7 @@ export default {
     });
 
     async function eventUpdateDate() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let timestamp = new Date(state.date).getTime();
       let url = `${baseUrl}/admin/event/update/date?eventId=${state.selectedEvents}&timestamp=${timestamp}&uuid=${token}`;
       await generalGetRequest(url);
@@ -60,7 +60,7 @@ export default {
     }
 
     async function findOldDate() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
       let data = await generalGetRequest(url);
       let oldDate = new Date(data.timestamp);

@@ -144,7 +144,7 @@ export default {
     async function viewAllReport() {
       state.info = "";
       state.src = null;
-      let token = await VueCookies.get("token");
+      let token = await VueCookies.get("adminToken");
       let imageIncluded = `false`;
       console.log("viewAllReport");
       let url = `${baseUrl}/admin/report/mk`;

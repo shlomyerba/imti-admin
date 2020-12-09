@@ -145,7 +145,7 @@ export default {
 
     async function viewAllReport() {
       state.info = "";
-      let token = await VueCookies.get("token");
+      let token = await VueCookies.get("adminToken");
       console.log("viewAllReport");
       let url = `${baseUrl}/admin/report/mk-event`;
       if (state.isEvent && state.isVote) {
@@ -179,7 +179,7 @@ export default {
     }
 
     async function updateMksListByEvent() {
-      let token = await VueCookies.get("token");
+      let token = await VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&imageIncluded=false&uuid=${token}`;
       state.mksByEvent = await generalGetRequest(url);
     }

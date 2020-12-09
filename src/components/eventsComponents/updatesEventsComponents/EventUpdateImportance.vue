@@ -61,7 +61,7 @@ export default {
     });
 
     async function eventUpdateImportance() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/update/importance?eventId=${state.selectedEvents}&importance=${state.selectedImportance}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedEvents = null;
@@ -69,7 +69,7 @@ export default {
     }
 
     async function findOldImportance() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
       let data = await generalGetRequest(url);
       state.selectedImportance = data.importance;

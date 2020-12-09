@@ -51,7 +51,7 @@ export default {
     });
 
     async function removeMkFromEvent() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/remove/mk?mkeId=${state.selectedMkByEvent}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedEvents = "";
@@ -64,7 +64,7 @@ export default {
     }
 
     async function getMksByEvent() {
-      let token = await VueCookies.get("token");
+      let token = await VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/mk-event/by/event?eventId=${state.selectedEvents}&uuid=${token}`;
       state.MksByEvent = await generalGetRequest(url);
     }

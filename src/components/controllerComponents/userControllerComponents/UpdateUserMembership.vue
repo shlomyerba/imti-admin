@@ -55,14 +55,14 @@ export default {
     });
 
     async function findCurrentMembership() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/user/info?userId=${state.selectedUser}&uuid=${token}`;
       let data = await generalGetRequest(url);
       state.selectedMembership = data.membership;
     }
 
     async function updateMembership() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/user/update/membership?membership=${state.selectedMembership}&userId=${state.selectedUser}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedUser = "";

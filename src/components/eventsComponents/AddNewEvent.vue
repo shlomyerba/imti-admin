@@ -85,7 +85,7 @@ export default {
     });
 
     async function addNewEvent() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let timestamp = new Date(state.date).getTime();
 
       let url = `${baseUrl}/admin/event/new?description=${state.description}&founderMKId=${state.selectedMk}&`;

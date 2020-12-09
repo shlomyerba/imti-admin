@@ -64,7 +64,7 @@ export default {
     });
 
     async function addMkToEvent() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/add/mk?eventId=${state.selectedEvents}&mkId=${state.selectedMk}&uuid=${token}&vote=${state.selectedVotes}`;
       await generalGetRequest(url);
       state.selectedEvents = null;

@@ -42,7 +42,7 @@ export default {
           state.password = "";
 
           //saving cooky for 45 minutes:
-          VueCookies.set("token", response.data, 60 * 45);
+          VueCookies.set("adminToken", response.data, 60 * 45);
 
           window.location = "/";
         } else {

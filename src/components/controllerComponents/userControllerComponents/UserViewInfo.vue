@@ -45,7 +45,7 @@ export default {
 
     async function userViewInfo() {
       state.info = "";
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/user/view/info?userId=${state.selectedUser}&uuid=${token}`;
       state.info = [await generalGetRequest(url)];
     }

@@ -47,14 +47,14 @@ export default {
     });
 
     async function findCurrentEmail() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/user/info?userId=${state.selectedUser}&uuid=${token}`;
       let data = await generalGetRequest(url);
       state.email = data.email;
     }
 
     async function updateEmail() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/user/update/email?email=${state.email}&userId=${state.selectedUser}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedUser = "";

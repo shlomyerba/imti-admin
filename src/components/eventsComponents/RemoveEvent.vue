@@ -34,7 +34,7 @@ export default {
     });
 
     async function removeEvent() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
 
       let url = `${baseUrl}/admin/event/remove?eventId=${state.selectedEvents}&uuid=${token}`;
       await generalGetRequest(url);

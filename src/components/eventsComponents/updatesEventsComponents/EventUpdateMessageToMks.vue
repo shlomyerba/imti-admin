@@ -52,7 +52,7 @@ export default {
     });
 
     async function eventUpdateMessageToMks() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/update/messageToMKs?eventId=${state.selectedEvents}&message=${state.textMessageToMKs}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedEvents = null;
@@ -60,7 +60,7 @@ export default {
     }
 
     async function findOldMessageToMks() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
       let data = await generalGetRequest(url);
       state.textMessageToMKs = data.msgToMKs;

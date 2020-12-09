@@ -75,7 +75,7 @@ export default {
     });
 
     async function saveMk() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/mk/add?`;
       if (state.email) {
         url += `email=${state.email}&`;

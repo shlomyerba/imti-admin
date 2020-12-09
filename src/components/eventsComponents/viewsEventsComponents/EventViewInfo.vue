@@ -44,7 +44,7 @@ export default {
     });
 
     async function eventViewInfo() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/view/info?eventId=${state.selectedEvents}&uuid=${token}`;
       state.info = [await generalGetRequest(url)];
     }

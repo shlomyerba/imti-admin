@@ -47,14 +47,14 @@ export default {
     });
 
     async function findCurrentPhone() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
       let data = await generalGetRequest(url);
       state.phone = data.phone;
     }
 
     async function updatePhone() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/mk/update/phone?phone=${state.phone}&mkId=${state.selectedMk}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedMk = "";

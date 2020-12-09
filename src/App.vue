@@ -16,8 +16,8 @@ export default {
   setup() {
 
     async function exit() {
-      VueCookies.set("token", null);
-      console.log("VueCookies.set" + VueCookies.get("token"));
+      VueCookies.set("adminToken", null);
+      console.log("VueCookies.set" + VueCookies.get("adminToken"));
       window.location = "/login";
     }
 

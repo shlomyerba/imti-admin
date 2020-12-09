@@ -52,7 +52,7 @@ export default {
     });
 
     async function eventUpdateDescription() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/update/description?eventId=${state.selectedEvents}&description=${state.description}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedEvents = null;
@@ -60,7 +60,7 @@ export default {
     }
 
     async function findOldDescription() {
-      let token = VueCookies.get("token");
+      let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/event/info?eventId=${state.selectedEvents}&uuid=${token}`;
       let data = await generalGetRequest(url);
       state.description = data.description;
