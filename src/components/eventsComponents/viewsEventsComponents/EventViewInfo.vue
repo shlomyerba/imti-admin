@@ -9,11 +9,7 @@
           @change="eventViewInfo"
           required
         >
-          <option
-            :value="option.id"
-            v-for="(option, index) in state.events"
-            :key="index"
-          >
+          <option :value="option.id" v-for="(option, index) in state.events" :key="index">
             {{ option.title }}
           </option>
         </select>
@@ -24,7 +20,6 @@
     <EventTable v-bind:info="state.info" />
   </div>
 </template>
- 
 
 <script>
 import VueCookies from "vue-cookies";
@@ -44,6 +39,7 @@ export default {
     });
 
     async function eventViewInfo() {
+      state.info = "";
       let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/event/view/info?eventId=${state.selectedEvents}&uuid=${token}`;
       state.info = [await generalGetRequest(url)];
@@ -61,7 +57,6 @@ export default {
 };
 </script>
 
-  
 <style lang="scss">
 .event-view-info_container {
   padding: 16px;
