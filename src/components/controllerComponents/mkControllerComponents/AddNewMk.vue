@@ -34,11 +34,20 @@
           </option>
         </select>
 
-        <label>Phone</label><br />
+        <label>Phone *</label><br />
         <input
-          type="number"
+          class="inputphone"
+          type="tel"
           placeholder="Enter phone number"
           v-model="state.phone"
+          maxlength="10"
+        />
+        <input
+          class="inputAreaCode"
+          type="tel"
+          placeholder="Enter phone number"
+          v-model="state.areaCode"
+          maxlength="3"
         />
         <label>Photo *</label><br />
         <input
@@ -72,6 +81,7 @@ export default {
       photo: null,
       selectedParty: null,
       parties: [],
+      areaCode: 972,
     });
 
     async function saveMk() {
@@ -81,9 +91,11 @@ export default {
         url += `email=${state.email}&`;
       }
       url += `first=${state.firstName}&last=${state.lastName}&partyId=${state.selectedParty}`;
-      if (state.phone) {
-        url += `&phone=${state.phone}`;
+      let phone = state.phone;
+      if (phone.charAt(0) === 0 || phone.charAt(0) === "0") {
+        phone = phone.substring(1);
       }
+      url += `&phone=${state.areaCode}${phone}`;
       url += `&uuid=${token}`;
 
       console.log(url);
@@ -119,6 +131,13 @@ export default {
 .add-new-mk_container {
   padding: 16px;
   font-weight: bold;
+
+  .inputAreaCode {
+    width: 15%;
+  }
+  .inputphone {
+    width: 85%;
+  }
 
   input,
   select {

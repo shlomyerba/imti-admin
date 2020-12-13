@@ -19,10 +19,18 @@
         </select>
         <label>Phone *</label><br />
         <input
-          type="number"
+          class="inputphone"
+          type="tel"
           placeholder="Enter phone number"
           v-model="state.phone"
-          required
+          maxlength="10"
+        />
+        <input
+          class="inputAreaCode"
+          type="tel"
+          placeholder="Enter phone number"
+          v-model="state.areaCode"
+          maxlength="3"
         />
         <button>update</button>
       </div>
@@ -50,12 +58,18 @@ export default {
       let token = VueCookies.get("adminToken");
       let url = `${baseUrl}/admin/report/mk/info?imageIncluded=false&mkId=${state.selectedMk}&uuid=${token}`;
       let data = await generalGetRequest(url);
-      state.phone = data.phone;
+      let phone = data.phone;
+      state.areaCode = phone.substring(0, 3);
+      state.phone = phone.substring(3);
     }
 
     async function updatePhone() {
       let token = VueCookies.get("adminToken");
-      let url = `${baseUrl}/admin/mk/update/phone?phone=${state.phone}&mkId=${state.selectedMk}&uuid=${token}`;
+      let phone = state.phone;
+      if (phone.charAt(0) === 0 || phone.charAt(0) === "0") {
+        phone = phone.substring(1);
+      }
+      let url = `${baseUrl}/admin/mk/update/phone?phone=${state.areaCode}${phone}&mkId=${state.selectedMk}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedMk = "";
       state.phone = "";
@@ -79,6 +93,13 @@ export default {
 .update-phone_container {
   padding: 16px;
   font-weight: bold;
+
+  .inputAreaCode {
+    width: 15%;
+  }
+  .inputphone {
+    width: 85%;
+  }
 
   input,
   select {
