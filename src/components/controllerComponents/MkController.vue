@@ -7,38 +7,38 @@
           @click="goToAddMk"
           v-if="state.isAddMk"
         >
-          add mk
+          הוסף ח"כ
         </button>
-        <button class="link_button" @click="goToAddMk" v-else>add mk</button>
+        <button class="link_button" @click="goToAddMk" v-else>הוסף ח"כ</button>
         <button
           class="link_button_choose"
           @click="goToRemoveMk"
           v-if="state.isRemoveMk"
         >
-          remove mk
+          מחק ח"כ
         </button>
         <button class="link_button" @click="goToRemoveMk" v-else>
-          remove mk
+          מחק ח"כ
         </button>
         <button
           class="link_button_choose"
           @click="goToUpdateEmail"
           v-if="state.isUpdateEmail"
         >
-          update email
+          עדכן אימייל
         </button>
         <button class="link_button" @click="goToUpdateEmail" v-else>
-          update email
+          עדכן אימייל
         </button>
         <button
           class="link_button_choose"
           @click="goToUpdateParty"
           v-if="state.isUpdateParty"
         >
-          update party
+          עדכן מפלגה
         </button>
         <button class="link_button" @click="goToUpdateParty" v-else>
-          update party
+          עדכן מפלגה
         </button>
 
         <button
@@ -46,10 +46,10 @@
           @click="goToUpdatePhone"
           v-if="state.isUpdatePhone"
         >
-          update phone
+          עדכן פלאפון
         </button>
         <button class="link_button" @click="goToUpdatePhone" v-else>
-          update phone
+          עדכן פלאפון
         </button>
 
         <button
@@ -57,10 +57,10 @@
           @click="goToUpdatePhoto"
           v-if="state.isUpdatePhoto"
         >
-          update photo
+          עדכן תמונה
         </button>
         <button class="link_button" @click="goToUpdatePhoto" v-else>
-          update photo
+          עדכן תמונה
         </button>
       </div>
 

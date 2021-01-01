@@ -7,19 +7,19 @@
           @click="goToMkOptions"
           v-if="state.isMkChoose"
         >
-          mk
+          חברי כנסת
         </button>
-        <button class="link_button" @click="goToMkOptions" v-else>mk</button>
+        <button class="link_button" @click="goToMkOptions" v-else>חברי כנסת</button>
 
         <button
           class="link_button_choose"
           @click="goToPartyOptions"
           v-if="state.isPartyChoose"
         >
-          party
+          מפלגות
         </button>
         <button class="link_button" @click="goToPartyOptions" v-else>
-          party
+          מפלגות
         </button>
 
         <button
@@ -27,10 +27,10 @@
           @click="goToUserOptions"
           v-if="state.isUserChoose"
         >
-          user
+          משתמשים
         </button>
         <button class="link_button" @click="goToUserOptions" v-else>
-          user
+          משתמשים
         </button>
       </div>
 

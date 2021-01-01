@@ -2,47 +2,82 @@
   <div class="user-controller">
     <div class="user-controller-panel">
       <div class="user-controller-panel_main-menu">
-        <button class="link_button_choose" @click="goToRemoveUser" v-if="state.isRemoveUser">remove user</button>
-        <button class="link_button" @click="goToRemoveUser" v-else>remove user</button>
-
-        <button class="link_button_choose" @click="goToUpdateEmail" v-if="state.isUpdateUserEmail" >
-          update email
+        <button
+          class="link_button_choose"
+          @click="goToRemoveUser"
+          v-if="state.isRemoveUser"
+        >
+          מחק משתמש
         </button>
-         <button class="link_button" @click="goToUpdateEmail" v-else>
-          update email
-        </button>
-
-
-        <button class="link_button_choose" @click="goToUpdateMembership" v-if="state.isUpdateUserMembership">
-          update membership
-        </button>
-         <button class="link_button" @click="goToUpdateMembership" v-else>
-          update membership
+        <button class="link_button" @click="goToRemoveUser" v-else>
+          מחר משתמש
         </button>
 
-
-        <button class="link_button_choose" @click="goToUpdatePhone" v-if="state.isUpdateUserPhone">
-          update phone
+        <button
+          class="link_button_choose"
+          @click="goToUpdateEmail"
+          v-if="state.isUpdateUserEmail"
+        >
+          עדכן אימייל
         </button>
-         <button class="link_button" @click="goToUpdatePhone" v-else>
-          update phone
+        <button class="link_button" @click="goToUpdateEmail" v-else>
+          עדכן אימייל
         </button>
 
+        <button
+          class="link_button_choose"
+          @click="goToUpdateMembership"
+          v-if="state.isUpdateUserMembership"
+        >
+          עדכן חברות
+        </button>
+        <button class="link_button" @click="goToUpdateMembership" v-else>
+          עדכן חברות
+        </button>
 
-        <button class="link_button_choose" @click="goToViewActivity" v-if="state.isUserViewActivity">
-          view activity
+        <button
+          class="link_button_choose"
+          @click="goToUpdatePhone"
+          v-if="state.isUpdateUserPhone"
+        >
+          עדכן פלאפון
+        </button>
+        <button class="link_button" @click="goToUpdatePhone" v-else>
+          עדכן פלאפון
+        </button>
+
+        <button
+          class="link_button_choose"
+          @click="goToViewActivity"
+          v-if="state.isUserViewActivity"
+        >
+          פעילות משמתמש
         </button>
         <button class="link_button" @click="goToViewActivity" v-else>
-          view activity
+          פעילות משמתמש
         </button>
 
+        <button
+          class="link_button_choose"
+          @click="goToViewEvents"
+          v-if="state.isUserViewEvents"
+        >
+          הצעות חוק
+        </button>
+        <button class="link_button" @click="goToViewEvents" v-else>
+          הצעות חוק
+        </button>
 
-        <button class="link_button_choose" @click="goToViewEvents" v-if="state.isUserViewEvents">view events</button>
-        <button class="link_button" @click="goToViewEvents" v-else>view events</button>
-
-
-        <button class="link_button_choose" @click="goToViewInfo" v-if="state.isUserViewInfo">view info</button>
-        <button class="link_button" @click="goToViewInfo" v-else>view info</button>
+        <button
+          class="link_button_choose"
+          @click="goToViewInfo"
+          v-if="state.isUserViewInfo"
+        >
+          פרטים אישיים
+        </button>
+        <button class="link_button" @click="goToViewInfo" v-else>
+          פרטים אישיים
+        </button>
       </div>
 
       <div class="user-controller-panel_action-screen">
@@ -153,7 +188,7 @@ export default {
     font-size: 15px;
   }
 
-   .link_button_choose {
+  .link_button_choose {
     color: gray;
     font-size: 20px;
   }

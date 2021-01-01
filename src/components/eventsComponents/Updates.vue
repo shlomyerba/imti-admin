@@ -2,32 +2,71 @@
   <div class="event-update-controller">
     <div class="event-update-controller-panel">
       <div class="event-update-controller-panel_main-menu">
+        <button
+          class="link_button_choose"
+          @click="goToUpdateDate"
+          v-if="state.isUpdateDate"
+        >
+          עדכן תאריך
+        </button>
+        <button class="link_button" @click="goToUpdateDate" v-else>
+          עדכן תאריך
+        </button>
 
-        <button class="link_button_choose" @click="goToUpdateDate" v-if="state.isUpdateDate">update date</button>
-        <button class="link_button" @click="goToUpdateDate" v-else>update date</button>
+        <button
+          class="link_button_choose"
+          @click="goToUpdateDescription"
+          v-if="state.isUpdateDescription"
+        >
+          עדכן תיאור
+        </button>
+        <button class="link_button" @click="goToUpdateDescription" v-else>
+          עדכן תיאור
+        </button>
 
+        <button
+          class="link_button_choose"
+          @click="goToUpdateFounder"
+          v-if="state.isUpdateFounder"
+        >
+          עדכן יוזם ההצעה
+        </button>
+        <button class="link_button" @click="goToUpdateFounder" v-else>
+          עדכן יוזם ההצעה
+        </button>
 
-        <button class="link_button_choose" @click="goToUpdateDescription" v-if="state.isUpdateDescription">update description</button>
-        <button class="link_button" @click="goToUpdateDescription" v-else>update description</button>
+        <button
+          class="link_button_choose"
+          @click="goToUpdateImportance"
+          v-if="state.isUpdateImportance"
+        >
+          עדכן רמת חשיבות
+        </button>
+        <button class="link_button" @click="goToUpdateImportance" v-else>
+          עדכן רמת חשיבות
+        </button>
 
+        <button
+          class="link_button_choose"
+          @click="goToUpdateMessageToMks"
+          v-if="state.isUpdateMessageToMks"
+        >
+          עדכן הודעה לח"כ
+        </button>
+        <button class="link_button" @click="goToUpdateMessageToMks" v-else>
+          עדכן הודעה לח"כ
+        </button>
 
-<button class="link_button_choose" @click="goToUpdateFounder" v-if="state.isUpdateFounder">update founder</button>
-        <button class="link_button" @click="goToUpdateFounder" v-else>update founder</button>
-
-<button class="link_button_choose" @click="goToUpdateImportance" v-if="state.isUpdateImportance">update importance</button>
-        <button class="link_button" @click="goToUpdateImportance" v-else>update importance</button>
-
-
-<button class="link_button_choose" @click="goToUpdateMessageToMks" v-if="state.isUpdateMessageToMks">update message</button>
-        <button class="link_button" @click="goToUpdateMessageToMks" v-else>update message</button>
-
-
-
-<button class="link_button_choose" @click="goUpdateStatus" v-if="state.isUpdateStatus">update status</button>
-        <button class="link_button" @click="goUpdateStatus" v-else>update status</button>
-
-
-
+        <button
+          class="link_button_choose"
+          @click="goUpdateStatus"
+          v-if="state.isUpdateStatus"
+        >
+          עדכן סטטוס
+        </button>
+        <button class="link_button" @click="goUpdateStatus" v-else>
+          עדכן סטטוס
+        </button>
       </div>
 
       <div class="user-controller-panel_action-screen">
@@ -92,7 +131,7 @@ export default {
       closeAll();
       state.isUpdateMessageToMks = true;
     }
-    
+
     function goUpdateStatus() {
       closeAll();
       state.isUpdateStatus = true;
@@ -129,7 +168,7 @@ export default {
     font-size: 15px;
   }
 
-   .link_button_choose {
+  .link_button_choose {
     color: gray;
     font-size: 20px;
   }

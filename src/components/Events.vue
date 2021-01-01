@@ -7,10 +7,10 @@
           @click="goToNewEvent"
           v-if="state.isNewEvent"
         >
-          new event
+          יצירת הצעה חדשה
         </button>
         <button class="link_button" @click="goToNewEvent" v-else>
-          new event
+          יצירת הצעה חדשה
         </button>
 
         <button
@@ -18,10 +18,10 @@
           @click="goToRemoveEvent"
           v-if="state.isRemoveEvent"
         >
-          remove event
+          מחק הצעה
         </button>
         <button class="link_button" @click="goToRemoveEvent" v-else>
-          remove event
+          מחק הצעה
         </button>
 
         <button
@@ -29,19 +29,21 @@
           @click="goToUpdates"
           v-if="state.isUpdates"
         >
-          updates
+          עדכן פרטים
         </button>
-        <button class="link_button" @click="goToUpdates" v-else>updates</button>
+        <button class="link_button" @click="goToUpdates" v-else>
+          עדכן פרטים
+        </button>
 
         <button
           class="link_button_choose"
           @click="goToMkToEvent"
           v-if="state.isMkToEvent"
         >
-          mk to event
+          שיוך ח"כ להצעה
         </button>
         <button class="link_button" @click="goToMkToEvent" v-else>
-          mk to event
+          שיוך ח"כ להצעה
         </button>
 
         <button
@@ -49,9 +51,11 @@
           @click="goToViews"
           v-if="state.isViews"
         >
-          views
+          דוחות הצעות חוק
         </button>
-        <button class="link_button" @click="goToViews" v-else>views</button>
+        <button class="link_button" @click="goToViews" v-else>
+          דוחות הצעות חוק
+        </button>
       </div>
 
       <div class="controller-panel_action-screen">

@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/">
-      <div class="navigation_logo">Imti</div>
+      <div class="navigation_logo">IMTI</div>
     </router-link>
     <button class="navigation_user" @click="exit">Exit</button>
   </nav>
@@ -31,9 +31,9 @@ export default {
   
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   display: flex;
   flex-direction: column;

@@ -7,10 +7,10 @@
           @click="goToController"
           v-if="state.isController"
         >
-          Controller
+          עריכה
         </button>
         <button class="link_button" @click="goToController" v-else>
-          Controller
+          עריכה
         </button>
 
         <button
@@ -18,18 +18,20 @@
           @click="goToEvents"
           v-if="state.isEvents"
         >
-          Events
+          הצעות חוק
         </button>
-        <button class="link_button" @click="goToEvents" v-else>Events</button>
+        <button class="link_button" @click="goToEvents" v-else>
+          הצעות חוק
+        </button>
 
         <button
           class="link_button_choose"
           @click="goToReports"
           v-if="state.isReports"
         >
-          Reports
+          דוחות
         </button>
-        <button class="link_button" @click="goToReports" v-else>Reports</button>
+        <button class="link_button" @click="goToReports" v-else>דוחות</button>
       </div>
 
       <div class="admin-panel_action-screen">

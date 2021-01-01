@@ -2,26 +2,45 @@
   <div class="event-view-controller">
     <div class="event-view-controller-panel">
       <div class="event-view-controller-panel_main-menu">
+        <button
+          class="link_button_choose"
+          @click="goToViewInfo"
+          v-if="state.isViewInfo"
+        >
+          פרטי הצבעה
+        </button>
+        <button class="link_button" @click="goToViewInfo" v-else>
+          פרטי הצבעה
+        </button>
 
-        <button class="link_button_choose" @click="goToViewInfo" v-if="state.isViewInfo">view info</button>
-        <button class="link_button" @click="goToViewInfo" v-else>view info</button>
+        <button
+          class="link_button_choose"
+          @click="goToViewMkEventAll"
+          v-if="state.isViewMkEventAll"
+        >
+          הצג ח"כים המשוייכים להצעה
+        </button>
+        <button class="link_button" @click="goToViewMkEventAll" v-else>
+          הצג ח"כים המשוייכים להצעה
+        </button>
 
-
-        <button class="link_button_choose" @click="goToViewMkEventAll" v-if="state.isViewMkEventAll">view mk event all</button>
-        <button class="link_button" @click="goToViewMkEventAll" v-else>view mk event all</button>
-
-
-<button class="link_button_choose" @click="goToViewMkEventInfo" v-if="state.isViewMkEventInfo">view mk event info</button>
-        <button class="link_button" @click="goToViewMkEventInfo" v-else>view mk event info</button>
-
-
+        <button
+          class="link_button_choose"
+          @click="goToViewMkEventInfo"
+          v-if="state.isViewMkEventInfo"
+        >
+          הצג שיוך ח"כ ספציפי להצעה
+        </button>
+        <button class="link_button" @click="goToViewMkEventInfo" v-else>
+          הצג שיוך ח"כ ספציפי להצעה
+        </button>
       </div>
 
       <div class="user-controller-panel_action-screen">
         <EventViewInfo v-if="state.isViewInfo" />
         <EventViewMkEventAll v-else-if="state.isViewMkEventAll" />
         <EventViewMkEventInfo v-else-if="state.isViewMkEventInfo" />
-          </div>
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +65,7 @@ export default {
       isViewInfo: true,
       isViewMkEventAll: false,
       isViewMkEventInfo: false,
-       });
+    });
 
     function goToViewInfo() {
       closeAll();
@@ -60,7 +79,7 @@ export default {
       closeAll();
       state.isViewMkEventInfo = true;
     }
-   
+
     function closeAll() {
       state.isViewInfo = false;
       state.isViewMkEventAll = false;
@@ -72,7 +91,7 @@ export default {
       goToViewInfo,
       goToViewMkEventAll,
       goToViewMkEventInfo,
-      };
+    };
   },
 };
 </script>
@@ -87,7 +106,7 @@ export default {
     font-size: 15px;
   }
 
-   .link_button_choose {
+  .link_button_choose {
     color: gray;
     font-size: 20px;
   }

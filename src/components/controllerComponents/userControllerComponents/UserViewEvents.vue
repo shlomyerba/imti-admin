@@ -98,7 +98,7 @@ export default {
   }
 }
 table {
-  font-family: arial, sans-serif;
+  // font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }

@@ -7,10 +7,10 @@
           @click="goToReportEvent"
           v-if="state.isReportEvent"
         >
-          event
+          הצעות חוק
         </button>
         <button class="link_button" @click="goToReportEvent" v-else>
-          event
+          הצעות חוק
         </button>
 
         <button
@@ -18,19 +18,21 @@
           @click="goToReportMK"
           v-if="state.isReportMK"
         >
-          mk
+          חברי כנסת
         </button>
-        <button class="link_button" @click="goToReportMK" v-else>mk</button>
+        <button class="link_button" @click="goToReportMK" v-else>
+          חברי כנסת
+        </button>
 
         <button
           class="link_button_choose"
           @click="goToReportMKEvent"
           v-if="state.isReportMKEvent"
         >
-          mk-event
+          ח"כים - הצעת חוק
         </button>
         <button class="link_button" @click="goToReportMKEvent" v-else>
-          mk-event
+          ח"כים - הצעת חוק
         </button>
 
         <button
@@ -38,10 +40,10 @@
           @click="goToReportParty"
           v-if="state.isReportParty"
         >
-          party
+          מפלגות
         </button>
         <button class="link_button" @click="goToReportParty" v-else>
-          party
+          מפלגות
         </button>
 
         <button
@@ -49,9 +51,11 @@
           @click="goToReportUser"
           v-if="state.isReportUser"
         >
-          user
+          משתמשים
         </button>
-        <button class="link_button" @click="goToReportUser" v-else>user</button>
+        <button class="link_button" @click="goToReportUser" v-else>
+          משתמשים
+        </button>
       </div>
 
       <div class="reports-panel_action-screen">

@@ -7,10 +7,10 @@
           @click="goToAddMkToEvent"
           v-if="state.isAddMkToEvent"
         >
-          add mk to event
+          שייך ח"כ להצעה
         </button>
         <button class="link_button" @click="goToAddMkToEvent" v-else>
-          add mk to event
+          שייך ח"כ להצעה
         </button>
 
         <button
@@ -18,10 +18,10 @@
           @click="goToRemoveMkFromEvent"
           v-if="state.isRemoveMkFromEvent"
         >
-          remove mk from event
+          הסר ח"כ מהצעה
         </button>
         <button class="link_button" @click="goToRemoveMkFromEvent" v-else>
-          remove mk from event
+          הסר ח"כ מהצעה
         </button>
 
         <button
@@ -29,10 +29,10 @@
           @click="goToUpdateMkVote"
           v-if="state.isUpdateMkVote"
         >
-          update vote
+          עדכן הצבעה
         </button>
         <button class="link_button" @click="goToUpdateMkVote" v-else>
-          update vote
+          עדכן הצבעה
         </button>
       </div>
 

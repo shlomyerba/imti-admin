@@ -7,20 +7,20 @@
           @click="goToAddParty"
           v-if="state.isAddParty"
         >
-          add party
+          הוסף מפלגה
         </button>
         <button class="link_button" @click="goToAddParty" v-else>
-          add party
+          הוסף מפלגה
         </button>
         <button
           class="link_button_choose"
           @click="goToRemoveParty"
           v-if="state.isRemoveParty"
         >
-          remove party
+          מחק מפלגה
         </button>
         <button class="link_button" @click="goToRemoveParty" v-else>
-          remove party
+          מחק מפלגה
         </button>
 
         <button
@@ -28,10 +28,10 @@
           @click="goToUpdateOrientation"
           v-if="state.isUpdateOrientation"
         >
-          update orientation
+          עדכן נטייה (אוריינטציה)
         </button>
         <button class="link_button" @click="goToUpdateOrientation" v-else>
-          update orientation
+          עדכן נטייה (אוריינטציה)
         </button>
       </div>
 
