@@ -19,6 +19,5 @@ export const reportUserOptions = [{ id: "all", name: "כל המשתמשים" }, 
 { id: "specificUserInfo", name: "פרטי משתמש ספציפי" },];
 
 
-export const reportMembershipOptions = [{ id: "true", name: "כן" }, { id: "false", name: "לא" },];
 
 

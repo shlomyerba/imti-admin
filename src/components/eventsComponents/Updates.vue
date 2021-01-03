@@ -48,6 +48,17 @@
 
         <button
           class="link_button_choose"
+          @click="goToUpdatePreferredVote"
+          v-if="state.isUpdatePreferredVote"
+        >
+          עדכן הצבעה מועדפת
+        </button>
+        <button class="link_button" @click="goToUpdatePreferredVote" v-else>
+          עדכן הצבעה מועדפת
+        </button>
+
+        <button
+          class="link_button_choose"
           @click="goToUpdateMessageToMks"
           v-if="state.isUpdateMessageToMks"
         >
@@ -74,6 +85,7 @@
         <EventUpdateDescription v-else-if="state.isUpdateDescription" />
         <EventUpdateFounder v-else-if="state.isUpdateFounder" />
         <EventUpdateImportance v-else-if="state.isUpdateImportance" />
+        <EventUpdatePreferredVote v-else-if="state.isUpdatePreferredVote" />
         <EventUpdateMessageToMks v-else-if="state.isUpdateMessageToMks" />
         <EventUpdateStatus v-else-if="state.isUpdateStatus" />
       </div>
@@ -87,6 +99,7 @@ import EventUpdateDate from "./updatesEventsComponents/EventUpdateDate";
 import EventUpdateDescription from "./updatesEventsComponents/EventUpdateDescription";
 import EventUpdateFounder from "./updatesEventsComponents/EventUpdateFounder";
 import EventUpdateImportance from "./updatesEventsComponents/EventUpdateImportance";
+import EventUpdatePreferredVote from "./updatesEventsComponents/EventUpdatePreferredVote";
 import EventUpdateMessageToMks from "./updatesEventsComponents/EventUpdateMessageToMks";
 import EventUpdateStatus from "./updatesEventsComponents/EventUpdateStatus";
 import { reactive } from "vue";
@@ -98,6 +111,7 @@ export default {
     EventUpdateDescription,
     EventUpdateFounder,
     EventUpdateImportance,
+    EventUpdatePreferredVote,
     EventUpdateMessageToMks,
     EventUpdateStatus,
   },
@@ -107,6 +121,7 @@ export default {
       isUpdateDescription: false,
       isUpdateFounder: false,
       isUpdateImportance: false,
+      isUpdatePreferredVote: false,
       isUpdateMessageToMks: false,
       isUpdateStatus: false,
     });
@@ -127,6 +142,10 @@ export default {
       closeAll();
       state.isUpdateImportance = true;
     }
+    function goToUpdatePreferredVote() {
+      closeAll();
+      state.isUpdatePreferredVote = true;
+    }
     function goToUpdateMessageToMks() {
       closeAll();
       state.isUpdateMessageToMks = true;
@@ -141,6 +160,7 @@ export default {
       state.isUpdateDescription = false;
       state.isUpdateFounder = false;
       state.isUpdateImportance = false;
+      state.isUpdatePreferredVote = false;
       state.isUpdateMessageToMks = false;
       state.isUpdateStatus = false;
     }
@@ -151,6 +171,7 @@ export default {
       goToUpdateDescription,
       goToUpdateFounder,
       goToUpdateImportance,
+      goToUpdatePreferredVote,
       goToUpdateMessageToMks,
       goUpdateStatus,
     };

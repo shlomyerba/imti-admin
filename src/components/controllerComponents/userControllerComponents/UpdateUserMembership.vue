@@ -43,7 +43,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
-import { reportMembershipOptions } from "../../../assets/reportsOptions";
+import { memberships } from "../../../assets/staticOptions";
 
 export default {
   name: "updateMembership",
@@ -52,7 +52,7 @@ export default {
       selectedUser: null,
       users: [],
       selectedMembership: null,
-      memberships: reportMembershipOptions,
+      memberships: memberships,
     });
 
     async function findCurrentMembership() {
