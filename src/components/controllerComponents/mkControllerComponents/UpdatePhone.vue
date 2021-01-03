@@ -2,7 +2,7 @@
   <div class="update-phone">
     <form class="update-phone_form" @submit.prevent="updatePhone">
       <div class="update-phone_container">
-        <label>Mks *</label><br />
+        <label>בחר חבר כנסת *</label><br />
         <select
           id="chooseMk"
           v-model="state.selectedMk"
@@ -17,22 +17,20 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Phone *</label><br />
+        <label>עדכן מספר טלפון *</label><br />
         <input
           class="inputphone"
           type="tel"
-          placeholder="Enter phone number"
           v-model="state.phone"
           maxlength="10"
         />
         <input
           class="inputAreaCode"
           type="tel"
-          placeholder="Enter phone number"
           v-model="state.areaCode"
           maxlength="3"
         />
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

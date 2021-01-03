@@ -2,7 +2,7 @@
   <div class="remove-user">
     <form class="remove-user_form" @submit.prevent="removeUser">
       <div class="remove-user_container">
-        <label>Users *</label><br />
+        <label>בחר משתמש *</label><br />
         <select id="ChooseUser" v-model="state.selectedUser" required>
           <option
             :value="option.id"
@@ -12,7 +12,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <button>remove</button>
+        <button>מחק</button>
       </div>
     </form>
   </div>

@@ -2,7 +2,7 @@
   <div class="update-orientation">
     <form class="update-orientation_form" @submit.prevent="updateOrientation">
       <div class="update-orientation_container">
-        <label>Parties *</label><br />
+        <label>בחר מפלגה *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedParty"
@@ -17,7 +17,7 @@
             {{ option.name }}
           </option>
         </select>
-        <label>Orientation *</label><br />
+        <label>עדכן נטייה *</label><br />
         <select
           id="ChooseOrientation"
           v-model="state.selectedOrientation"
@@ -31,7 +31,7 @@
             {{ option.name }}
           </option>
         </select>
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

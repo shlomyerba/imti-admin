@@ -2,14 +2,13 @@
   <div class="add-new-party">
     <form class="add-new-party_form" @submit.prevent="addNewParty">
       <div class="add-new-party_container">
-        <label>name *</label><br />
+        <label>שם המפלגה *</label><br />
         <input
           type="name"
-          placeholder="Enter party name"
           v-model="state.name"
           required
         />
-        <label>Orientation *</label><br />
+        <label>נטייה *</label><br />
         <select
           id="ChooseOrientation"
           v-model="state.selectedOrientation"
@@ -23,7 +22,7 @@
             {{ option.name }}
           </option>
         </select>
-        <button>add</button>
+        <button>הוסף</button>
       </div>
     </form>
   </div>

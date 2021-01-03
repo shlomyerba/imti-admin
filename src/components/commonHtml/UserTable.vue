@@ -2,12 +2,12 @@
   <table class="user_info">
     <tr>
       <th>Id</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Membership</th>
-      <th>Password</th>
-      <th>Phone</th>
+      <th>שם פרטי</th>
+      <th>שם משפחה</th>
+      <th>אימייל</th>
+      <th>חברות</th>
+      <th>סיסמה</th>
+      <th>מספר טלפון</th>
     </tr>
     <tr v-for="(event, index) in state.info" :key="index">
       <td>{{ event.id }}</td>

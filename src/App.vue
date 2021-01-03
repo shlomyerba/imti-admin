@@ -3,7 +3,7 @@
     <router-link to="/">
       <div class="navigation_logo">IMTI</div>
     </router-link>
-    <button class="navigation_user" @click="exit">Exit</button>
+    <button class="navigation_user" @click="exit">התנתק</button>
   </nav>
   <router-view />
 </template>

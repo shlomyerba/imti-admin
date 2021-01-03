@@ -1,8 +1,8 @@
 <template>
   <table class="user_info">
     <tr>
-      <th>Evevt</th>
-      <th>Mk</th>
+      <th>הצעת חוק</th>
+      <th>חבר כנסת</th>
     </tr>
     <tr v-for="(event, index) in state.info" :key="index">
       <td>{{ event.event.title }}</td>

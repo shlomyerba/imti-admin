@@ -2,28 +2,25 @@
   <div class="add-new-mk">
     <form class="add-new-mk_form" @submit.prevent="saveMk">
       <div class="add-new-mk_container">
-        <label>Email *</label><br />
+        <label>אימייל *</label><br />
         <input
           type="email"
-          placeholder="Enter Email"
           v-model="state.email"
           required
         />
-        <label>First Name *</label><br />
+        <label>שם פרטי *</label><br />
         <input
           type="text"
-          placeholder="Enter firstName"
           v-model="state.firstName"
           required
         />
-        <label>Last name *</label><br />
+        <label>שם משפחה *</label><br />
         <input
           type="text"
-          placeholder="Enter lasttName"
           v-model="state.lastName"
           required
         />
-        <label>Party *</label><br />
+        <label>מפלגה *</label><br />
         <select id="addParty" v-model="state.selectedParty" required>
           <option
             :value="option.id"
@@ -34,30 +31,27 @@
           </option>
         </select>
 
-        <label>Phone *</label><br />
+        <label>מספר טלפון *</label><br />
         <input
           class="inputphone"
           type="tel"
-          placeholder="Enter phone number"
           v-model="state.phone"
           maxlength="10"
         />
         <input
           class="inputAreaCode"
           type="tel"
-          placeholder="Enter phone number"
           v-model="state.areaCode"
           maxlength="3"
         />
-        <label>Photo *</label><br />
+        <label>תמונה *</label><br />
         <input
           type="file"
-          placeholder="upload photo"
           @change="uploadPhoto"
           required
         />
 
-        <button>add</button>
+        <button>הוסף</button>
       </div>
     </form>
   </div>

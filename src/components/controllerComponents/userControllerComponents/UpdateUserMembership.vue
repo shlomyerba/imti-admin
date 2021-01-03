@@ -2,7 +2,7 @@
   <div class="update-membership">
     <form class="update-membership_form" @submit.prevent="updateMembership">
       <div class="update-membership_container">
-        <label>Users *</label><br />
+        <label>בחר משתמש *</label><br />
         <select
           id="chooseMk"
           v-model="state.selectedUser"
@@ -17,7 +17,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Membership *</label><br />
+        <label>עדכן חברות *</label><br />
         <select
           id="ChooseMembership"
           v-model="state.selectedMembership"
@@ -28,10 +28,10 @@
             v-for="(option, index) in state.memberships"
             :key="index"
           >
-            {{ option.id }}
+            {{ option.name }}
           </option>
         </select>
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>
@@ -43,6 +43,7 @@ import VueCookies from "vue-cookies";
 import { reactive, onMounted } from "vue";
 import { baseUrl } from "../../../assets/url";
 import { getAllUsers, generalGetRequest } from "../../../assets/apiRequest";
+import { reportMembershipOptions } from "../../../assets/reportsOptions";
 
 export default {
   name: "updateMembership",
@@ -51,7 +52,7 @@ export default {
       selectedUser: null,
       users: [],
       selectedMembership: null,
-      memberships: [{ id: false }, { id: true }],
+      memberships: reportMembershipOptions,
     });
 
     async function findCurrentMembership() {

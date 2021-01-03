@@ -2,7 +2,7 @@
   <div class="update-email">
     <form class="update-email_form" @submit.prevent="updateEmail">
       <div class="update-email_container">
-        <label>Mks *</label><br />
+        <label>בחר חבר כנסת *</label><br />
         <select
           id="chooseMk"
           v-model="state.selectedMk"
@@ -17,14 +17,13 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Email *</label><br />
+        <label>עדכן אימייל *</label><br />
         <input
           type="email"
-          placeholder="Enter Email"
           v-model="state.email"
           required
         />
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

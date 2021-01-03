@@ -2,7 +2,7 @@
   <div class="update-party">
     <form class="update-party_form" @submit.prevent="updateParty">
       <div class="update-party_container">
-        <label>Mks *</label><br />
+        <label>בחר חבר כנסת *</label><br />
         <select
           id="chooseMk"
           v-model="state.selectedMk"
@@ -17,7 +17,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <label>Party *</label><br />
+        <label>עדכן מפלגה *</label><br />
         <select id="chooseParty" v-model="state.selectedParty" required>
           <option
             :value="option.id"
@@ -27,7 +27,7 @@
             {{ option.name }}
           </option>
         </select>
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

@@ -2,7 +2,7 @@
   <div class="user-view-events">
     <form class="user-view-events_form">
       <div class="user-view-events_container">
-        <label>Users *</label><br />
+        <label>בחר משתמש *</label><br />
         <select
           id="ChooseUser"
           v-model="state.selectedUser"

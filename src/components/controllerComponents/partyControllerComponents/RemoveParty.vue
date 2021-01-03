@@ -2,7 +2,7 @@
   <div class="remove-party">
     <form class="remove-party_form" @submit.prevent="removeParty">
       <div class="remove-party_container">
-        <label>Parties *</label><br />
+        <label>בחר מפלגה *</label><br />
         <select id="ChooseParty" v-model="state.selectedParty" required>
           <option
             :value="option.id"
@@ -12,7 +12,7 @@
             {{ option.name }}
           </option>
         </select>
-        <button>remove</button>
+        <button>מחק</button>
       </div>
     </form>
   </div>

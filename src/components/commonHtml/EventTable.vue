@@ -1,14 +1,14 @@
 <template>
   <table class="user_info">
     <tr>
-      <th>Title</th>
-      <th width="200">Description</th>
-      <th>Importance</th>
-      <th>Mk Founder</th>
-      <th width="200">Msg To MKs</th>
-      <th width="80">Date</th>
-      <th>Time</th>
-      <th>Status</th>
+      <th>הצעת חוק</th>
+      <th width="200">תיאור</th>
+      <th>חשיבות</th>
+      <th>יוזם ההצעה</th>
+      <th width="200">הודעה לחברי הכנסת</th>
+      <th width="80">תאריך</th>
+      <th>שעה</th>
+      <th>סטטוס</th>
     </tr>
     <tr v-for="(event, index) in state.info" :key="index">
       <td>{{ event.title }}</td>

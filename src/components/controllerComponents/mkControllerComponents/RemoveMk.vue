@@ -2,7 +2,7 @@
   <div class="remove-mk">
     <form class="remove-mk_form" @submit.prevent="removeMk">
       <div class="remove-mk_container">
-        <label>Mks *</label><br />
+        <label>בחר חבר כנסת *</label><br />
         <select id="ChooseParty" v-model="state.selectedMk" required>
           <option
             :value="option.id"
@@ -12,7 +12,7 @@
             {{ `${option.first} ${option.last}` }}
           </option>
         </select>
-        <button>remove</button>
+        <button>מחק</button>
       </div>
     </form>
   </div>
