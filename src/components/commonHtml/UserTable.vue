@@ -1,7 +1,7 @@
 <template>
   <table class="user_info">
     <tr>
-      <th>Id</th>
+      <th width="60">מספר סידורי</th>
       <th>שם פרטי</th>
       <th>שם משפחה</th>
       <th>אימייל</th>

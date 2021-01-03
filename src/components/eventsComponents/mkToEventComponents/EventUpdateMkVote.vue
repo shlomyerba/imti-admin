@@ -2,7 +2,7 @@
   <div class="event-update-mk-vote">
     <form class="event-update-mk-vote_form" @submit.prevent="eventUpdateMkVote">
       <div class="event-update-mk-vote_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -17,7 +17,7 @@
             {{ option.title }}
           </option>
         </select>
-        <label>Mks by event *</label><br />
+        <label>בחר חבר כנסת מתוך חברי הכנסת המשוייכים *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedMkByEvent"
@@ -31,7 +31,7 @@
             {{ `${option.mk.first} ${option.mk.last}` }}
           </option>
         </select>
-        <label>Vote *</label><br />
+        <label>עדכן הצבעה *</label><br />
         <select id="chooseImportance" v-model="state.selectedVotes" required>
           <option
             :value="option.id"
@@ -41,7 +41,7 @@
             {{ option.name }}
           </option>
         </select>
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

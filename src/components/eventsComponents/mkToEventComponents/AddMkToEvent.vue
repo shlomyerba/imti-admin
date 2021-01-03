@@ -2,7 +2,7 @@
   <div class="add-mk-to-event">
     <form class="add-mk-to-event_form" @submit.prevent="addMkToEvent">
       <div class="add-mk-to-event_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select id="ChooseParty" v-model="state.selectedEvents" required>
           <option
             :value="option.id"
@@ -12,7 +12,7 @@
             {{ option.title }}
           </option>
         </select>
-        <label>Mks *</label><br />
+        <label>בחר חבר כנסת *</label><br />
         <select id="ChooseParty" v-model="state.selectedMk" required>
           <option
             :value="option.id"
@@ -23,7 +23,7 @@
           </option>
         </select>
 
-        <label>Vote *</label><br />
+        <label>הצבעה *</label><br />
         <select id="chooseImportance" v-model="state.selectedVotes" required>
           <option
             :value="option.id"
@@ -33,7 +33,7 @@
             {{ option.name }}
           </option>
         </select>
-        <button>add</button>
+        <button>שייך</button>
       </div>
     </form>
   </div>

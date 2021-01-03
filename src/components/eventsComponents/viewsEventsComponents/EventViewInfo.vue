@@ -2,7 +2,7 @@
   <div class="event-view-info">
     <form class="event-view-info_form">
       <div class="event-view-info_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseEvent"
           v-model="state.selectedEvents"

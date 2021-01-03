@@ -5,7 +5,7 @@
       @submit.prevent="eventUpdateFounder"
     >
       <div class="event-update-founder_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -21,7 +21,7 @@
           </option>
         </select>
 
-        <label>FounderMk *</label><br />
+        <label>עדכן יוזם הצעה *</label><br />
         <select id="chooseEvent" v-model="state.selectedFounder" required>
           <option
             :value="option.id"
@@ -32,7 +32,7 @@
           </option>
         </select>
 
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

@@ -2,7 +2,7 @@
   <div class="remove-event">
     <form class="remove-event_form" @submit.prevent="removeEvent">
       <div class="remove-event_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select id="ChooseEvent" v-model="state.selectedEvents" required>
           <option
             :value="option.id"
@@ -12,7 +12,7 @@
             {{ option.title }}
           </option>
         </select>
-        <button>remove</button>
+        <button>מחק</button>
       </div>
     </form>
   </div>

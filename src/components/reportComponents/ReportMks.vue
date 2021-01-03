@@ -1,7 +1,7 @@
 <template>
   <div class="report-mk">
     <div class="report-mk_container">
-      <label>Choose report by *</label><br />
+      <label>בחר דוח לפי *</label><br />
       <select v-model="state.selectedBy" @change="findNext">
         <option
           :value="option.id"
@@ -68,14 +68,14 @@
         </option>
       </select>
 
-      <button @click="viewAllReport" v-if="state.isChoose">view</button>
+      <button @click="viewAllReport" v-if="state.isChoose">הצג</button>
     </div>
   </div>
 
   <div v-if="state.info">
     <MkTable v-bind:info="state.info" />
     <div class="report-mk_img" v-if="state.src">
-      <img v-bind:src="state.src" />
+      <img v-bind:src="state.src" width="150" height="200" />
     </div>
   </div>
 </template>

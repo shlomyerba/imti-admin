@@ -40,10 +40,10 @@
           @click="goToUpdateImportance"
           v-if="state.isUpdateImportance"
         >
-          עדכן רמת חשיבות
+          עדכן חשיבות
         </button>
         <button class="link_button" @click="goToUpdateImportance" v-else>
-          עדכן רמת חשיבות
+          עדכן חשיבות
         </button>
 
         <button

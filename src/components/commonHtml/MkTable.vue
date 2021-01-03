@@ -1,10 +1,10 @@
 <template>
   <table class="user_info">
     <tr>
-      <th>Name</th>
-      <th>Party</th>
-      <th>Email</th>
-      <th>Phone</th>
+      <th>שם</th>
+      <th>מפלגה</th>
+      <th>אימייל</th>
+      <th>מספר טלפון</th>
     </tr>
     <tr v-for="(event, index) in state.info" :key="index">
       <td>{{ `${event.first} ${event.last}` }}</td>

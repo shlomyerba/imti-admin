@@ -7,10 +7,10 @@
           @click="goToViewInfo"
           v-if="state.isViewInfo"
         >
-          פרטי הצבעה
+          פרטי הצעה
         </button>
         <button class="link_button" @click="goToViewInfo" v-else>
-          פרטי הצבעה
+          פרטי הצעה
         </button>
 
         <button

@@ -1,7 +1,7 @@
 <template>
   <table class="user_info">
     <tr>
-      <th>הצעת חוק</th>
+      <th>כותרת</th>
       <th width="200">תיאור</th>
       <th>חשיבות</th>
       <th>יוזם ההצעה</th>

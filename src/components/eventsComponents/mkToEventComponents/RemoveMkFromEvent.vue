@@ -2,7 +2,7 @@
   <div class="remove-mk-from-event">
     <form class="remove-mk-from-event_form" @submit.prevent="removeMkFromEvent">
       <div class="remove-mk-from-event_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -17,7 +17,7 @@
             {{ option.title }}
           </option>
         </select>
-        <label>Mks by event *</label><br />
+        <label>בחר חבר כנסת מתוך חברי הכנסת המשוייכים *</label><br />
         <select id="ChooseParty" v-model="state.selectedMkByEvent" required>
           <option
             :value="option.id"
@@ -27,7 +27,7 @@
             {{ `${option.mk.first} ${option.mk.last}` }}
           </option>
         </select>
-        <button>remove</button>
+        <button>הסר</button>
       </div>
     </form>
   </div>

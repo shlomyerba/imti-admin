@@ -5,7 +5,7 @@
       @submit.prevent="eventUpdateMessageToMks"
     >
       <div class="event-update-message_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -21,15 +21,14 @@
           </option>
         </select>
 
-        <label>TextMessageToMKs *</label><br />
+        <label>עדכן הודעה לחברי כנסת *</label><br />
         <input
           type="text"
-          placeholder="Enter Text Message To MKs"
           v-model="state.textMessageToMKs"
           required
         />
 
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

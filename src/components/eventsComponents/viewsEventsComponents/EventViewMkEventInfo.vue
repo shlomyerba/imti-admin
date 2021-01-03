@@ -5,7 +5,7 @@
       @submit.prevent="eventViewMkEventInfo"
     >
       <div class="event-view-mk-event-info_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -20,7 +20,7 @@
             {{ option.title }}
           </option>
         </select>
-        <label>Mks by event *</label><br />
+        <label>בחר חבר כנסת *</label><br />
         <select id="ChooseParty" v-model="state.selectedMkByEvent">
           <option
             :value="option.id"
@@ -30,7 +30,7 @@
             {{ `${option.mk.first} ${option.mk.last}` }}
           </option>
         </select>
-        <button>view</button>
+        <button>הצג</button>
       </div>
     </form>
   </div>

@@ -2,7 +2,7 @@
   <div class="event-view-mk-event-all">
     <form class="event-view-mk-event-all_form">
       <div class="event-view-mk-event-all_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseEvent"
           v-model="state.selectedEvents"

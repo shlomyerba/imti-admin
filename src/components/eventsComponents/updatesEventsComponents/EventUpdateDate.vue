@@ -2,7 +2,7 @@
   <div class="event-update-date">
     <form class="event-update-date_form" @submit.prevent="eventUpdateDate">
       <div class="event-update-date_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -18,15 +18,14 @@
           </option>
         </select>
 
-        <label>Date *</label><br />
+        <label>עדכן תאריך ושעה *</label><br />
         <input
           type="datetime-local"
-          placeholder="Enter Date"
           v-model="state.date"
           required
         />
 
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

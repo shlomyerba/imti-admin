@@ -2,29 +2,26 @@
   <div class="add-new-event">
     <form class="add-new-event_form" @submit.prevent="addNewEvent">
       <div class="add-new-event_container">
-        <label>Title *</label><br />
+        <label>כותרת *</label><br />
         <input
           type="text"
-          placeholder="Enter Title"
           v-model="state.title"
           required
         />
-        <label>Description *</label><br />
+        <label>תיאור *</label><br />
         <input
           type="text"
-          placeholder="Enter Description"
           v-model="state.description"
           required
         />
-        <label>Date *</label><br />
+        <label>תאריך ושעה *</label><br />
         <input
           type="datetime-local"
-          placeholder="Enter Date"
           v-model="state.date"
           required
         />
 
-        <label>FounderMk *</label><br />
+        <label>יוזם ההצעה *</label><br />
         <select id="chooseEvent" v-model="state.selectedMk" required>
           <option
             :value="option.id"
@@ -35,7 +32,7 @@
           </option>
         </select>
 
-        <label>Importance *</label><br />
+        <label>חשיבות *</label><br />
         <select
           id="chooseImportance"
           v-model="state.selectedImportance"
@@ -49,14 +46,13 @@
             {{ option.name }}
           </option>
         </select>
-        <label>TextMessageToMKs *</label><br />
+        <label>הודעה לחברי כנסת *</label><br />
         <input
           type="text"
-          placeholder="Enter Text Message To MKs"
           v-model="state.textMessageToMKs"
           required
         />
-        <button>add</button>
+        <button>הוסף</button>
       </div>
     </form>
   </div>

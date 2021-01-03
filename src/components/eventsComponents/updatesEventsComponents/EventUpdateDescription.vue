@@ -5,7 +5,7 @@
       @submit.prevent="eventUpdateDescription"
     >
       <div class="event-update-description_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -21,15 +21,14 @@
           </option>
         </select>
 
-        <label>Description *</label><br />
+        <label>עדכן תיאור *</label><br />
         <input
           type="text"
-          placeholder="Enter Description"
           v-model="state.description"
           required
         />
 
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

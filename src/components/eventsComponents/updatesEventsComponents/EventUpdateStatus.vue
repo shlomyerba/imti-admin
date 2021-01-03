@@ -2,7 +2,7 @@
   <div class="event-update-status">
     <form class="event-update-status_form" @submit.prevent="eventUpdateStatus">
       <div class="event-update-status_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -18,7 +18,7 @@
           </option>
         </select>
 
-        <label>Status *</label><br />
+        <label>עדכן סטטוס *</label><br />
         <select id="chooseImportance" v-model="state.selectedStatus" required>
           <option
             :value="option.id"
@@ -29,7 +29,7 @@
           </option>
         </select>
 
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>

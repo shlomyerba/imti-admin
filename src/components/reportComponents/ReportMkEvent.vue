@@ -1,7 +1,7 @@
 <template>
   <div class="report-mk-event">
     <div class="report-mk-event_container">
-      <label>Choose report by *</label><br />
+      <label>בחר דוח לפי *</label><br />
       <select v-model="state.selectedBy" @change="findNext">
         <option
           :value="option.id"
@@ -64,7 +64,7 @@
         </option>
       </select>
 
-      <button @click="viewAllReport" v-if="state.isChoose">view</button>
+      <button @click="viewAllReport" v-if="state.isChoose">הצג</button>
     </div>
   </div>
 

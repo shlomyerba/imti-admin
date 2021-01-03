@@ -1,11 +1,11 @@
 <template>
   <table class="user_info">
     <tr>
-      <th>Id</th>
-      <th>Mk</th>
-      <th>Event</th>
-      <th width="200">Description</th>
-      <th>Vote</th>
+      <th>מספר סידורי</th>
+      <th>חבר כנסת</th>
+      <th>הצעת חוק</th>
+      <th width="200">תיאור</th>
+      <th>הצבעה</th>
     </tr>
     <tr v-for="(event, index) in state.info" :key="index">
       <td>{{ event.id }}</td>

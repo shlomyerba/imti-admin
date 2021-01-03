@@ -5,7 +5,7 @@
       @submit.prevent="eventUpdateImportance"
     >
       <div class="event-update-importance_container">
-        <label>Events *</label><br />
+        <label>בחר הצעת חוק *</label><br />
         <select
           id="ChooseParty"
           v-model="state.selectedEvents"
@@ -21,7 +21,7 @@
           </option>
         </select>
 
-        <label>Importance *</label><br />
+        <label>עדכן חשיבות *</label><br />
         <select
           id="chooseImportance"
           v-model="state.selectedImportance"
@@ -36,7 +36,7 @@
           </option>
         </select>
 
-        <button>update</button>
+        <button>עדכן</button>
       </div>
     </form>
   </div>
