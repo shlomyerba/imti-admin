@@ -3,14 +3,13 @@
     <form class="login_form" @submit.prevent="login">
       <div class="login_container">
         
-        <label>password</label>
+        <label>הזן סיסמה</label>
         <input
           type="password"
-          placeholder="Enter Password"
           v-model="state.password"
           required
         />
-        <button>Login</button>
+        <button>הכנס</button>
       </div>
     </form>
   </div>
