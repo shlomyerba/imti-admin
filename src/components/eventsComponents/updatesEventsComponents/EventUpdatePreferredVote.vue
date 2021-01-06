@@ -63,8 +63,7 @@ export default {
     async function eventUpdatePreferredVote() {
       let token = VueCookies.get("adminToken");
 
-      ///to do!!!!
-      let url = `${baseUrl}/admin/event/update/preferredVote?eventId=${state.selectedEvents}&preferredVote=${state.selectedPreferredVote}&uuid=${token}`;
+      let url = `${baseUrl}/admin/event/update/pref/vote?eventId=${state.selectedEvents}&preferredVote=${state.selectedPreferredVote}&uuid=${token}`;
       await generalGetRequest(url);
       state.selectedEvents = null;
       state.selectedPreferredVote = null;
