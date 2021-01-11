@@ -8,9 +8,9 @@ export const orientations = [{ id: "LEFT", name: 'שמאל' }, { id: "RIGHT", na
 export const status = [{ id: "OPEN", name: "פתוח" }, { id: "SUCCESS", name: "הצליח" },
 { id: "FAILURE", name: "נכשל" }, { id: "DELAYED", name: "נדחה" }];
 
-export const votes = [{ id: "YES", name: "כן" }, { id: "NO", name: "לא" },
-{ id: "MISSING", name: "חסר" }, { id: "NONE", name: "לא רלוונטי" }];
+export const votes = [{ id: "YES", name: "בעד" }, { id: "NO", name: "נגד" },
+{ id: "MISSING", name: "מתלבט" }];
 
 export const memberships = [{ id: true, name: "כן" }, { id: false, name: "לא" }];
 
-export const preferredVote = [{ id: "YES", name: "כן" }, { id: "NO", name: "לא" }, ];
+export const preferredVote = [{ id: "YES", name: "בעד" }, { id: "NO", name: "נגד" }, ];
