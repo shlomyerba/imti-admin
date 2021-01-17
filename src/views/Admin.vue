@@ -32,12 +32,22 @@
           דוחות
         </button>
         <button class="link_button" @click="goToReports" v-else>דוחות</button>
+
+        <button
+          class="link_button_choose"
+          @click="goTonNews"
+          v-if="state.isNews"
+        >
+          חדשות
+        </button>
+        <button class="link_button" @click="goToNews" v-else>חדשות</button>
       </div>
 
       <div class="admin-panel_action-screen">
         <Controller v-if="state.isController" />
         <Events v-else-if="state.isEvents" />
         <Reports v-else-if="state.isReports" />
+        <News v-else-if="state.isNews" />
       </div>
     </div>
   </div>
@@ -47,17 +57,19 @@
 import Controller from "../components/Controller";
 import Events from "../components/Events";
 import Reports from "../components/Reports";
+import News from "../components/News";
 import { reactive, onMounted } from "vue";
 import VueCookies from "vue-cookies";
 
 export default {
   name: "Admin",
-  components: { Controller, Events, Reports },
+  components: { Controller, Events, Reports, News },
   setup() {
     const state = reactive({
       isController: true,
       isEvents: false,
       isReports: false,
+      isNews: false,
     });
 
     function goToController() {
@@ -75,10 +87,16 @@ export default {
       state.isReports = true;
     }
 
+    function goToNews() {
+      closeAll();
+      state.isNews = true;
+    }
+
     function closeAll() {
       state.isController = false;
       state.isEvents = false;
       state.isReports = false;
+      state.isNews = false;
     }
 
     //check if token is expired every 10 seconds:
@@ -96,6 +114,7 @@ export default {
       goToController,
       goToEvents,
       goToReports,
+      goToNews,
       closeAll,
     };
   },

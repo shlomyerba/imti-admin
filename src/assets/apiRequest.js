@@ -55,3 +55,9 @@ export async function getAllUsers() {
     let url = `${baseUrl}/admin/report/user/all?uuid=${token}`;
     return await generalGetRequest(url);
 }
+
+export async function getAllNews() {
+    let token = VueCookies.get("adminToken");
+    let url = `${baseUrl}/admin/reports/news/all?uuid=${token}`;
+    return await generalGetRequest(url);
+}
