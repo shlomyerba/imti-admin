@@ -2,13 +2,8 @@
   <div class="home">
     <form class="login_form" @submit.prevent="login">
       <div class="login_container">
-        
         <label>הזן סיסמה</label>
-        <input
-          type="password"
-          v-model="state.password"
-          required
-        />
+        <input type="password" v-model="state.password" required />
         <button>הכנס</button>
       </div>
     </form>
@@ -25,19 +20,16 @@ export default {
   name: "Login",
   setup() {
     const state = reactive({
-      username: "",
       password: "",
       timeout: null,
-      tempToken: "X%2376saNR!tA", //temp
     });
 
     async function login() {
       try {
         let response = await axios.get(
-          `${baseUrl}/admin/login?password=${state.tempToken}`
+          `${baseUrl}/admin/login?password=${state.password}`
         );
         if (response.data) {
-          state.username = "";
           state.password = "";
 
           //saving cooky for 45 minutes:
